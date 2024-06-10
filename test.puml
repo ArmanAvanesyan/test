@@ -1,38 +1,49 @@
-' Process Element Style
-skinparam {
-    RectangleBackgroundColor #FCF4A3
-    RectangleBorderColor black
-    RectangleFontColor black
-    RectangleRoundCorner 15
-    DefaultFontName Arial
-    DefaultFontSize 12
+' Colors
+' ##################################
+
+!define ELEMENT_FONT_COLOR #FFFFFF
+!define PROCESS_BG_COLOR #08427B
+
+' Styling
+' ##################################
+
+!global $TECHN_FONT_SIZE = 12
+
+skinparam defaultTextAlignment center
+skinparam wrapWidth 200
+skinparam maxMessageSize 150
+
+skinparam rectangle {
+    StereotypeFontSize 12
+    shadowing false
 }
 
+skinparam Arrow {
+    Color #666666
+    FontColor #666666
+    FontSize 12
+}
 
-' Global variables
-!global $processID = ""
-!global $processName = ""
+' Rectangle styling for processes
+skinparam rectangle<<process>> {
+    StereotypeFontColor ELEMENT_FONT_COLOR
+    FontColor ELEMENT_FONT_COLOR
+    BackgroundColor PROCESS_BG_COLOR
+    BorderColor #073B6F
+}
 
+' Elements
+' ##################################
 
-' Set Process Details Function
-!unquoted function SetProcessDetails($id, $name)
-  !$processID = $id
-  !$processName = $name
-  !return ""
+!function $getProcess($id, $name)
+!if ($id == "")
+!return '<$process>\n=='+$name
+!endif
+!if ($id != "")
+!return '<$process>\n=='+$id+'\n\n'+$name
+!endif
 !endfunction
 
-
-' Process Element Function
-!unquoted function ProcessElement($id, $name)
-  rectangle $id as "" << (P, #FCF4A3) >> {
-    rectangle "ID: " + $id as idSection << (P, #F3F2A9) >>
-    rectangle $name as nameSection << (P, #FCF4A3) >>
-  }
-  !return ""
-!endfunction
-
-
-' Process Macro
-!define PROCESS(id, name) ProcessElement(id, name)
-
-
+!unquoted procedure Process($alias, $name, $id="")
+rectangle "$getProcess($id, $name)" <<process>> as $alias
+!endprocedure
