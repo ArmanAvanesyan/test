@@ -1,8 +1,8 @@
 ' Colors
 ' ##################################
 
-!define ELEMENT_FONT_COLOR #FFFFFF
-!define PROCESS_BG_COLOR #08427B
+!define ELEMENT_FONT_COLOR #000000
+!define PROCESS_BG_COLOR #FFFFFF
 
 ' Styling
 ' ##################################
@@ -16,6 +16,7 @@ skinparam maxMessageSize 150
 skinparam rectangle {
     StereotypeFontSize 12
     shadowing false
+    roundCorner 25
 }
 
 skinparam Arrow {
@@ -26,10 +27,9 @@ skinparam Arrow {
 
 ' Rectangle styling for processes
 skinparam rectangle<<process>> {
-    StereotypeFontColor ELEMENT_FONT_COLOR
     FontColor ELEMENT_FONT_COLOR
     BackgroundColor PROCESS_BG_COLOR
-    BorderColor #073B6F
+    BorderColor #000000
 }
 
 ' Elements
@@ -37,10 +37,10 @@ skinparam rectangle<<process>> {
 
 !function $getProcess($id, $name)
 !if ($id == "")
-!return '<$process>\n=='+$name
+!return $name
 !endif
 !if ($id != "")
-!return '<$process>\n=='+$id+'\n\n'+$name
+!return $id+'\n\n'+$name
 !endif
 !endfunction
 
