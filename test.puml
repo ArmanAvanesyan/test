@@ -17,10 +17,16 @@ skinparam rectangle {
     roundCorner 25
 }
 
+skinparam Arrow {
+    Color #666666
+    FontColor #666666
+    FontSize 12
+}
+
 ' Rectangle styling for processes
 skinparam rectangle<<process>> {
     FontColor ELEMENT_FONT_COLOR
-    BackgroundColor ELEMENT_BG_COLOR
+    BackgroundColor PROCESS_BG_COLOR
     BorderColor #000000
 }
 
