@@ -1,0 +1,38 @@
+' Process Element Style
+skinparam {
+    RectangleBackgroundColor #FCF4A3
+    RectangleBorderColor black
+    RectangleFontColor black
+    RectangleRoundCorner 15
+    DefaultFontName Arial
+    DefaultFontSize 12
+}
+
+
+' Global variables
+!global $processID = ""
+!global $processName = ""
+
+
+' Set Process Details Function
+!unquoted function SetProcessDetails($id, $name)
+  !$processID = $id
+  !$processName = $name
+  !return ""
+!endfunction
+
+
+' Process Element Function
+!unquoted function ProcessElement($id, $name)
+  rectangle $id as "" << (P, #FCF4A3) >> {
+    rectangle "ID: " + $id as idSection << (P, #F3F2A9) >>
+    rectangle $name as nameSection << (P, #FCF4A3) >>
+  }
+  !return ""
+!endfunction
+
+
+' Process Macro
+!define PROCESS(id, name) ProcessElement(id, name)
+
+
