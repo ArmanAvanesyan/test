@@ -7,7 +7,6 @@
 ' Open the digraph and define the default node shape
 !procedure startDfd()
 digraph dfd2 {
-    node[shape=box]
 !endprocedure
 
 ' Close the digraph
@@ -52,19 +51,19 @@ subgraph cluster_level1 {
 ' Process procedure with step number
 ' Usage: Process(alias, stepID, name)
 !procedure Process($alias, $id, $name)
-    $alias [label="{<f0> $id|<f1> $name\n\n\n}", shape=Mrecord, pos="0,0!", fontcolor=black, fontsize=12, color=black, penwidth=2];
+    $alias [label="{<f0> $id|<f1> $name\n\n\n}", shape=Mrecord];
 !endprocedure
 
 ' Store procedure for data stores
 ' Usage: Store(alias, stepID, name)
 !procedure Store($alias, $id, $name)
-    $alias [label="<f0> $id   |<f1> $name", fontcolor=black, fontsize=12, color=black, penwidth=2];
+    $alias [label="<f0> $id   |<f1> $name"];
 !endprocedure
 
 ' External procedure for external entities
 ' Usage: External(alias, label)
 !procedure External($alias, $label)
-    $alias [label="$label", shape=box, fontcolor=black, fontsize=12, color=black, penwidth=2];
+    $alias [label="$label", shape=box];
 !endprocedure
 
 '-------------------------------
