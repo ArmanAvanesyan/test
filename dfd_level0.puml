@@ -1,21 +1,66 @@
 ' dfd_level0.puml
-!include context.puml
 
-!procedure TitleLevel0($title)
-    graph [label=<<TABLE BORDER="0" CELLBORDER="0"> \
-    <TR><TD><FONT POINT-SIZE="16">$title</FONT></TD></TR> \
-    <TR><TD><FONT POINT-SIZE="10">Data Flow Diagram Level 0</FONT></TD></TR> \
-    </TABLE>> ]
+'------------------------------------------------------
+' DFD Level 0 Library: Procedures for Processes, Stores,
+' External Entities, and Data Flows
+'------------------------------------------------------
+
+' Define startDfd and endDfd procedures using DOT syntax
+!procedure startDfd()
+digraph dfd2 {
 !endprocedure
 
-!procedure DataStore($alias, $label)
-    $alias [label="$label" shape=cylinder fontsize=12 penwidth=2]
+!procedure endDfd()
+}
 !endprocedure
 
-!procedure SubProcess($alias, $label, $number)
-    !if ($notation == "GANE_SARSON")
-        $alias [label="{<f0> $number |<f1> $label}" shape=Mrecord fontsize=12 penwidth=2]
+' Title procedure: sets graph attributes with an HTML-like label
+!procedure Title($title)
+    graph [rankdir=LR, ranksep=1.5, splines=true, overlap=false, labeljust=c, labelloc=t, \
+    label=<<TABLE BORDER="0" CELLBORDER="0">
+    <TR><TD><FONT POINT-SIZE="16">$title</FONT></TD></TR>
+    <TR><TD><FONT POINT-SIZE="10">Context Diagram (DFD Level 0)</FONT></TD></TR>
+    </TABLE>>];
+!endprocedure
+
+' Process procedure with step number
+' Usage: Process(alias, stepID, name)
+!procedure Process($alias, $id, $name)
+    $alias [label="{<f0> $id|<f1> $name\n\n\n}", shape=Mrecord, pos="0,0!", fontcolor=black, fontsize=12, color=black, penwidth=2];
+!endprocedure
+
+' Store procedure for data stores
+' Usage: Store(alias, stepID, name)
+!procedure Store($alias, $id, $name)
+    $alias [label="<f0> $id   |<f1> $name", fontcolor=black, fontsize=12, color=black, penwidth=2];
+!endprocedure
+
+' External procedure for external entities
+!procedure External($alias, $label)
+    $alias [label="$label", shape=box, fontcolor=black, fontsize=12, color=black, penwidth=2];
+!endprocedure
+
+' Data Flow macros
+!procedure InFlow($alias1, $alias2, $label="")
+    !if ($label != "")
+        $alias1 -> $alias2 [label="$label", fontcolor=black, fontsize=10, color=black, penwidth=1];
     !else
-        $alias [label="$number.0\n$label" shape=circle fontsize=12 penwidth=2]
+        $alias1 -> $alias2 [color=black, penwidth=1];
+    !endif
+!endprocedure
+
+!procedure OutFlow($alias1, $alias2, $label="")
+    !if ($label != "")
+        $alias2 -> $alias1 [label="$label", dir=back, fontcolor=black, fontsize=10, color=black, penwidth=1];
+    !else
+        $alias2 -> $alias1 [dir=back, fontcolor=black, fontsize=10, color=black, penwidth=1];
+    !endif
+!endprocedure
+
+!procedure BiFlow($alias1, $alias2, $label="")
+    !if ($label != "")
+        $alias1 -> $alias2 [label="$label", dir=both, fontcolor=black, fontsize=10, color=black, penwidth=1];
+    !else
+        $alias1 -> $alias2 [dir=both, fontcolor=black, fontsize=10, color=black, penwidth=1];
     !endif
 !endprocedure
