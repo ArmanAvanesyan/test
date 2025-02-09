@@ -11,6 +11,7 @@
 ' Open the digraph and define the default node shape
 !procedure startDfd($title)
 digraph dfd2 {
+rankdir="LR"
 node[shape=record]
 label =$title
 !endprocedure
@@ -27,7 +28,7 @@ label =$title
 ' External procedure for external entities
 ' Usage: External(alias, label)
 !procedure External($alias, $label)
-    $alias [label="$label", shape=box];
+    $alias [label="$label" shape=box fillcolor=lightblue style=filled fontcolor=black fontsize=12 color=black width=2];
 !endprocedure
 
 ' Process procedure with step number
