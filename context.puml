@@ -4,7 +4,7 @@
 !$DEFAULT_FONTNAME    = "Arial"
 !$DEFAULT_FONTSIZE    = 12
 !$DEFAULT_FONTCOLOR   = "black"
-!$DEFAULT_FILLCOLOR   = "lightblue"      ' Used for External nodes
+!$DEFAULT_FILLCOLOR   = "lightblue"
 !$DEFAULT_BORDERCOLOR = "black"
 !$DEFAULT_PENWIDTH    = 2
 
@@ -15,7 +15,7 @@
 
 ' Process nodes now use a gradient fill.
 !$PROCESS_GRADIENTANGLE   = "270"
-!$PROCESS_GRADIENTFILLCOLOR = "lightblue;0.3:white"  ' Syntax: "startColor;ratio:endColor"
+!$PROCESS_GRADIENTFILLCOLOR = "lightblue;0.3:white"
 
 '===========================
 ' Helper Function
