@@ -2,6 +2,8 @@
 digraph dfd2 {
     rankdir="LR"
     node[shape=record]
+    style=filled
+    fillcolor=white
 !endprocedure
 
 !procedure endDfd()
