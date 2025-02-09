@@ -7,6 +7,7 @@
 ' Open the digraph and define the default node shape
 !procedure startDfd()
 digraph dfd2 {
+    node[shape=record]
 !endprocedure
 
 ' Close the digraph
@@ -23,17 +24,8 @@ digraph dfd2 {
     </TABLE>>];
 !endprocedure
 
-'-------------------------------
-' Subgraph block procedures
-'-------------------------------
-
-' Start the external entities subgraph (grouping nodes that represent externals)
-!procedure startExternal()
-subgraph level0 {
-!endprocedure
-
-' End the external subgraph and immediately start the processes/data stores cluster
-!procedure endExternalAndStartCluster()
+' start the processes/data stores cluster
+!procedure Elements{
 }
 subgraph cluster_level1 {
     label = "Level 0";
@@ -80,7 +72,7 @@ subgraph cluster_level1 {
 
 !procedure OutFlow($alias1, $alias2, $label="")
     !if ($label != "")
-        $alias2 -> $alias1 [label="$label", dir=back, fontcolor=black, fontsize=10, color=black, penwidth=1];
+        $alias2 -> $alias1 [label="$label", fontcolor=black, fontsize=10, color=black, penwidth=1];
     !else
         $alias2 -> $alias1 [dir=back, fontcolor=black, fontsize=10, color=black, penwidth=1];
     !endif
@@ -88,13 +80,8 @@ subgraph cluster_level1 {
 
 !procedure BiFlow($alias1, $alias2, $label="")
     !if ($label != "")
-        $alias1 -> $alias2 [label="$label", dir=both, fontcolor=black, fontsize=10, color=black, penwidth=1];
+        $alias1 -> $alias2 [label="$label", fontcolor=black, fontsize=10, color=black, penwidth=1];
     !else
         $alias1 -> $alias2 [dir=both, fontcolor=black, fontsize=10, color=black, penwidth=1];
     !endif
-!endprocedure
-
-' Force nodes to the same rank (e.g. for data stores)
-!procedure SameRank($aliases)
-{rank=same; $aliases}
 !endprocedure
