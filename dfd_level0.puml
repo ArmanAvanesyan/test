@@ -1,21 +1,21 @@
 ' dfd_level0.puml
-
 '------------------------------------------------------
 ' DFD Level 0 Library: Procedures for Processes, Data Stores,
-' External Entities, Subgraphs, and Data Flows (using Graphviz DOT syntax)
+' External Entities, Subgraph Blocks, and Data Flows
 '------------------------------------------------------
 
-' Define startDfd and endDfd procedures
+' Open the digraph and define the default node shape
 !procedure startDfd()
 digraph dfd2 {
     node[shape=record]
 !endprocedure
 
+' Close the digraph
 !procedure endDfd()
 }
 !endprocedure
 
-' Title procedure: sets graph attributes with an HTML-like label
+' Set a title with an HTML-like label
 !procedure Title($title)
     graph [rankdir=LR, ranksep=1.5, splines=true, overlap=false, labeljust=c, labelloc=t, \
     label=<<TABLE BORDER="0" CELLBORDER="0">
@@ -23,6 +23,31 @@ digraph dfd2 {
     <TR><TD><FONT POINT-SIZE="10">DFD Level 0 Diagram</FONT></TD></TR>
     </TABLE>>];
 !endprocedure
+
+'-------------------------------
+' Subgraph block procedures
+'-------------------------------
+
+' Start the external entities subgraph (grouping nodes that represent externals)
+!procedure startExternal()
+subgraph level0 {
+!endprocedure
+
+' End the external subgraph and immediately start the processes/data stores cluster
+!procedure endExternalAndStartCluster()
+}
+subgraph cluster_level1 {
+    label = "Level 0";
+!endprocedure
+
+' End the processes/data stores subgraph
+!procedure endCluster()
+}
+!endprocedure
+
+'-------------------------------
+' Node procedures
+'-------------------------------
 
 ' Process procedure with step number
 ' Usage: Process(alias, stepID, name)
@@ -37,11 +62,15 @@ digraph dfd2 {
 !endprocedure
 
 ' External procedure for external entities
+' Usage: External(alias, label)
 !procedure External($alias, $label)
     $alias [label="$label", shape=box, fontcolor=black, fontsize=12, color=black, penwidth=2];
 !endprocedure
 
+'-------------------------------
 ' Data Flow macros
+'-------------------------------
+
 !procedure InFlow($alias1, $alias2, $label="")
     !if ($label != "")
         $alias1 -> $alias2 [label="$label", fontcolor=black, fontsize=10, color=black, penwidth=1];
@@ -66,21 +95,7 @@ digraph dfd2 {
     !endif
 !endprocedure
 
-'------------------------------------------------------
-' Procedures for subgraph blocks
-'------------------------------------------------------
-' Start a subgraph with a given name and label
-!procedure StartSubgraph($name, $label)
-subgraph $name {
-    label = "$label";
-!endprocedure
-
-' End a subgraph block
-!procedure EndSubgraph()
-}
-!endprocedure
-
-' Procedure to group nodes in the same rank
+' Force nodes to the same rank (e.g. for data stores)
 !procedure SameRank($aliases)
 {rank=same; $aliases}
 !endprocedure
