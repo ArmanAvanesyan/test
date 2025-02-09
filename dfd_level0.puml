@@ -8,13 +8,13 @@
     !return $title
 !endfunction
 
-' Set a title with an HTML-like label
 !procedure Title($title)
-    graph [splines=true, overlap=false, labeljust=c, labelloc=t, \
-    label=<<TABLE BORDER="0" CELLBORDER="0">
-    <TR><TD><FONT POINT-SIZE="16">$title</FONT></TD></TR>
-    <TR><TD><FONT POINT-SIZE="10">DFD Level 0 Diagram</FONT></TD></TR>
-    </TABLE>>];
+    graph [rankdir=LR ranksep=1.5 splines=true overlap=false labeljust=c labelloc=t \
+    label=<<TABLE BORDER="0" CELLBORDER="0"> \
+    <TR><TD><FONT POINT-SIZE="16">$title</FONT></TD></TR> \
+    <TR><TD><FONT POINT-SIZE="10">Context Diagram (DFD Level 0)</FONT></TD></TR> \
+    <TR><TD><FONT POINT-SIZE="8">$notation Notation</FONT></TD></TR> \
+    </TABLE>> ]
 !endprocedure
 
 ' Open the digraph and define the default node shape
