@@ -53,19 +53,13 @@ digraph dfd2 {
 ' Data Flow (Arrow) Procedures
 '===========================
 !procedure Flow_R($from, $to, $label = "")
-  $from -> $to [label="$label", dir=forward, constraint=false,
-                fontcolor=black, fontsize=10,
-                color=black, penwidth=1];
+  $from -> $to [label="$label", dir=forward, constraint=false];
 !endprocedure
 
 !procedure Flow_L($from, $to, $label = "")
-  $from -> $to [label="$label", dir=back, constraint=false,
-                fontcolor=black, fontsize=10,
-                color=black, penwidth=1];
+  $from -> $to [label="$label", dir=back, constraint=false];
 !endprocedure
 
 !procedure BiFlow($from, $to, $label = "")
-  $from -> $to [label="$label", dir=both, constraint=false,
-                fontcolor=black, fontsize=10,
-                color=black, penwidth=1];
+  $from -> $to [label="$label", dir=both, constraint=false];
 !endprocedure
