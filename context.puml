@@ -2,19 +2,18 @@
 !function getTitle($title)
     !return $title
 !endfunction
-' Define startDfd and endDfd procedures
+
+' Open the digraph and define the default node shape
 !procedure startDfd($title)
 digraph dfd2 {
 node[shape=record]
 label =$title
 !endprocedure
 
+' Close the digraph
 !procedure endDfd()
 }
 !endprocedure
-
-
-
 
 ' Define External procedure (for external entities)
 !procedure External($alias, $label)
