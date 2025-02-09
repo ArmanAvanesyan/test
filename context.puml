@@ -1,21 +1,6 @@
 '===========================
 ' Global Default Style Variables
 '===========================
-!$DEFAULT_FONTNAME    = "Arial"
-!$DEFAULT_FONTSIZE    = 12
-!$DEFAULT_FONTCOLOR   = "black"
-!$DEFAULT_FILLCOLOR   = "lightblue"
-!$DEFAULT_BORDERCOLOR = "black"
-!$DEFAULT_PENWIDTH    = "2"
-
-!$ARROW_FONTCOLOR     = "black"
-!$ARROW_FONTSIZE      = "10"
-!$ARROW_COLOR         = "black"
-!$ARROW_PENWIDTH      = "1"
-
-' Process nodes now use a gradient fill.
-!$PROCESS_GRADIENTANGLE   = "270"
-!$PROCESS_GRADIENTFILLCOLOR = "lightblue;0.3:white"
 
 '===========================
 ' Helper Function
@@ -51,20 +36,17 @@ digraph dfd2 {
 ' Node Definitions
 '===========================
 
-' External nodes are drawn as a box using the default fill color.
 !procedure External($alias, $label)
-  $alias [label="$label", shape=box, style=filled, fillcolor=$DEFAULT_FILLCOLOR,
-          fontcolor=$DEFAULT_FONTCOLOR, fontsize=$DEFAULT_FONTSIZE,
-          color=$DEFAULT_BORDERCOLOR, penwidth=$DEFAULT_PENWIDTH];
+  $alias [label="$label", shape=box, style=filled, fillcolor=lightblue,
+          fontcolor=black, fontsize="12",
+          color=black, penwidth=2];
 !endprocedure
 
-' Process nodes are drawn in your fixed format.
-' The entire node gets a gradient fill (applied uniformly) using the global gradient settings.
 !procedure Process($alias, $label)
     $alias [label="0 | $label\n\n", shape=Mrecord, pos="0,0!", 
-            fontcolor=$DEFAULT_FONTCOLOR, fontsize=$DEFAULT_FONTSIZE,
-            color=$DEFAULT_BORDERCOLOR, penwidth=$DEFAULT_PENWIDTH,
-            style=filled, gradientangle=$PROCESS_GRADIENTANGLE, fillcolor=$PROCESS_GRADIENTFILLCOLOR];
+            fontcolor=black, fontsize=12,
+            color=black, penwidth=2,
+            style=filled, gradientangle=270, fillcolor="lightblue;0.3:white"];
 !endprocedure
 
 '===========================
@@ -72,18 +54,18 @@ digraph dfd2 {
 '===========================
 !procedure Flow_R($from, $to, $label = "")
   $from -> $to [label="$label", dir=forward, constraint=false,
-                fontcolor=$ARROW_FONTCOLOR, fontsize=$ARROW_FONTSIZE,
-                color=$ARROW_COLOR, penwidth=$ARROW_PENWIDTH];
+                fontcolor=black, fontsize=10,
+                color=black, penwidth=1];
 !endprocedure
 
 !procedure Flow_L($from, $to, $label = "")
   $from -> $to [label="$label", dir=back, constraint=false,
-                fontcolor=$ARROW_FONTCOLOR, fontsize=$ARROW_FONTSIZE,
-                color=$ARROW_COLOR, penwidth=$ARROW_PENWIDTH];
+                fontcolor=black, fontsize=10,
+                color=black, penwidth=1];
 !endprocedure
 
 !procedure BiFlow($from, $to, $label = "")
   $from -> $to [label="$label", dir=both, constraint=false,
-                fontcolor=$ARROW_FONTCOLOR, fontsize=$ARROW_FONTSIZE,
-                color=$ARROW_COLOR, penwidth=$ARROW_PENWIDTH];
+                fontcolor=black, fontsize=10,
+                color=black, penwidth=1];
 !endprocedure
