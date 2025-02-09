@@ -22,27 +22,11 @@ digraph dfd2 {
 !endprocedure
 
 !procedure Process($alias, $label)
-    !if ($notation == "GANE_SARSON")
-        $alias [label=$label shape=Mrecord pos="0,0!" fontcolor=black fontsize=12 color=black penwidth=2]
-    !elseif ($notation == "YOURDON_DEMARCO")
-        $alias [label=$label shape=circle pos="0,0!" fontcolor=black fontsize=12 color=black penwidth=2]
-    !elseif ($notation == "SSADM")
-        $alias [label=$label shape=record pos="0,0!" fontcolor=black fontsize=12 color=black penwidth=2]
-    !else
-        $alias [label=$label shape=circle pos="0,0!" fontcolor=black fontsize=12 color=black penwidth=2]
-    !endif
+    $alias [label=$label shape=Mrecord pos="0,0!" fontcolor=black fontsize=12 color=black penwidth=2]
 !endprocedure
 
 !procedure External($alias, $label)
-    !if ($notation == "GANE_SARSON")
-        $alias [label=$label shape=rect fontcolor=black fontsize=12 color=black penwidth=2]
-    !elseif ($notation == "YOURDON_DEMARCO")
-        $alias [label=$label shape=rect fontcolor=black fontsize=12 color=black penwidth=2]
-    !elseif ($notation == "SSADM")
-        $alias [label=$label shape=oval fontcolor=black fontsize=12 color=black penwidth=2]
-    !else
-        $alias [label=$label shape=rect fontcolor=black fontsize=12 color=black penwidth=2]
-    !endif
+    $alias [label=$label shape=rect fontcolor=black fontsize=12 color=black penwidth=2]
 !endprocedure
 
 ' Define the Data Flow macros
