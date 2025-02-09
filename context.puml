@@ -13,29 +13,29 @@ digraph dfd2 {
 !endprocedure
 
 !procedure Process($alias, $label)
-    $alias [label="0 | $label\n\n" shape=Mrecord];
+    $alias [label="0 | $label\n\n" shape=Mrecord fontcolor=black fontsize=12 color=black penwidth=2 gradientangle="270" tyle=filled fillcolor="lightblue;0.3:whitte];
 !endprocedure
 
 !procedure Flow_R($from, $to, $label = "")
     !if ($label != "")
-        $from -> $to [label="$label" dir=forward];
+        $from -> $to [label="$label" dir=forward fontcolor=black fontsize=10 color=black penwidth=1];
     !else
-        $from -> $to [dir=forward];
+        $from -> $to [dir=forward fontcolor=black fontsize=10 color=black penwidth=1];
     !endif
 !endprocedure
 
 !procedure Flow_L($from, $to, $label = "")
     !if ($label != "")
-        $from -> $to [label="$label" dir=back];
+        $from -> $to [label="$label" dir=back fontcolor=black fontsize=10 color=black penwidth=1];
     !else
-        $from -> $to [dir=back];
+        $from -> $to [dir=back fontcolor=black fontsize=10 color=black penwidth=1];
     !endif
 !endprocedure
 
 !procedure BiFlow($from, $to, $label = "")
     !if ($label != "")
-        $from -> $to [label="$label" dir=both];
+        $from -> $to [label="$label" dir=both fontcolor=black fontsize=10 color=black penwidth=1];
     !else
-        $from -> $to [label="$label" dir=both];
+        $from -> $to [label="$label" dir=both fontcolor=black fontsize=10 color=black penwidth=1];
     !endif
 !endprocedure
