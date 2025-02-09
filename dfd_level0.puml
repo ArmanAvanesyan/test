@@ -4,6 +4,10 @@
 ' External Entities, Subgraph Blocks, and Data Flows
 '------------------------------------------------------
 
+!function getTitle($title)
+    !return $title
+!endfunction
+
 ' Set a title with an HTML-like label
 !procedure Title($title)
     graph [splines=true, overlap=false, labeljust=c, labelloc=t, \
