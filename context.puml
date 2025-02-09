@@ -1,40 +1,89 @@
-' context.puml
+'===========================
+' Global Default Style Variables
+'===========================
+!$DEFAULT_FONTNAME    = "Arial"
+!$DEFAULT_FONTSIZE    = 12
+!$DEFAULT_FONTCOLOR   = "black"
+!$DEFAULT_FILLCOLOR   = "lightblue"      ' Used for External nodes
+!$DEFAULT_BORDERCOLOR = "black"
+!$DEFAULT_PENWIDTH    = 2
+
+!$ARROW_FONTCOLOR     = "black"
+!$ARROW_FONTSIZE      = 10
+!$ARROW_COLOR         = "black"
+!$ARROW_PENWIDTH      = 1
+
+' Process nodes now use a gradient fill.
+!$PROCESS_GRADIENTANGLE   = "270"
+!$PROCESS_GRADIENTFILLCOLOR = "lightblue;0.3:white"  ' Syntax: "startColor;ratio:endColor"
+
+'===========================
+' Helper Function
+'===========================
 !function getTitle($title)
     !return $title
 !endfunction
 
-' Open the digraph and define the default node shape
+'===========================
+' DFD Framework: Start and End Procedures
+'===========================
 !procedure startDfd($title)
 digraph dfd2 {
-rankdir="LR"
-node[shape=record]
-label =$title
+  rankdir="LR"
+  node [
+    shape=record,
+    style=filled,
+    fillcolor=$DEFAULT_FILLCOLOR,
+    color=$DEFAULT_BORDERCOLOR,
+    fontcolor=$DEFAULT_FONTCOLOR,
+    fontsize=$DEFAULT_FONTSIZE,
+    fontname=$DEFAULT_FONTNAME,
+    penwidth=$DEFAULT_PENWIDTH
+  ]
+  label = "$title"
 !endprocedure
 
-' Close the digraph
 !procedure endDfd()
 }
 !endprocedure
 
+'===========================
+' Node Definitions
+'===========================
+
+' External nodes are drawn as a box using the default fill color.
 !procedure External($alias, $label)
-    $alias [label="$label", shape=box, fontcolor=black, fontsize=12, color=black, penwidth=2];
+  $alias [label="$label", shape=box, style=filled, fillcolor=$DEFAULT_FILLCOLOR,
+          fontcolor=$DEFAULT_FONTCOLOR, fontsize=$DEFAULT_FONTSIZE,
+          color=$DEFAULT_BORDERCOLOR, penwidth=$DEFAULT_PENWIDTH];
 !endprocedure
 
+' Process nodes are drawn in your fixed format.
+' The entire node gets a gradient fill (applied uniformly) using the global gradient settings.
 !procedure Process($alias, $label)
-    $alias [label="0 | $label\n\n", shape=Mrecord, pos="0,0!", fontcolor=black, fontsize=12, color=black, penwidth=2];
+    $alias [label="0 | $label\n\n", shape=Mrecord, pos="0,0!", 
+            fontcolor=$DEFAULT_FONTCOLOR, fontsize=$DEFAULT_FONTSIZE,
+            color=$DEFAULT_BORDERCOLOR, penwidth=$DEFAULT_PENWIDTH,
+            style=filled, gradientangle=$PROCESS_GRADIENTANGLE, fillcolor=$PROCESS_GRADIENTFILLCOLOR];
 !endprocedure
 
-'---------------------------
-' Define Data Flow (arrow) procedures
+'===========================
+' Data Flow (Arrow) Procedures
+'===========================
 !procedure Flow_R($from, $to, $label = "")
-  $from -> $to [label="$label", dir=forward, constraint=false, fontcolor=black, fontsize=10, color=black, penwidth=1];
+  $from -> $to [label="$label", dir=forward, constraint=false,
+                fontcolor=$ARROW_FONTCOLOR, fontsize=$ARROW_FONTSIZE,
+                color=$ARROW_COLOR, penwidth=$ARROW_PENWIDTH];
 !endprocedure
 
 !procedure Flow_L($from, $to, $label = "")
-  $from -> $to [label="$label", dir=back, constraint=false, fontcolor=black, fontsize=10, color=black, penwidth=1];
+  $from -> $to [label="$label", dir=back, constraint=false,
+                fontcolor=$ARROW_FONTCOLOR, fontsize=$ARROW_FONTSIZE,
+                color=$ARROW_COLOR, penwidth=$ARROW_PENWIDTH];
 !endprocedure
 
 !procedure BiFlow($from, $to, $label = "")
-  $from -> $to [label="$label", dir=both, constraint=false, fontcolor=black, fontsize=10, color=black, penwidth=1];
+  $from -> $to [label="$label", dir=both, constraint=false,
+                fontcolor=$ARROW_FONTCOLOR, fontsize=$ARROW_FONTSIZE,
+                color=$ARROW_COLOR, penwidth=$ARROW_PENWIDTH];
 !endprocedure
-
