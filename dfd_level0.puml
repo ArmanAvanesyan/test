@@ -26,7 +26,6 @@ digraph dfd2 {
 
 ' start the processes/data stores cluster
 !procedure startElements()
-}
 subgraph cluster_level1 {
     label = "Level 0";
 !endprocedure
