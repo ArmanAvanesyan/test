@@ -27,14 +27,14 @@ label =$title
 '---------------------------
 ' Define Data Flow (arrow) procedures
 !procedure Flow_R($from, $to, $label = "")
-  $from -> $to [label="$label", dir=forward, constraint=true, fontcolor=black, fontsize=10, color=black, penwidth=1];
+  $from -> $to [label="$label", dir=forward, constraint=false, fontcolor=black, fontsize=10, color=black, penwidth=1];
 !endprocedure
 
 !procedure Flow_L($from, $to, $label = "")
-  $from -> $to [label="$label", dir=back, constraint=true, fontcolor=black, fontsize=10, color=black, penwidth=1];
+  $from -> $to [label="$label", dir=back, constraint=false, fontcolor=black, fontsize=10, color=black, penwidth=1];
 !endprocedure
 
 !procedure BiFlow($from, $to, $label = "")
-  $from -> $to [label="$label", dir=both, constraint=true, fontcolor=black, fontsize=10, color=black, penwidth=1];
+  $from -> $to [label="$label", dir=both, constraint=false, fontcolor=black, fontsize=10, color=black, penwidth=1];
 !endprocedure
 
