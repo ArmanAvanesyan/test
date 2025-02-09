@@ -7,12 +7,6 @@
 ' Open the digraph and define the default node shape
 !procedure startDfd()
 digraph dfd2 {
-    subgraph cluster_level1 {
-!endprocedure
-
-' End the processes/data stores subgraph
-!procedure startFlows()
-    }
 !endprocedure
 
 ' Close the digraph
