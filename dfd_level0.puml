@@ -8,6 +8,7 @@
 !procedure startDfd()
 digraph dfd2 {
     node[shape=record]
+    subgraph cluster_level1 {
 !endprocedure
 
 ' Close the digraph
@@ -24,14 +25,9 @@ digraph dfd2 {
     </TABLE>>];
 !endprocedure
 
-' start the processes/data stores cluster
-!procedure startElements()
-subgraph cluster_level1 {
-    label = "Level 0";
-!endprocedure
 
 ' End the processes/data stores subgraph
-!procedure endElements()
+!procedure startFlows()
 }
 !endprocedure
 
@@ -42,7 +38,7 @@ subgraph cluster_level1 {
 ' Process procedure with step number
 ' Usage: Process(alias, stepID, name)
 !procedure Process($alias, $id, $name)
-    $alias [label="{<f0> $id|<f1> $name\n\n\n}", shape=Mrecord];
+    $alias [label="{<f0> $id|<f1> $name\n\n}", shape=Mrecord];
 !endprocedure
 
 ' Store procedure for data stores
