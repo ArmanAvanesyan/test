@@ -7,7 +7,6 @@
 !procedure startDfd($title)
 digraph dfd2 {
 node[shape=record]
-rankdir="LR";
 label =$title
 !endprocedure
 
