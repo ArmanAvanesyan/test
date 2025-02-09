@@ -1,15 +1,9 @@
-!function getTitle($title)
-    !return $title
-!endfunction
-
-' Open the digraph and define the default node shape
 !procedure startDfd()
 digraph dfd2 {
-rankdir="LR"
-node[shape=record]
+    rankdir="LR"
+    node[shape=record]
 !endprocedure
 
-' Close the digraph
 !procedure endDfd()
 }
 !endprocedure
