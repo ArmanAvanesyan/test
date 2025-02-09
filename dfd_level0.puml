@@ -2,7 +2,7 @@
 
 '------------------------------------------------------
 ' DFD Level 0 Library: Procedures for Processes, Data Stores,
-' External Entities, and Data Flows (using Graphviz DOT syntax)
+' External Entities, Subgraphs, and Data Flows (using Graphviz DOT syntax)
 '------------------------------------------------------
 
 ' Define startDfd and endDfd procedures
@@ -64,4 +64,23 @@ digraph dfd2 {
     !else
         $alias1 -> $alias2 [dir=both, fontcolor=black, fontsize=10, color=black, penwidth=1];
     !endif
+!endprocedure
+
+'------------------------------------------------------
+' Procedures for subgraph blocks
+'------------------------------------------------------
+' Start a subgraph with a given name and label
+!procedure StartSubgraph($name, $label)
+subgraph $name {
+    label = "$label";
+!endprocedure
+
+' End a subgraph block
+!procedure EndSubgraph()
+}
+!endprocedure
+
+' Procedure to group nodes in the same rank
+!procedure SameRank($aliases)
+{rank=same; $aliases}
 !endprocedure
