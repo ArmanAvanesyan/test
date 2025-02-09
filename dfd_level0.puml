@@ -4,6 +4,15 @@
 ' External Entities, Subgraph Blocks, and Data Flows
 '------------------------------------------------------
 
+' Set a title with an HTML-like label
+!procedure Title($title)
+    graph [splines=true, overlap=false, labeljust=c, labelloc=t, \
+    label=<<TABLE BORDER="0" CELLBORDER="0">
+    <TR><TD><FONT POINT-SIZE="16">$title</FONT></TD></TR>
+    <TR><TD><FONT POINT-SIZE="10">DFD Level 0 Diagram</FONT></TD></TR>
+    </TABLE>>];
+!endprocedure
+
 ' Open the digraph and define the default node shape
 !procedure startDfd()
 digraph dfd2 {
@@ -14,18 +23,6 @@ node[shape=record]
 !procedure endDfd()
 }
 !endprocedure
-
-' Set a title with an HTML-like label
-!procedure Title($title)
-    graph [splines=true, overlap=false, labeljust=c, labelloc=t, \
-    label=<<TABLE BORDER="0" CELLBORDER="0">
-    <TR><TD><FONT POINT-SIZE="16">$title</FONT></TD></TR>
-    <TR><TD><FONT POINT-SIZE="10">DFD Level 0 Diagram</FONT></TD></TR>
-    </TABLE>>];
-!endprocedure
-
-
-
 
 '-------------------------------
 ' Node procedures
