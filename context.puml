@@ -8,7 +8,7 @@
 digraph dfd2 {
 node[shape=record]
 label =$title
-rankdir="LR"
+rankdir="LR";
 !endprocedure
 
 ' Close the digraph
