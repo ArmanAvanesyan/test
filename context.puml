@@ -32,6 +32,7 @@ digraph dfd2 {
 !endprocedure
 
 ' Define the Data Flow macros
+
 !procedure InFlow($alias1, $alias2, $label="")
     !if ($label != "")
         $alias1 -> $alias2 [label="$label", fontcolor=black, fontsize=10, color=black, penwidth=1];
