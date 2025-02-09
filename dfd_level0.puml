@@ -7,7 +7,6 @@
 ' Open the digraph and define the default node shape
 !procedure startDfd()
 digraph dfd2 {
-    node[shape=record]
     subgraph cluster_level1 {
 !endprocedure
 
