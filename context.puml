@@ -6,6 +6,7 @@
 ' Open the digraph and define the default node shape
 !procedure startDfd($title)
 digraph dfd2 {
+rankdir="LR"
 node[shape=record]
 label =$title
 !endprocedure
@@ -15,40 +16,25 @@ label =$title
 }
 !endprocedure
 
-' Define External procedure (for external entities)
 !procedure External($alias, $label)
     $alias [label="$label", shape=box, fontcolor=black, fontsize=12, color=black, penwidth=2];
 !endprocedure
 
-' It automatically wraps the given label in the format: "{<f0> 0|<f1> <label>\n\n\n}"
 !procedure Process($alias, $label)
-    $alias [label="{<f0> 0|<f1> $label\n\n\n}", shape=Mrecord, pos="0,0!", fontcolor=black, fontsize=12, color=black, penwidth=2];
+    $alias [label="0 | $label\n\n}", shape=Mrecord, pos="0,0!", fontcolor=black, fontsize=12, color=black, penwidth=2];
 !endprocedure
 
-
-
-' Define the Data Flow macros
-
-!procedure InFlow($alias1, $alias2, $label="")
-    !if ($label != "")
-        $alias1 -> $alias2 [label="$label", fontcolor=black, fontsize=10, color=black, penwidth=1];
-    !else
-        $alias1 -> $alias2 [color=black, penwidth=1];
-    !endif
+'---------------------------
+' Define Data Flow (arrow) procedures
+!procedure Flow_R($from, $to, $label = "")
+  $from -> $to [label="$label", dir=forward, fontcolor=black, fontsize=10, color=black, penwidth=1];
 !endprocedure
 
-!procedure OutFlow($alias1, $alias2, $label="")
-    !if ($label != "")
-        $alias2 -> $alias1 [label="$label", dir=back, fontcolor=black, fontsize=10, color=black, penwidth=1];
-    !else
-        $alias2 -> $alias1 [dir=back, fontcolor=black, fontsize=10, color=black, penwidth=1];
-    !endif
+!procedure Flow_L($from, $to, $label = "")
+  $from -> $to [label="$label", dir=back, fontcolor=black, fontsize=10, color=black, penwidth=1];
 !endprocedure
 
-!procedure BiFlow($alias1, $alias2, $label="")
-    !if ($label != "")
-        $alias1 -> $alias2 [label="$label", dir=both, fontcolor=black, fontsize=10, color=black, penwidth=1];
-    !else
-        $alias1 -> $alias2 [dir=both, fontcolor=black, fontsize=10, color=black, penwidth=1];
-    !endif
+!procedure BiFlow($from, $to, $label = "")
+  $from -> $to [label="$label", dir=both, fontcolor=black, fontsize=10, color=black, penwidth=1];
 !endprocedure
+
