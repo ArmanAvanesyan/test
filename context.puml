@@ -1,0 +1,49 @@
+' context.puml
+!procedure setNotation(notation)
+    !if (notation == "GANE_SARSON" || notation == "YOURDON_DEMARCO" || notation == "SSADM")
+        !$notation = notation
+    !else
+        !$notation = "DEFAULT"
+    !endif
+!endprocedure
+
+!procedure startDfd()
+digraph dfd_context {
+!endprocedure
+
+!procedure endDfd()
+}
+!endprocedure
+
+!procedure Title($title)
+    graph [rankdir=LR ranksep=1.5 splines=true overlap=false labeljust=c labelloc=t \
+    label=<<TABLE BORDER="0" CELLBORDER="0"> \
+    <TR><TD><FONT POINT-SIZE="16">$title</FONT></TD></TR> \
+    <TR><TD><FONT POINT-SIZE="10">Context Diagram (DFD Level 0)</FONT></TD></TR> \
+    <TR><TD><FONT POINT-SIZE="8">$notation Notation</FONT></TD></TR> \
+    </TABLE>> ]
+!endprocedure
+
+!procedure Process($alias, $label)
+    !if ($notation == "GANE_SARSON")
+        $alias [label=$label shape=Mrecord fontsize=12 penwidth=2]
+    !elseif ($notation == "YOURDON_DEMARCO")
+        $alias [label=$label shape=circle fontsize=12 penwidth=2]
+    !elseif ($notation == "SSADM")
+        $alias [label=$label shape=record fontsize=12 penwidth=2]
+    !else
+        $alias [label=$label shape=circle fontsize=12 penwidth=2]
+    !endif
+!endprocedure
+
+!procedure External($alias, $label)
+    !if ($notation == "SSADM")
+        $alias [label=$label shape=oval fontsize=12 penwidth=2]
+    !else
+        $alias [label=$label shape=rect fontsize=12 penwidth=2]
+    !endif
+!endprocedure
+
+!procedure DataFlow($from, $to, $label="")
+    $from -> $to [label="$label" fontsize=10 penwidth=1]
+!endprocedure
