@@ -34,7 +34,7 @@ label =$title
 ' Process procedure with step number
 ' Usage: Process(alias, stepID, name)
 !procedure Process($alias, $id, $name)
-    $alias [label="$id | $name\n\n}" shape=Mrecord fillcolor=white style=filled fontcolor=black fontsize=12];
+    $alias [label="$id | $name\n\n" shape=Mrecord fillcolor=white style=filled fontcolor=black fontsize=12];
 !endprocedure
 
 ' Store procedure for data stores
