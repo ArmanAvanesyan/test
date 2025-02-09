@@ -24,13 +24,25 @@ label =$title
 !endprocedure
 
 !procedure Flow_R($from, $to, $label = "")
-  $from -> $to [label="$label", dir=forward, constraint=false, fontcolor=black, fontsize=10, color=black, penwidth=1];
+    !if ($label != "")
+        $from -> $to [label="$label", dir=forward, constraint=false, fontcolor=black, fontsize=10, color=black, penwidth=1];
+    !else
+        $from -> $to [dir=forward, constraint=false, fontcolor=black, fontsize=10, color=black, penwidth=1];
+    !endif
 !endprocedure
 
-!procedure Flow_L($from, $to, $label = "")
-  $from -> $to [label="$label", dir=back, constraint=false, fontcolor=black, fontsize=10, color=black, penwidth=1];
+!procedure Flow_L($alias1, $to, $label = "")
+    !if ($label != "")
+        $from -> $to [label="$label", dir=back, constraint=false, fontcolor=black, fontsize=10, color=black, penwidth=1];
+    !else
+        $from -> $to [dir=back, constraint=false, fontcolor=black, fontsize=10, color=black, penwidth=1];
+    !endif
 !endprocedure
 
 !procedure BiFlow($from, $to, $label = "")
-  $from -> $to [label="$label", dir=both, constraint=false, fontcolor=black, fontsize=10, color=black, penwidth=1];
+    !if ($label != "")
+        $from -> $to [label="$label", dir=both, constraint=false, fontcolor=black, fontsize=10, color=black, penwidth=1];
+    !else
+        $from -> $to [label="$label", dir=both, constraint=false, fontcolor=black, fontsize=10, color=black, penwidth=1];
+    !endif
 !endprocedure
