@@ -5,6 +5,7 @@
 ' Open the digraph and define the default node shape
 !procedure startDfd($title)
 digraph dfd2 {
+rankdir="LR"
 node[shape=record]
 label =$title
 !endprocedure
