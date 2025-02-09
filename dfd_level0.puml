@@ -1,6 +1,11 @@
 !procedure startDfd()
 digraph dfd2 {
     node[shape=record]
+    subgraph level0{
+!endprocedure
+
+!procedure lvl1()
+}
 !endprocedure
 
 !procedure endDfd()
