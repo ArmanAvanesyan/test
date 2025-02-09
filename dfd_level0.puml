@@ -9,15 +9,15 @@ node[shape=record]
 !endprocedure
 
 !procedure External($alias, $label)
-    $alias [label="$label" shape=box fillcolor=lightblue style=filled fontcolor=black fontsize=12 color=black width=2];
+    $alias [label="$label" shape=box fillcolor=lightblue style=filled width=2];
 !endprocedure
 
 !procedure Process($alias, $id, $name)
-    $alias [label="$id | $name\n\n" shape=Mrecord fillcolor=white style=filled fontcolor=black fontsize=12];
+    $alias [label="{<f0> $id |<f1> $name\n\n\n}" shape=Mrecord style=bold];
 !endprocedure
 
 !procedure Store($alias, $id, $name)
-    $alias [label="<f0> $id   |<f1> $name"];
+    $alias [label="<f0> $id   |<f1> $name" fillcolor=lightblue style=filled];
 !endprocedure
 
 !procedure Flow($from, $to, $label = "")
