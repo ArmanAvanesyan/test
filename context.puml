@@ -9,11 +9,11 @@ digraph dfd2 {
 !endprocedure
 
 !procedure External($alias, $label)
-    $alias [label="$label" shape=box fontcolor=black fontsize=12 color=black penwidth=2];
+    $alias [label="$label" shape=box style=filled fillcolor=lightblue fontcolor=black fontsize=12 color=black penwidth=2];
 !endprocedure
 
 !procedure Process($alias, $label)
-    $alias [label="0 | $label\n\n" shape=Mrecord gradientangle=270 style=filled bgcolor="white:lightblue" fontcolor=black fontsize=12 penwidth=2];
+    $alias [label="0 | $label\n\n" shape=Mrecord gradientangle=270 style=filled fillcolor="white:lightblue" fontcolor=black fontsize=12 penwidth=2];
 !endprocedure
 
 !procedure Flow_R($from, $to, $label = "")
