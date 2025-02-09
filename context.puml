@@ -21,35 +21,37 @@ digraph dfd2 {
     </TABLE>> ]
 !endprocedure
 
+' Define Process procedure (for processes)
 !procedure Process($alias, $label)
-    $alias [label=$label shape=Mrecord pos="0,0!" fontcolor=black fontsize=12 color=black penwidth=2]
+    $alias [label="$label", shape=Mrecord, pos="0,0!", fontcolor=black, fontsize=12, color=black, penwidth=2];
 !endprocedure
 
+' Define External procedure (for external entities)
 !procedure External($alias, $label)
-    $alias [label=$label shape=rect fontcolor=black fontsize=12 color=black penwidth=2]
+    $alias [label="$label", shape=box, fontcolor=black, fontsize=12, color=black, penwidth=2];
 !endprocedure
 
 ' Define the Data Flow macros
 !procedure InFlow($alias1, $alias2, $label="")
     !if ($label != "")
-        $alias1 -> $alias2 [label=$label fontcolor=black fontsize=10 color=black penwidth=1]
+        $alias1 -> $alias2 [label="$label", fontcolor=black, fontsize=10, color=black, penwidth=1];
     !else
-        $alias1 -> $alias2 [color=black penwidth=1]
+        $alias1 -> $alias2 [color=black, penwidth=1];
     !endif
 !endprocedure
 
 !procedure OutFlow($alias1, $alias2, $label="")
     !if ($label != "")
-        $alias2 -> $alias1 [label=$label dir=back fontcolor=black fontsize=10 color=black penwidth=1]
+        $alias2 -> $alias1 [label="$label", dir=back, fontcolor=black, fontsize=10, color=black, penwidth=1];
     !else
-        $alias2 -> $alias1 [dir=back fontcolor=black fontsize=10 color=black penwidth=1]
+        $alias2 -> $alias1 [dir=back, fontcolor=black, fontsize=10, color=black, penwidth=1];
     !endif
 !endprocedure
 
 !procedure BiFlow($alias1, $alias2, $label="")
     !if ($label != "")
-        $alias1 -> $alias2 [label=$label dir=both fontcolor=black fontsize=10 color=black penwidth=1]
+        $alias1 -> $alias2 [label="$label", dir=both, fontcolor=black, fontsize=10, color=black, penwidth=1];
     !else
-        $alias1 -> $alias2 [dir=both fontcolor=black fontsize=10 color=black penwidth=1]
+        $alias1 -> $alias2 [dir=both, fontcolor=black, fontsize=10, color=black, penwidth=1];
     !endif
 !endprocedure
