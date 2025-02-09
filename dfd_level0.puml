@@ -40,7 +40,7 @@ node[shape=record]
 ' Process procedure with step number
 ' Usage: Process(alias, stepID, name)
 !procedure Process($alias, $id, $name)
-    $alias [label="{<f0> $id|<f1> $name\n\n\n}", shape=Mrecord];
+    $alias [label="{<f0> $id|<f1> $name\n\n}", shape=Mrecord];
 !endprocedure
 
 ' Store procedure for data stores
