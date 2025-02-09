@@ -37,6 +37,12 @@ digraph dfd2 {
 ' Node procedures
 '-------------------------------
 
+' External procedure for external entities
+' Usage: External(alias, label)
+!procedure External($alias, $label)
+    $alias [label="$label", shape=box];
+!endprocedure
+
 ' Process procedure with step number
 ' Usage: Process(alias, stepID, name)
 !procedure Process($alias, $id, $name)
@@ -49,11 +55,7 @@ digraph dfd2 {
     $alias [label="<f0> $id   |<f1> $name"];
 !endprocedure
 
-' External procedure for external entities
-' Usage: External(alias, label)
-!procedure External($alias, $label)
-    $alias [label="$label", shape=box];
-!endprocedure
+
 
 '-------------------------------
 ' Data Flow macros
