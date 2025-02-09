@@ -1,51 +1,71 @@
 ' context.puml
-' Define a global variable for notation and set a default value
-!$notation = "DEFAULT"
-
-' Define a procedure to set the notation
-!procedure setNotation(notation)
-    !if (notation == "GANE_SARSON" || notation == "YOURDON_DEMARCO" || notation == "SSADM")
-        !$notation = notation
-    !else
-        !$notation = "DEFAULT"
-    !endif
-!endprocedure
-
-' Start and End for the Diagram (PlantUML Native)
+' Define startDfd and endDfd procedures
 !procedure startDfd()
-    title Data Flow Diagram (DFD Level 0)
-    caption Notation: $notation
+digraph dfd2 {
 !endprocedure
 
 !procedure endDfd()
-    ' No need for a closing function in PlantUML
+}
 !endprocedure
 
-' Define Title Function
+!function getTitle($title)
+    !return $title
+!endfunction
+
 !procedure Title($title)
-    title $title
-    caption Context Diagram (DFD Level 0) - Notation: $notation
+    graph [rankdir=LR ranksep=1.5 splines=true overlap=false labeljust=c labelloc=t \
+    label=<<TABLE BORDER="0" CELLBORDER="0"> \
+    <TR><TD><FONT POINT-SIZE="16">$title</FONT></TD></TR> \
+    <TR><TD><FONT POINT-SIZE="10">Context Diagram (DFD Level 0)</FONT></TD></TR> \
+    <TR><TD><FONT POINT-SIZE="8">$notation Notation</FONT></TD></TR> \
+    </TABLE>> ]
 !endprocedure
 
-' Define Process
 !procedure Process($alias, $label)
-    process $alias as "$label"
+    !if ($notation == "GANE_SARSON")
+        $alias [label=$label shape=Mrecord pos="0,0!" fontcolor=black fontsize=12 color=black penwidth=2]
+    !elseif ($notation == "YOURDON_DEMARCO")
+        $alias [label=$label shape=circle pos="0,0!" fontcolor=black fontsize=12 color=black penwidth=2]
+    !elseif ($notation == "SSADM")
+        $alias [label=$label shape=record pos="0,0!" fontcolor=black fontsize=12 color=black penwidth=2]
+    !else
+        $alias [label=$label shape=circle pos="0,0!" fontcolor=black fontsize=12 color=black penwidth=2]
+    !endif
 !endprocedure
 
-' Define External Entity
 !procedure External($alias, $label)
-    actor $alias as "$label"
+    !if ($notation == "GANE_SARSON")
+        $alias [label=$label shape=rect fontcolor=black fontsize=12 color=black penwidth=2]
+    !elseif ($notation == "YOURDON_DEMARCO")
+        $alias [label=$label shape=rect fontcolor=black fontsize=12 color=black penwidth=2]
+    !elseif ($notation == "SSADM")
+        $alias [label=$label shape=oval fontcolor=black fontsize=12 color=black penwidth=2]
+    !else
+        $alias [label=$label shape=rect fontcolor=black fontsize=12 color=black penwidth=2]
+    !endif
 !endprocedure
 
-' Define Data Flows (Unidirectional)
-!procedure InFlow($from, $to, $label="")
-    $from --> $to : $label
+' Define the Data Flow macros
+!procedure InFlow($alias1, $alias2, $label="")
+    !if ($label != "")
+        $alias1 -> $alias2 [label=$label fontcolor=black fontsize=10 color=black penwidth=1]
+    !else
+        $alias1 -> $alias2 [color=black penwidth=1]
+    !endif
 !endprocedure
 
-!procedure OutFlow($from, $to, $label="")
-    $to --> $from : $label
+!procedure OutFlow($alias1, $alias2, $label="")
+    !if ($label != "")
+        $alias2 -> $alias1 [label=$label dir=back fontcolor=black fontsize=10 color=black penwidth=1]
+    !else
+        $alias2 -> $alias1 [dir=back fontcolor=black fontsize=10 color=black penwidth=1]
+    !endif
 !endprocedure
 
-!procedure BiFlow($from, $to, $label="")
-    $from <--> $to : $label
+!procedure BiFlow($alias1, $alias2, $label="")
+    !if ($label != "")
+        $alias1 -> $alias2 [label=$label dir=both fontcolor=black fontsize=10 color=black penwidth=1]
+    !else
+        $alias1 -> $alias2 [dir=both fontcolor=black fontsize=10 color=black penwidth=1]
+    !endif
 !endprocedure
