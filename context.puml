@@ -1,4 +1,3 @@
-' context.puml
 !function getTitle($title)
     !return $title
 !endfunction
@@ -6,7 +5,6 @@
 ' Open the digraph and define the default node shape
 !procedure startDfd($title)
 digraph dfd2 {
-rankdir="LR"
 node[shape=record]
 label =$title
 !endprocedure
@@ -17,15 +15,13 @@ label =$title
 !endprocedure
 
 !procedure External($alias, $label)
-    $alias [label="$label", shape=box, fontcolor=black, fontsize=12, color=black, penwidth=2];
+    $alias [label="$label", shape=box];
 !endprocedure
 
 !procedure Process($alias, $label)
     $alias [label="0 | $label\n\n", shape=Mrecord, pos="0,0!", fontcolor=black, fontsize=12, color=black, penwidth=2];
 !endprocedure
 
-'---------------------------
-' Define Data Flow (arrow) procedures
 !procedure Flow_R($from, $to, $label = "")
   $from -> $to [label="$label", dir=forward, constraint=false, fontcolor=black, fontsize=10, color=black, penwidth=1];
 !endprocedure
