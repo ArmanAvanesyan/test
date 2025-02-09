@@ -6,12 +6,12 @@
 !$DEFAULT_FONTCOLOR   = "black"
 !$DEFAULT_FILLCOLOR   = "lightblue"
 !$DEFAULT_BORDERCOLOR = "black"
-!$DEFAULT_PENWIDTH    = 2
+!$DEFAULT_PENWIDTH    = "2"
 
 !$ARROW_FONTCOLOR     = "black"
-!$ARROW_FONTSIZE      = 10
+!$ARROW_FONTSIZE      = "10"
 !$ARROW_COLOR         = "black"
-!$ARROW_PENWIDTH      = 1
+!$ARROW_PENWIDTH      = "1"
 
 ' Process nodes now use a gradient fill.
 !$PROCESS_GRADIENTANGLE   = "270"
