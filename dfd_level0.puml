@@ -17,7 +17,7 @@ node[shape=record]
 
 ' Set a title with an HTML-like label
 !procedure Title($title)
-    graph [rankdir=LR, ranksep=1.5, splines=true, overlap=false, labeljust=c, labelloc=t, \
+    graph [splines=true, overlap=false, labeljust=c, labelloc=t, \
     label=<<TABLE BORDER="0" CELLBORDER="0">
     <TR><TD><FONT POINT-SIZE="16">$title</FONT></TD></TR>
     <TR><TD><FONT POINT-SIZE="10">DFD Level 0 Diagram</FONT></TD></TR>
