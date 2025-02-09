@@ -8,14 +8,11 @@
     !return $title
 !endfunction
 
-!procedure Title($title)
-    label ="$title"
-!endprocedure
-
 ' Open the digraph and define the default node shape
-!procedure startDfd()
+!procedure startDfd($title)
 digraph dfd2 {
 node[shape=record]
+label ="$title"
 !endprocedure
 
 ' Close the digraph
