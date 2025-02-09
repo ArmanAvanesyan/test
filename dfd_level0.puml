@@ -1,6 +1,7 @@
 !procedure startDfd()
-    digraph dfd2 {
-        node[shape=record]
+digraph dfd2 {
+    rankdir="LR"
+    node[shape=record]
 !endprocedure
 
 !procedure endDfd()
