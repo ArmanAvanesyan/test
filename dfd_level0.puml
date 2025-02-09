@@ -20,10 +20,55 @@ node[shape=record]
     $alias [label="<f0> $id   |<f1> $name"];
 !endprocedure
 
-!procedure InFlow($alias1, $alias2, $label="")
+!procedure Flow($from, $to, $label = "")
     !if ($label != "")
-        $alias1 -> $alias2 [label="$label"];
+         $from -> $to [ label="$label"];
     !else
-        $alias1 -> $alias2;
+         $from -> $to [ constraint=false];
     !endif
+!endprocedure
+
+' External entity to Process (incoming from external)
+!procedure ExtToProc($ext, $proc, $label = "")
+    Flow($ext, $proc, $label);
+!endprocedure
+
+' Process to External entity (outgoing from process)
+!procedure ProcToExt($proc, $ext, $label = "")
+    Flow($proc, $ext, $label);
+!endprocedure
+
+' Process to Process
+!procedure ProcToProc($proc1, $proc2, $label = "")
+    Flow($proc1, $proc2, $label);
+!endprocedure
+
+' Process to Data Store (outgoing from process to datastore)
+!procedure ProcToStore($proc, $store, $label = "")
+    Flow($proc, $store, $label);
+!endprocedure
+
+' Data Store to Process (incoming to process from datastore)
+!procedure StoreToProc($store, $proc, $label = "")
+    Flow($store, $proc, $label);
+!endprocedure
+
+!procedure startProcessCluster()
+subgraph cluster_processes {
+    label="Processes";
+    rankdir=TB;
+!endprocedure
+
+!procedure endProcessCluster()
+}
+!endprocedure
+
+!procedure startStoreCluster()
+subgraph cluster_stores {
+    label="Data Stores";
+    rankdir=TB;
+!endprocedure
+
+!procedure endStoreCluster()
+}
 !endprocedure
