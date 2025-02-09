@@ -21,7 +21,7 @@ label =$title
 !endprocedure
 
 !procedure Process($alias, $label)
-    $alias [label="0 | $label\n\n}", shape=Mrecord, pos="0,0!", fontcolor=black, fontsize=12, color=black, penwidth=2];
+    $alias [label="0 | $label\n\n", shape=Mrecord, pos="0,0!", fontcolor=black, fontsize=12, color=black, penwidth=2];
 !endprocedure
 
 '---------------------------
