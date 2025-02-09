@@ -28,27 +28,22 @@ node[shape=record]
     !endif
 !endprocedure
 
-' External entity to Process (incoming from external)
 !procedure ExtToProc($ext, $proc, $label = "")
     Flow($ext, $proc, $label);
 !endprocedure
 
-' Process to External entity (outgoing from process)
 !procedure ProcToExt($proc, $ext, $label = "")
     Flow($proc, $ext, $label);
 !endprocedure
 
-' Process to Process
 !procedure ProcToProc($proc1, $proc2, $label = "")
     Flow($proc1, $proc2, $label);
 !endprocedure
 
-' Process to Data Store (outgoing from process to datastore)
 !procedure ProcToStore($proc, $store, $label = "")
     Flow($proc, $store, $label);
 !endprocedure
 
-' Data Store to Process (incoming to process from datastore)
 !procedure StoreToProc($store, $proc, $label = "")
     Flow($store, $proc, $label);
 !endprocedure
