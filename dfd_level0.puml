@@ -57,8 +57,8 @@ node[shape=record]
 
 !procedure InFlow($alias1, $alias2, $label="")
     !if ($label != "")
-        $alias1 -> $alias2 [label="$label", fontcolor=black, fontsize=10, color=black, penwidth=1];
+        $alias1 -> $alias2 [label="$label"];
     !else
-        $alias1 -> $alias2 [color=black, penwidth=1];
+        $alias1 -> $alias2;
     !endif
 !endprocedure
