@@ -66,19 +66,3 @@ digraph dfd2 {
         $alias1 -> $alias2 [color=black, penwidth=1];
     !endif
 !endprocedure
-
-!procedure OutFlow($alias1, $alias2, $label="")
-    !if ($label != "")
-        $alias2 -> $alias1 [label="$label", fontcolor=black, fontsize=10, color=black, penwidth=1];
-    !else
-        $alias2 -> $alias1 [dir=back, fontcolor=black, fontsize=10, color=black, penwidth=1];
-    !endif
-!endprocedure
-
-!procedure BiFlow($alias1, $alias2, $label="")
-    !if ($label != "")
-        $alias1 -> $alias2 [label="$label", fontcolor=black, fontsize=10, color=black, penwidth=1];
-    !else
-        $alias1 -> $alias2 [dir=both, fontcolor=black, fontsize=10, color=black, penwidth=1];
-    !endif
-!endprocedure
