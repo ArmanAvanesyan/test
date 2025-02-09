@@ -1,18 +1,19 @@
 ' context.puml
+!function getTitle($title)
+    !return $title
+!endfunction
 ' Define startDfd and endDfd procedures
 !procedure startDfd($title)
 digraph dfd2 {
 node[shape=record]
-label = $title
+label =$title
 !endprocedure
 
 !procedure endDfd()
 }
 !endprocedure
 
-!function getTitle($title)
-    !return $title
-!endfunction
+
 
 
 ' Define External procedure (for external entities)
