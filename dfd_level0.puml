@@ -7,7 +7,7 @@
 ' Open the digraph and define the default node shape
 !procedure startDfd()
 digraph dfd2 {
-    node[shape=record]
+    node[shape=box]
 !endprocedure
 
 ' Close the digraph
