@@ -15,16 +15,7 @@
 !procedure startDfd($title)
 digraph dfd2 {
   rankdir="LR"
-  node [
-    shape=record,
-    style=filled,
-    fillcolor=$DEFAULT_FILLCOLOR,
-    color=$DEFAULT_BORDERCOLOR,
-    fontcolor=$DEFAULT_FONTCOLOR,
-    fontsize=$DEFAULT_FONTSIZE,
-    fontname=$DEFAULT_FONTNAME,
-    penwidth=$DEFAULT_PENWIDTH
-  ]
+  node [shape=record]
   label = "$title"
 !endprocedure
 
