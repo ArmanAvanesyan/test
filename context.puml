@@ -31,7 +31,7 @@ label =$title
     !endif
 !endprocedure
 
-!procedure Flow_L($alias1, $to, $label = "")
+!procedure Flow_L($from, $to, $label = "")
     !if ($label != "")
         $from -> $to [label="$label", dir=back];
     !else
