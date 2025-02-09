@@ -25,24 +25,24 @@ label =$title
 
 !procedure Flow_R($from, $to, $label = "")
     !if ($label != "")
-        $from -> $to [label="$label", dir=forward, constraint=false];
+        $from -> $to [label="$label" dir=forward constraint=false];
     !else
-        $from -> $to [dir=forward, constraint=false];
+        $from -> $to [dir=forward constraint=false];
     !endif
 !endprocedure
 
 !procedure Flow_L($from, $to, $label = "")
     !if ($label != "")
-        $from -> $to [label="$label", dir=back];
+        $from -> $to [label="$label" dir=back];
     !else
-        $from -> $to [dir=back, constraint=false];
+        $from -> $to [dir=back constraint=false];
     !endif
 !endprocedure
 
 !procedure BiFlow($from, $to, $label = "")
     !if ($label != "")
-        $from -> $to [label="$label", dir=both, constraint=false];
+        $from -> $to [label="$label" dir=both constraint=false];
     !else
-        $from -> $to [label="$label", dir=both, constraint=false];
+        $from -> $to [label="$label" dir=both constraint=false];
     !endif
 !endprocedure
