@@ -1,53 +1,24 @@
-' dfd_level0.puml
-'------------------------------------------------------
-' DFD Level 0 Library: Procedures for Processes, Data Stores,
-' External Entities, Subgraph Blocks, and Data Flows
-'------------------------------------------------------
-
-!function getTitle($title)
-    !return $title
-!endfunction
-
-' Open the digraph and define the default node shape
 !procedure startDfd($title)
 digraph dfd2 {
 rankdir="LR"
 node[shape=record]
-label =$title
 !endprocedure
 
-' Close the digraph
 !procedure endDfd()
 }
 !endprocedure
 
-'-------------------------------
-' Node procedures
-'-------------------------------
-
-' External procedure for external entities
-' Usage: External(alias, label)
 !procedure External($alias, $label)
     $alias [label="$label" shape=box fillcolor=lightblue style=filled fontcolor=black fontsize=12 color=black width=2];
 !endprocedure
 
-' Process procedure with step number
-' Usage: Process(alias, stepID, name)
 !procedure Process($alias, $id, $name)
     $alias [label="$id | $name\n\n" shape=Mrecord fillcolor=white style=filled fontcolor=black fontsize=12];
 !endprocedure
 
-' Store procedure for data stores
-' Usage: Store(alias, stepID, name)
 !procedure Store($alias, $id, $name)
     $alias [label="<f0> $id   |<f1> $name"];
 !endprocedure
-
-
-
-'-------------------------------
-' Data Flow macros
-'-------------------------------
 
 !procedure InFlow($alias1, $alias2, $label="")
     !if ($label != "")
