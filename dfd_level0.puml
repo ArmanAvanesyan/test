@@ -1,0 +1,21 @@
+' dfd_level0.puml
+!include context.puml
+
+!procedure TitleLevel0($title)
+    graph [label=<<TABLE BORDER="0" CELLBORDER="0"> \
+    <TR><TD><FONT POINT-SIZE="16">$title</FONT></TD></TR> \
+    <TR><TD><FONT POINT-SIZE="10">Data Flow Diagram Level 0</FONT></TD></TR> \
+    </TABLE>> ]
+!endprocedure
+
+!procedure DataStore($alias, $label)
+    $alias [label="$label" shape=cylinder fontsize=12 penwidth=2]
+!endprocedure
+
+!procedure SubProcess($alias, $label, $number)
+    !if ($notation == "GANE_SARSON")
+        $alias [label="{<f0> $number |<f1> $label}" shape=Mrecord fontsize=12 penwidth=2]
+    !else
+        $alias [label="$number.0\n$label" shape=circle fontsize=12 penwidth=2]
+    !endif
+!endprocedure
