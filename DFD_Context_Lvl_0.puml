@@ -13,9 +13,11 @@ digraph dfd2 {
 ' Elements
 
 !procedure External($alias, $label)
-    $alias [label="$label" shape=box fillcolor=$EXTERNAL_FILL_COLOR style=$ELEMENT_STYLE fontcolor=$DEFAULT_FONT_COLOR fontsize=$ELEMENT_FONT_SIZE color=$DEFAULT_BORDER_COLOR width=$DEFAULT_BORDER_WIDTH];
+    $alias [label="$label" shape=box];
 !endprocedure
+' , fillcolor=$EXTERNAL_FILL_COLOR, style=$ELEMENT_STYLE, fontcolor=$DEFAULT_FONT_COLOR, fontsize=$ELEMENT_FONT_SIZE, color=$DEFAULT_BORDER_COLOR, width=$DEFAULT_BORDER_WIDTH
 
 !procedure Process($alias, $label)
-    $alias [label="0 | $label\n\n" shape=Mrecord fillcolor=$PROCESS_FILL_COLOR style=$ELEMENT_STYLE fontcolor=$DEFAULT_FONT_COLOR fontsize=$ELEMENT_FONT_SIZE color=$DEFAULT_BORDER_COLOR width=$DEFAULT_BORDER_WIDTH];
+    $alias [label="0 | $label\n\n" shape=Mrecord];
+' , fillcolor=$PROCESS_FILL_COLOR, style=$ELEMENT_STYLE, fontcolor=$DEFAULT_FONT_COLOR, fontsize=$ELEMENT_FONT_SIZE, color=$DEFAULT_BORDER_COLOR, width=$DEFAULT_BORDER_WIDTH
 !endprocedure
