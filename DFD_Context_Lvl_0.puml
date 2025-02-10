@@ -8,6 +8,9 @@ digraph dfd2 {
 }
 !endprocedure
 
+' Elements
+' ##################################
+
 !procedure External($alias, $label)
     $alias [label="$label" shape=box fillcolor=lightblue style=filled fontcolor=black fontsize=12 color=black width=2];
 !endprocedure
