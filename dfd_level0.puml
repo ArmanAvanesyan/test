@@ -1,16 +1,17 @@
 !procedure startDfd()
 digraph dfd2 {
-    node[shape=record]
-    subgraph level0{
+    node[shape=record];
+    subgraph level0 {
 !endprocedure
 
 !procedure lvl1()
-}
-subgraph cluster_level1{
+    }
+    subgraph cluster_level1 {
     
 !endprocedure
 
 !procedure endDfd()
+    }
 }
 !endprocedure
 
@@ -19,22 +20,22 @@ subgraph cluster_level1{
 !endprocedure
 
 !procedure External($alias, $label)
-    $alias [label="$label" shape=box fillcolor=lightblue style=filled fontcolor=black fontsize=12 color=black width=2];
+    $alias [label="$label", shape=box, fillcolor=lightblue, style=filled, fontcolor=black, fontsize=12, color=black, width=2];
 !endprocedure
 
 !procedure Process($alias, $id, $name)
-    $alias [label="{<f0> $id |<f1> $name\n\n\n}" shape=Mrecord style=bold];
+    $alias [label="{<f0> $id |<f1> $name\n\n\n}", shape=Mrecord, style=bold];
 !endprocedure
 
 !procedure Store($alias, $id, $name)
-    $alias [label="<f0> $id   |<f1> $name" fillcolor=lightblue style=filled];
+    $alias [label="<f0> $id   |<f1> $name", fillcolor=lightblue, style=filled];
 !endprocedure
 
 !procedure Flow($from, $to, $label = "")
     !if ($label != "")
-         $from -> $to [ label="$label"];
+         $from -> $to [label="$label"];
     !else
-         $from -> $to [ constraint=false];
+         $from -> $to [constraint=false];
     !endif
 !endprocedure
 
