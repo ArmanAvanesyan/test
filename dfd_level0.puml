@@ -39,6 +39,15 @@ digraph dfd2 {
     !endif
 !endprocedure
 
+!procedure Flow($from, $to, $label = "", $extra = "")
+    !if ($label != "")
+         $from -> $to [ label="$label"$extra ];
+    !else
+         $from -> $to [ constraint=false $extra ];
+    !endif
+!endprocedure
+
+' Semantic wrappers for flows:
 !procedure ExtToProc($ext, $proc, $label = "")
     Flow($ext, $proc, $label);
 !endprocedure
@@ -57,4 +66,9 @@ digraph dfd2 {
 
 !procedure StoreToProc($store, $proc, $label = "")
     Flow($store, $proc, $label);
+!endprocedure
+
+' New procedure to draw an edge from a store to a process with a reversed arrow:
+!procedure StoreToProcBack($store, $proc, $label = "")
+    Flow($store, $proc, $label, ", dir=back");
 !endprocedure
