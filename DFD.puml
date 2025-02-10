@@ -1,0 +1,67 @@
+' Colors
+
+!global $DEFAULT_FONT_COLOR ?= "#000000"
+!global $DEFAULT_TITLE_COLOR ?= "#000000"
+!$DATAFLOW_COLOR ?= "#666666"
+!$DATAFLOW_FONT_COLOR ?= $ARROW_COLOR
+
+
+' Styling
+
+!global $ELEMENT_FONT_SIZE ?= "12"
+!global $DATAFLOW_FONT_SIZE ?= "10"
+!global $DEFAULT_BORDER_COLOR ?= "blue"
+!global $EXTERNAL_FILL_COLOR ?= "lightblue"
+!global $STORE_FILL_COLOR ?= "lightblue"
+!global $PROCESS_FILL_COLOR ?= "white"
+!global $ELEMENT_STYLE ?= "filled"
+
+' Layout
+' ##################################
+
+!procedure LAYOUT_TOP_DOWN()
+  rankdir="TD"
+!endprocedure
+
+!procedure LAYOUT_LEFT_RIGHT() 
+  rankdir="LR"
+!endprocedure
+
+' Data Flows
+
+!unquoted procedure Flow_($from, $to, $label, $direction="")
+  $from -> $to [label="$label", dir="$direction", fontcolor=black, fontsize=10, color=black, width=1]
+!endprocedure
+
+!unquoted procedure Flow($from, $to, $label)
+  Flow_($from, $to, $label, "forward")
+!endprocedure
+
+!unquoted procedure BiFlow($from, $to, $label)
+  Flow_($from, $to, $label, "both")
+!endprocedure
+
+!unquoted procedure Flow_Back($from, $to, $label)
+  Flow_($from, $to, $label, "back")
+!endprocedure
+
+' Layout Helpers
+
+!unquoted procedure Lay_D($from, $to)
+{
+  newrank=true;  // Force a new ranking group
+  $from -> $to [style=invis, constraint=true];
+}
+!endprocedure
+
+!unquoted procedure Lay_U($from, $to)
+  {newrank=true; $to -> $from [style=invis, constraint=true]}
+!endprocedure
+
+!unquoted procedure Lay_R($from, $to)
+  {{ rank=same; $from -> $to [style=invis, constraint=true]}}
+!endprocedure
+
+!unquoted procedure Lay_L($from, $to)
+  {{rank=same; $to -> $from [style=invis, constraint=true]}}
+!endprocedure
