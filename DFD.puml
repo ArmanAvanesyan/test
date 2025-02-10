@@ -18,7 +18,6 @@
 !global $ELEMENT_STYLE ?= "filled"
 
 ' Layout
-' ##################################
 
 !procedure LAYOUT_TOP_DOWN()
   rankdir="TD"
@@ -31,7 +30,7 @@
 ' Data Flows
 
 !unquoted procedure Flow_($from, $to, $label, $direction="")
-  $from -> $to [label="$label", dir="$direction", fontcolor=black, fontsize=10, color=black, width=1]
+  $from -> $to [label="$label", dir="$direction", fontcolor=$DATAFLOW_FONT_COLOR, fontsize=$DATAFLOW_FONT_SIZE, color=$DEFAULT_BORDER_COLOR, width=$DEFAULT_BORDER_WIDTH]
 !endprocedure
 
 !unquoted procedure Flow($from, $to, $label)
@@ -50,7 +49,7 @@
 
 !unquoted procedure Lay_D($from, $to)
 {
-  newrank=true;  // Force a new ranking group
+  newrank=true;
   $from -> $to [style=invis, constraint=true];
 }
 !endprocedure
