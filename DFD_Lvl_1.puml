@@ -1,3 +1,5 @@
+!include https://raw.githubusercontent.com/ArmanAvanesyan/test/main/DFD.puml
+
 !procedure startDfd()
 digraph dfd2 {
     node[shape=record];
