@@ -19,7 +19,7 @@
 !endfunction
 
 !function $getElementLine($shape, $alias, $label)
-  !$formattedLabel = $formatLabel($shape, $label)  ' Get formatted label
+  !$formattedLabel = $formatLabel($shape, $label)
   !$line = $constructElementLine($alias, $formattedLabel, $shape) 
   !return $line
 !endfunction
