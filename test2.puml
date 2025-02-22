@@ -13,11 +13,6 @@
     !endif
   !endif
 
-  ' Add ID
-  !if ($id != "")
-    !$element = "<f0> " + $id
-  !endif
-
   ' If shape is "Mrecord", wrap in {}
   !if ($shape == "Mrecord")
     !$element = "{ " + !$element + " }"
@@ -42,13 +37,15 @@ digraph dfd2 {
 
 ' External Entity Constructor
 !procedure External($alias, $label)
-  !$element = $getBaseElement($label, "box")
-  $alias [label="$element", shape=box];
+  !$getLabel = $getBaseElement($label, "box")
+  !$getShape = "box"
+  $alias [label="$getLabel", shape="$getShape"];
 !endprocedure
 
 ' Process Constructor
 !procedure Process($alias, $label)
-  !$element = $getBaseElement($label, "Mrecord")
-  $alias [label="$element", shape=Mrecord];
+  !$getLabel = $getBaseElement($label, "Mrecord")
+  !$getShape = "Mrecord"
+  $alias [label="$getLabel", shape="$getShape"];
 !endprocedure
 @enduml
