@@ -20,7 +20,7 @@
 
 !function $getElementLine($shape, $alias, $label)
   !$formattedLabel = $formatLabel($shape, $label)  ' Get formatted label
-  !$line = $constructElementLine($alias, $formattedLabel, $shape)  ' Construct UML element
+  !$line = $constructElementLine($alias, $formattedLabel, $shape) 
   !return $line
 !endfunction
 
