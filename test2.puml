@@ -1,24 +1,22 @@
 !includeurl https://raw.githubusercontent.com/ArmanAvanesyan/test/main/DFD.puml
 
 ' Base Element Function
-!function $getBaseElement($label, $id,  $shape)
+!function $getBaseElement($shape, $allias, $id, $label)
   !$element = ""
-
-  ' Add Label (Name)
-  !if ($label != "")
-    !if ($element != "")
-      !$element = !$element + " |<f1> " + $label
-    !else
-      !$element = "<f1> " + $label
-    !endif
-  !endif
-
-  ' If shape is "Mrecord", wrap in {}
-  !if ($shape == "Mrecord")
-    !$element = "{ " + !$element + " }"
+  
+ !if ($shape == "Mrecord")
+    !$element = "0 | " + $label + "\n\n"
+  !else
+    !$element = $label
   !endif
 
   !return $element
+!endfunction
+
+!function $getElementLine($shape, $elementType, $alias, $label)
+  !$baseProp = $getBaseElement($label, $shape)
+  !$line = $alias + " [label=" + %chr(34) + $baseProp + %chr(34) + ", shape=" + $shape + "]"
+  !return $line
 !endfunction
 
 ' Start & End of DFD
@@ -36,16 +34,13 @@ digraph dfd2 {
 ' Element Constructors
 
 ' External Entity Constructor
-!procedure External($alias, $label)
-  !$getLabel = $getBaseElement($label, "box")
-  !$getShape = "box"
-  $alias [label="$getLabel", shape="$getShape"];
+!unquoted procedure External($alias, $label)
+  $getElementLine("box", "External", $alias, $label)
 !endprocedure
 
 ' Process Constructor
-!procedure Process($alias, $label)
-  !$getLabel = $getBaseElement($label, "Mrecord")
-  !$getShape = "Mrecord"
-  $alias [label="$getLabel", shape="$getShape"];
+!unquoted procedure Process($alias, $label)
+  $getElementLine("Mrecord", "Process", $alias, $label)
 !endprocedure
+
 @enduml
