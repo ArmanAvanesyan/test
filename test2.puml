@@ -1,21 +1,26 @@
 !includeurl https://raw.githubusercontent.com/ArmanAvanesyan/test/main/DFD.puml
 
-' Base Element Function
-!function $getBaseElement($shape, $allias, $id, $label)
-  !$element = ""
-  
- !if ($shape == "Mrecord")
-    !$element = "0 | " + $label + "\n\n"
+' Base Element Functions
+!function $formatLabel($shape, $label)
+  !$formattedLabel = ""
+
+  !if ($shape == "Mrecord")
+    !$formattedLabel = "0 | " + $label + "\n\n"
   !else
-    !$element = $label
+    !$formattedLabel = $label
   !endif
 
-  !return $element
+  !return $formattedLabel
 !endfunction
 
-!function $getElementLine($shape, $elementType, $alias, $label)
-  !$baseProp = $getBaseElement($shape, $alias, "", $label)
-  !$line = $alias + " [label=" + %chr(34) + $baseProp + %chr(34) + ", shape=" + $shape + "]"
+!function $constructElementLine($alias, $formattedLabel, $shape)
+  !$line = $alias + " [label=" + %chr(34) + $formattedLabel + %chr(34) + ", shape=" + $shape + "]"
+  !return $line
+!endfunction
+
+!function $getElementLine($shape, $alias, $label)
+  !$formattedLabel = $formatLabel($shape, $label)  ' Get formatted label
+  !$line = $constructElementLine($alias, $formattedLabel, $shape)  ' Construct UML element
   !return $line
 !endfunction
 
@@ -35,12 +40,12 @@ digraph dfd2 {
 
 ' External Entity Constructor
 !unquoted procedure External($alias, $label)
-  $getElementLine("box", "External", $alias, $label)
+  $getElementLine("box", $alias, $label)
 !endprocedure
 
 ' Process Constructor
 !unquoted procedure Process($alias, $label)
-  $getElementLine("Mrecord", "Process", $alias, $label)
+  $getElementLine("Mrecord", $alias, $label)
 !endprocedure
 
 @enduml
