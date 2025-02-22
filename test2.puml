@@ -14,7 +14,7 @@
 !endfunction
 
 !function $getElementLine($shape, $elementType, $alias, $label)
-  !$baseProp = $getBaseElement($label, $shape)
+  !$baseProp = $getBaseElement($shape, $alias, "", $label)
   !$line = $alias + " [label=" + %chr(34) + $baseProp + %chr(34) + ", shape=" + $shape + "]"
   !return $line
 !endfunction
