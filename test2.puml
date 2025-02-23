@@ -1,24 +1,5 @@
 !includeurl https://raw.githubusercontent.com/ArmanAvanesyan/test/main/DFD.puml
 
-' Base Element Functions
-!unquoted function $formatLabel($shape, $label)
-  !$formattedLabel = ""
-
-  !if ($shape == "Mrecord")
-    !$formattedLabel = "0 " + %chr(124) + " " + $label + %chr(92) + "n" + %chr(92) + "n"
-  !else
-    !$formattedLabel = $label
-  !endif
-
-  !return $formattedLabel
-!endfunction
-
-!unquoted function $getElementLine($shape, $alias, $label)
-  !$formattedLabel = $formatLabel($shape, $label)
- !$line = $alias + " " + %chr(91) + "label=" + %chr(34) + $formattedLabel + %chr(34) + " shape=" + $shape + %chr(93)
-  !return $line
-!endfunction
-
 ' Start & End of DFD
 
 !procedure startDfd()
@@ -31,16 +12,14 @@ digraph dfd2 {
 }
 !endprocedure
 
-' Element Constructors
+' Elements
 
-' External Entity Constructor
-!unquoted procedure External($alias, $label)
-  $getElementLine(box, $alias, $label)
+!unqoted procedure External($alias, $label)
+    $alias [label="$label" shape=box];
 !endprocedure
 
-' Process Constructor
-!unquoted procedure Process($alias, $label)
-  $getElementLine(Mrecord, $alias, $label)
+!unqoted procedure Process($alias, $label)
+    $alias [label="0 | $label\n\n" shape=Mrecord];
 !endprocedure
 
 @enduml
