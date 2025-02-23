@@ -4,8 +4,8 @@
 !unquoted function $formatLabel($shape, $label)
   !$formattedLabel = ""
 
-  !if ($shape ="Mrecord")
-    !$formattedLabel = "0 |  + $label + \n\n"
+  !if ($shape == "Mrecord")
+    !$formattedLabel = '0 | ' + $label + ' \n\n'
   !else
     !$formattedLabel = $label
   !endif
@@ -15,7 +15,7 @@
 
 !unquoted function $getElementLine($shape, $alias, $label)
   !$formattedLabel = $formatLabel($shape, $label)
-  !$line = $alias + [label="$formattedLabel", shape=$shape] 
+  !$line = $alias + '[' + 'label=' + " + $formattedLabel + "  + , +  'shape=' + $shape + ] 
   !return $line
 !endfunction
 
