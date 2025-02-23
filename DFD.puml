@@ -28,22 +28,33 @@
 !endprocedure
 
 ' Data Flows
-
-!unquoted procedure Flow_($from, $to, $label, $direction="")
-  $from -> $to [label="$label", dir="$direction"]
-!endprocedure
-' , fontcolor=$DATAFLOW_FONT_COLOR, fontsize=$DATAFLOW_FONT_SIZE, color=$DEFAULT_BORDER_COLOR, width=$DEFAULT_BORDER_WIDTH
+!unquoted function $getFlow($from, $to, $label, $direction)
+  !$flow = $from -> $to [dir=$direction]
+  !if ($label !="")
+    !$flow = $from -> $to [label="$label", dir="$direction"]
+  !endif
+  !return $flow
+!endfuction
 
 !unquoted procedure Flow($from, $to, $label)
-  Flow_($from, $to, $label, "forward")
+  $getFlow($from, $to, $label, forward)
+!endprocedure
+!unquoted procedure Flow($from, $to)
+  $getFlow($from, $to, "", forward)
 !endprocedure
 
 !unquoted procedure BiFlow($from, $to, $label)
-  Flow_($from, $to, $label, "both")
+  $getFlow($from, $to, $label, both)
+!endprocedure
+!unquoted procedure BiFlow($from, $to)
+  $getFlow($from, $to, "", both)
 !endprocedure
 
 !unquoted procedure Flow_Back($from, $to, $label)
-  Flow_($from, $to, $label, "back")
+  $getFlow($from, $to, $label, back)
+!endprocedure
+!unquoted procedure Flow_Back($from, $tol)
+  $getFlow($from, $to, "", back)
 !endprocedure
 
 ' Layout Helpers
