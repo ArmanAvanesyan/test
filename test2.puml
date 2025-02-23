@@ -1,7 +1,7 @@
 !includeurl https://raw.githubusercontent.com/ArmanAvanesyan/test/main/DFD.puml
 
 ' Base Element Functions
-!unqoted function $formatLabel($shape, $label)
+!unquoted function $formatLabel($shape, $label)
   !$formattedLabel = ""
 
   !if ($shape = Mrecord)
