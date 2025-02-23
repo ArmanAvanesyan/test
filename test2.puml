@@ -16,11 +16,11 @@
     !return $title
 !endfunction
 
-!unquoted procedure Title($title)
+!unquoted procedure Title($title, $subtitle="Context Diagram (DFD Level 0)")
     graph [rankdir=LR ranksep=1.5 splines=true overlap=false labeljust=c labelloc=t fontname=$TITLE_FONTNAME\
     label=<<TABLE BORDER="0" CELLBORDER="0"> \
     <TR><TD><FONT POINT-SIZE="16">$title</FONT></TD></TR> \
-    <TR><TD><FONT POINT-SIZE="10">Context Diagram (DFD Level 0)</FONT></TD></TR> \
+    <TR><TD><FONT POINT-SIZE="10">$subtitle</FONT></TD></TR> \
     </TABLE>> ]
 !endprocedure
 
@@ -36,10 +36,10 @@ digraph dfd2 {
 
 ' Elements
 
-!unquoted procedure External($alias, $label)
+!unquoted procedure External($alias, $label, $fillColor="", $borderColor="", $fontSize="")
     $alias [label="$label" shape=box fillcolor=$EXTERNAL_FILL_COLOR style=$ELEMENT_STYLE fontcolor=$DEFAULT_FONT_COLOR  fontsize=$ELEMENT_FONT_SIZE color=$DEFAULT_BORDER_COLOR width=$DEFAULT_BORDER_WIDTH];
 !endprocedure
 
-!unquoted procedure Process($alias, $label)
+!unquoted procedure Process($alias, $label, $fillColor="", $borderColor="", $fontSize="")
    $alias [label="0 | $label\n\n" shape=Mrecord fillcolor=$PROCESS_FILL_COLOR style=$ELEMENT_STYLE fontcolor=$DEFAULT_FONT_COLOR fontsize=$ELEMENT_FONT_SIZE color=$DEFAULT_BORDER_COLOR width=$DEFAULT_BORDER_WIDTH];
 !endprocedure
