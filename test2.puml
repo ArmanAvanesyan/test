@@ -1,7 +1,5 @@
 !includeurl https://raw.githubusercontent.com/ArmanAvanesyan/test/main/DFD.puml
 
-' Start & End of DFD
-
 !procedure startDfd()
 digraph dfd2 {
     rankdir="LR"
