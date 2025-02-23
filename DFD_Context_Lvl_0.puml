@@ -1,31 +1,12 @@
 !includeurl https://raw.githubusercontent.com/ArmanAvanesyan/test/main/DFD.puml
+!$level="Context Diagram (DFD Level 0)"
 
-!unquoted procedure startDfd($label)
-digraph dfd2 {
-    Title($label)
-    node[shape=record]
-!endprocedure
-
-!procedure endDfd()
-}
-!endprocedure
-
-!function getTitle($title)
-    !return $title
-!endfunction
-
-!unquoted procedure Title($title)
-    graph [rankdir=LR ranksep=1.5 splines=true overlap=false labeljust=c labelloc=t fontname="Helvetica,Arial,sans-serif"\
-    label=<<TABLE BORDER="0" CELLBORDER="0"> \
-    <TR><TD><FONT COLOR="#345000" POINT-SIZE="16">$title</FONT></TD></TR> \
-    <TR><TD><FONT COLOR="#000000" POINT-SIZE="10">Context Diagram (DFD Level 0)</FONT></TD></TR> \
-    </TABLE>> ]
-!endprocedure
+' Elements
 
 !unquoted procedure External($alias, $label)
-    $alias [label="$label" shape=box fillcolor=lightblue style=filled fontcolor="#000000"  fontsize=12 color=blue width=2];
+    $alias [label="$label" shape=box fillcolor=lightsteelblue1 style=filled fontcolor="#000000"  fontsize=12 color=grey width=1 height=2];
 !endprocedure
 
 !unquoted procedure Process($alias, $label)
-   $alias [label="0 | $label\n\n" shape=Mrecord fillcolor=white fontcolor="#000000" fontsize=12 color=blue width=2];
+   $alias [label="0 | $label\n\n" shape=Mrecord fillcolor=lightsteelblue1 style=filled fontcolor="#000000" fontsize=12 color=grey width=2];
 !endprocedure
