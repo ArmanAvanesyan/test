@@ -1,19 +1,19 @@
 !includeurl https://raw.githubusercontent.com/ArmanAvanesyan/test/main/DFD.puml
 ' Colors
- !global $DEFAULT_FONT_COLOR ?= "#000000"
- !global $DEFAULT_TITLE_COLOR ?= "#000000"
-'!$DATAFLOW_COLOR ?= "#666666"
-'!$DATAFLOW_FONT_COLOR ?= "#000000"
+ !global $DEFAULT_FONT_COLOR = "#000000"
+ !global $DEFAULT_TITLE_COLOR = "#000000"
+'!$DATAFLOW_COLOR = "#666666"
+'!$DATAFLOW_FONT_COLOR = "#000000"
 
 ' Styling
-!global $TITLE_FONTNAME ?= "Helvetica,Arial,sans-serif"
-!global $ELEMENT_FONT_SIZE ?= 12
-!global $DATAFLOW_FONT_SIZE ?= 10
-!global $DEFAULT_BORDER_COLOR ?= "blue"
-!global $DEFAULT_BORDER_WIDTH ?= 2
-!global $EXTERNAL_FILL_COLOR ?= "lightblue"
-!global $PROCESS_FILL_COLOR ?= "white"
-!global $ELEMENT_STYLE ?= "filled"
+!global $TITLE_FONTNAME = "Helvetica,Arial,sans-serif"
+!global $ELEMENT_FONT_SIZE = 12
+!global $DATAFLOW_FONT_SIZE = 10
+!global $DEFAULT_BORDER_COLOR = "blue"
+!global $DEFAULT_BORDER_WIDTH = 2
+!global $EXTERNAL_FILL_COLOR = "lightblue"
+!global $PROCESS_FILL_COLOR = "white"
+!global $ELEMENT_STYLE = "filled"
 
 !function getTitle($title)
     !return $title
