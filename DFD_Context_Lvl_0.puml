@@ -1,8 +1,8 @@
 !includeurl https://raw.githubusercontent.com/ArmanAvanesyan/test/main/DFD.puml
 
-!unquoted procedure startDfd($title)
+!unquoted procedure startDfd($label)
 digraph dfd2 {
-    Title($title)
+    Title($label)
     node[shape=record]
 !endprocedure
 
