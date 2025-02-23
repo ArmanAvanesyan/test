@@ -39,6 +39,6 @@ digraph dfd2 {
     $alias [label="$label" shape=box fillcolor=$EXTERNAL_FILL_COLOR style=$ELEMENT_STYLE fontcolor=$DEFAULT_FONT_COLOR  fontsize=$ELEMENT_FONT_SIZE color=$DEFAULT_BORDER_COLOR width=$DEFAULT_BORDER_WIDTH];
 !endprocedure
 
-!unquoted procedure Process($alias, $label)
-   $alias [label="0 | $label\n\n" shape=Mrecord fillcolor=white fontcolor="#000000" fontsize=12 color=blue width=2];
+!unquoted procedure Process($alias, $label, $fillcolor="", fontcolor="", fontsize="", color="", width="")
+   $alias [label="0 | $label\n\n" shape=Mrecord fillcolor=$PROCESS_FILL_COLOR fontcolor=$DEFAULT_FONT_COLOR fontsize=$ELEMENT_FONT_SIZE color=$DEFAULT_BORDER_COLOR width=$DEFAULT_BORDER_WIDTH];
 !endprocedure
