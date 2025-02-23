@@ -5,7 +5,7 @@
   !$formattedLabel = ""
 
   !if ($shape == "Mrecord")
-    !$formattedLabel = "0 | " + $label + "\n\n"
+    !$formattedLabel = "0 |  + $label + \n\n"
   !else
     !$formattedLabel = $label
   !endif
@@ -14,7 +14,7 @@
 !endfunction
 
 !function $constructElementLine($alias, $formattedLabel, $shape)
-  !$line = $alias + " [label=" + %chr(34) + $formattedLabel + %chr(34) + ", shape=" + $shape + "]"
+  !$line = $alias +  [label=" $formattedLabel ", shape=$shape]
   !return $line
 !endfunction
 
