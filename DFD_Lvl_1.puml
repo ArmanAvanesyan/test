@@ -21,15 +21,27 @@ digraph dfd2 {
 }
 !endprocedure
 
+!function getTitle($title)
+    !return $title
+!endfunction
+
+!unquoted procedure Title($title)
+    graph [rankdir=LR ranksep=1.5 splines=true overlap=false labeljust=c labelloc=t fontname="Helvetica,Arial,sans-serif"\
+    label=<<TABLE BORDER="0" CELLBORDER="0"> \
+    <TR><TD><FONT COLOR="#345000" POINT-SIZE="16">$title</FONT></TD></TR> \
+    <TR><TD><FONT COLOR="#000000" POINT-SIZE="10">DFD Level 1</FONT></TD></TR> \
+    </TABLE>> ]
+!endprocedure
+
 ' Elements
 !procedure External($alias, $label)
-    $alias [label="$label", shape=box, fillcolor=$EXTERNAL_FILL_COLOR, style=$ELEMENT_STYLE, fontcolor=$DEFAULT_FONT_COLOR, fontsize=$ELEMENT_FONT_SIZE, color=$DEFAULT_BORDER_COLOR, width=$DEFAULT_BORDER_WIDTH];
+    $alias [label="$label", shape=box fillcolor=lightblue style=filled fontcolor="#000000"  fontsize=12 color=blue width=2];
 !endprocedure
 
 !procedure Process($alias, $id, $name)
-    $alias [label="{<f0> $id |<f1> $name\n\n\n}", shape=Mrecord, fillcolor=$PROCESS_FILL_COLOR, style=$ELEMENT_STYLE, fontcolor=$DEFAULT_FONT_COLOR, fontsize=$ELEMENT_FONT_SIZE, color=$DEFAULT_BORDER_COLOR, width=$DEFAULT_BORDER_WIDTH];
+    $alias [label="{<f0> $id |<f1> $name\n\n\n}" fillcolor=white fontcolor="#000000" fontsize=12 color=blue width=2];
 !endprocedure
 
 !procedure Store($alias, $id, $name)
-    $alias [label="<f0> $id   |<f1> $name", fillcolor=$STORE_FILL_COLOR, style=$ELEMENT_STYLE, fontcolor=$DEFAULT_FONT_COLOR, fontsize=$ELEMENT_FONT_SIZE, color=$DEFAULT_BORDER_COLOR, width=$DEFAULT_BORDER_WIDTH];
+    $alias [label="<f0> $id   |<f1> $name" fillcolor=white style=filled fontcolor="#000000" fontsize=12 color=blue width=2];
 !endprocedure
