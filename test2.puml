@@ -14,7 +14,8 @@
 
 !unquoted procedure startDfd($title)
 digraph dfd2 {
-Title($title)
+    Title($title)
+    node[shape=record]
 !endprocedure
 
 !procedure endDfd()
