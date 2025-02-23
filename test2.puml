@@ -2,13 +2,13 @@
 
 ' Start & End of DFD
 
-!quoted procedure startDfd()
+!procedure startDfd()
 digraph dfd2 {
     rankdir="LR"
     node[shape=record]
 !endprocedure
 
-!quoted procedure endDfd()
+!procedure endDfd()
 }
 !endprocedure
 
