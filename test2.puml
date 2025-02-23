@@ -1,23 +1,11 @@
 !includeurl https://raw.githubusercontent.com/ArmanAvanesyan/test/main/DFD.puml
-' Colors
- !global $DEFAULT_FONT_COLOR = "#000000"
- !global $DEFAULT_TITLE_COLOR = "#000000"
-
-' Styling
-!global $TITLE_FONTNAME = "Helvetica,Arial,sans-serif"
-!global $ELEMENT_FONT_SIZE = 12
-!global $DEFAULT_BORDER_COLOR = "blue"
-!global $DEFAULT_BORDER_WIDTH = 2
-!global $EXTERNAL_FILL_COLOR = "lightblue"
-!global $PROCESS_FILL_COLOR = "white"
-!global $ELEMENT_STYLE = "filled"
 
 !function getTitle($title)
     !return $title
 !endfunction
 
 !unquoted procedure Title($title, $subtitle="Context Diagram (DFD Level 0)")
-    graph [rankdir=LR ranksep=1.5 splines=true overlap=false labeljust=c labelloc=t fontname=$TITLE_FONTNAME\
+    graph [rankdir=LR ranksep=1.5 splines=true overlap=false labeljust=c labelloc=t fontname="Helvetica,Arial,sans-serif"\
     label=<<TABLE BORDER="0" CELLBORDER="0"> \
     <TR><TD><FONT POINT-SIZE="16">$title</FONT></TD></TR> \
     <TR><TD><FONT POINT-SIZE="10">$subtitle</FONT></TD></TR> \
@@ -36,10 +24,10 @@ digraph dfd2 {
 
 ' Elements
 
-!unquoted procedure External($alias, $label, $fillColor="", $borderColor="", $fontSize="")
-    $alias [label="$label" shape=box fillcolor=$EXTERNAL_FILL_COLOR style=$ELEMENT_STYLE fontcolor=$DEFAULT_FONT_COLOR  fontsize=$ELEMENT_FONT_SIZE color=$DEFAULT_BORDER_COLOR width=$DEFAULT_BORDER_WIDTH];
+!unquoted procedure External($alias, $label)
+    $alias [label="$label" shape=box fillcolor=lightblue style=filled fontcolor="#000000"  fontsize=12 color=blue width=2];
 !endprocedure
 
-!unquoted procedure Process($alias, $label, $fillColor="", $borderColor="", $fontSize="")
-   $alias [label="0 | $label\n\n" shape=Mrecord fillcolor=$PROCESS_FILL_COLOR style=$ELEMENT_STYLE fontcolor=$DEFAULT_FONT_COLOR fontsize=$ELEMENT_FONT_SIZE color=$DEFAULT_BORDER_COLOR width=$DEFAULT_BORDER_WIDTH];
+!unquoted procedure Process($alias, $label)
+   $alias [label="0 | $label\n\n" shape=Mrecord fillcolor=white style=filled fontcolor="#000000" fontsize=12 color=blue width=2];
 !endprocedure
