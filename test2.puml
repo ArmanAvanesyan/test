@@ -1,13 +1,5 @@
 !includeurl https://raw.githubusercontent.com/ArmanAvanesyan/test/main/DFD.puml
 
-!global $DEFAULT_FONT_COLOR ?= "#000000"
-!global $ELEMENT_FONT_SIZE ?= 12
-!global $DEFAULT_BORDER_COLOR ?= "blue"
-!global $DEFAULT_BORDER_WIDTH ?= 2
-!global $EXTERNAL_FILL_COLOR ?= "lightblue"
-!global $PROCESS_FILL_COLOR ?= "white"
-!global $ELEMENT_STYLE ?= "filled"
-
 !function getTitle($title)
     !return $title
 !endfunction
@@ -32,10 +24,10 @@ digraph dfd2 {
 
 ' Elements
 
-!unquoted procedure External($alias, $label, $fillcolor="", $style="", $fontcolor="", $fontsize="", $color="", $width="")
-    $alias [label="$label" shape=box fillcolor=$EXTERNAL_FILL_COLOR style=$ELEMENT_STYLE fontcolor=$DEFAULT_FONT_COLOR  fontsize=$ELEMENT_FONT_SIZE color=$DEFAULT_BORDER_COLOR width=$DEFAULT_BORDER_WIDTH];
+!unquoted procedure External($alias, $label)
+    $alias [label="$label" shape=box fillcolor=lightblue style=filled fontcolor="#000000"  fontsize=12 color=blue width=2];
 !endprocedure
 
-!unquoted procedure Process($alias, $label, $fillcolor="", fontcolor="", fontsize="", color="", width="")
-   $alias [label="0 | $label\n\n" shape=Mrecord fillcolor=$PROCESS_FILL_COLOR fontcolor=$DEFAULT_FONT_COLOR fontsize=$ELEMENT_FONT_SIZE color=$DEFAULT_BORDER_COLOR width=$DEFAULT_BORDER_WIDTH];
+!unquoted procedure Process($alias, $label)
+   $alias [label="0 | $label\n\n" shape=Mrecord fillcolor=white fontcolor="#000000" fontsize=12 color=blue width=2];
 !endprocedure
