@@ -1,7 +1,7 @@
 !includeurl https://raw.githubusercontent.com/ArmanAvanesyan/test/main/DFD.puml
 
 ' Base Element Functions
-!function $formatLabel($shape, $label)
+!unqoted function $formatLabel($shape, $label)
   !$formattedLabel = ""
 
   !if ($shape == "Mrecord")
@@ -13,7 +13,7 @@
   !return $formattedLabel
 !endfunction
 
-!function $getElementLine($shape, $alias, $label)
+!unquoted function $getElementLine($shape, $alias, $label)
   !$formattedLabel = $formatLabel($shape, $label)
   !$line = $alias + [label="$formattedLabel", shape=$shape] 
   !return $line
@@ -40,7 +40,7 @@ digraph dfd2 {
 
 ' Process Constructor
 !unquoted procedure Process($alias, $label)
-  $getElementLine("Mrecord", $alias, $label)
+  $getElementLine(Mrecord, $alias, $label)
 !endprocedure
 
 @enduml
