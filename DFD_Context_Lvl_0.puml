@@ -22,8 +22,6 @@ digraph dfd2 {
 }
 !endprocedure
 
-' Elements
-
 !unquoted procedure External($alias, $label)
     $alias [label="$label" shape=box fillcolor=lightblue style=filled fontcolor="#000000"  fontsize=12 color=blue width=2];
 !endprocedure
