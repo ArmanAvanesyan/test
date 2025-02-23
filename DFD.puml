@@ -36,12 +36,17 @@
   !endif
 !endprocedure
 
-!endprocedure
-
 !unquoted procedure Flow($from, $to, $label="")
-  Flow_($from, $to, $label, forward)
+Flow_($from, $to, $label, forward)
 !endprocedure
 
+!unquoted procedure BiFlow($from, $to, $label="")
+Flow_($from, $to, $label, both)
+!endprocedure
+
+!unquoted procedure Flow_Back($from, $to, $label="")
+Flow_($from, $to, $label, back)
+!endprocedure
 
 
 ' Layout Helpers
