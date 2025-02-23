@@ -32,7 +32,7 @@ digraph dfd2 {
 
 ' Elements
 
-!unquoted procedure External($alias, $label, $fillcolor="", $style="", fontcolor="", fontsize="", color="", width="")
+!unquoted procedure External($alias, $label, $fillcolor="", $style="", $fontcolor="", $fontsize="", $color="", $width="")
     $alias [label="$label" shape=box fillcolor=$EXTERNAL_FILL_COLOR style=$ELEMENT_STYLE fontcolor=$DEFAULT_FONT_COLOR  fontsize=$ELEMENT_FONT_SIZE color=$DEFAULT_BORDER_COLOR width=$DEFAULT_BORDER_WIDTH];
 !endprocedure
 
