@@ -4,7 +4,7 @@
 !unquoted function $formatLabel($shape, $label)
   !$formattedLabel = ""
 
-  !if ($shape = "Mrecord")
+  !if ($shape ="Mrecord")
     !$formattedLabel = "0 |  + $label + \n\n"
   !else
     !$formattedLabel = $label
