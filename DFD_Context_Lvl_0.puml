@@ -1,5 +1,9 @@
 !includeurl https://raw.githubusercontent.com/ArmanAvanesyan/test/main/DFD.puml
 
+!function getTitle($title)
+    !return $title
+!endfunction
+
 !unquoted procedure Title($title)
     graph [rankdir=LR ranksep=1.5 splines=true overlap=false labeljust=c labelloc=t fontname="Helvetica,Arial,sans-serif"\
     label=<<TABLE BORDER="0" CELLBORDER="0"> \
