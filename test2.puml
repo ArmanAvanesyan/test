@@ -2,13 +2,13 @@
 
 ' Start & End of DFD
 
-!procedure startDfd()
+!unquoted procedure startDfd()
 digraph dfd2 {
     rankdir="LR"
     node[shape=record]
 !endprocedure
 
-!procedure endDfd()
+!unqoted procedure endDfd()
 }
 !endprocedure
 
@@ -21,5 +21,3 @@ digraph dfd2 {
 !unqoted procedure Process($alias, $label)
     $alias [label="0 | $label\n\n" shape=Mrecord];
 !endprocedure
-
-@enduml
