@@ -13,14 +13,9 @@
   !return $formattedLabel
 !endfunction
 
-!function $constructElementLine($alias, $formattedLabel, $shape)
-  !$line = $alias +  [label=" $formattedLabel ", shape=$shape]
-  !return $line
-!endfunction
-
 !function $getElementLine($shape, $alias, $label)
   !$formattedLabel = $formatLabel($shape, $label)
-  !$line = $constructElementLine($alias, $formattedLabel, $shape) 
+  !$line = $alias + [label="$formattedLabel", shape=$shape] 
   !return $line
 !endfunction
 
