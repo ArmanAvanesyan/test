@@ -14,8 +14,8 @@
 !endfunction
 
 !unquoted function $getElementLine($shape, $alias, $label)
-  !$formattedLabel = $formatLabel($shape, $label)
-  !$line = $alias + [label="$formattedLabel", shape=$shape] 
+  !$labelFormat = $formatLabel($shape, $label)
+  !$line = $alias + [label="$labelFormat", shape=$shape] 
   !return $line
 !endfunction
 
