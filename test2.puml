@@ -28,5 +28,5 @@ Title($title)
 !endprocedure
 
 !unquoted procedure Process($alias, $label)
-    $alias [label="{<f0> 0 |<f1> $label\n\n\n}" shape=Mrecord];
+   $alias [label="0 | $label\n\n" shape=Mrecord];
 !endprocedure
