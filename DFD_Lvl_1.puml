@@ -1,47 +1,26 @@
 !includeurl https://raw.githubusercontent.com/ArmanAvanesyan/test/main/DFD.puml
+!$level="DFD Level 1"
 
-!procedure startDfd()
-digraph dfd2 {
-    node[shape=record];
-    subgraph level0 {
+!unquoted procedure Process($label)
+subgraph cluster_level1{
+graph [clusterrank=local rankdir=TB labeljust=c labelloc=t color=grey \
+label="$label"]
 !endprocedure
 
-!procedure lvl1()
-    }
-    subgraph cluster_level1 {
-    
-!endprocedure
-
-!procedure endDfd()
-    }
+!procedure DataFlows()
 }
-!endprocedure
-
-!procedure startFlows()
-}
-!endprocedure
-
-!function getTitle($title)
-    !return $title
-!endfunction
-
-!unquoted procedure Title($title)
-    graph [rankdir=LR ranksep=1.5 splines=true overlap=false labeljust=c labelloc=t fontname="Helvetica,Arial,sans-serif"\
-    label=<<TABLE BORDER="0" CELLBORDER="0"> \
-    <TR><TD><FONT COLOR="#345000" POINT-SIZE="16">$title</FONT></TD></TR> \
-    <TR><TD><FONT COLOR="#000000" POINT-SIZE="10">DFD Level 1</FONT></TD></TR> \
-    </TABLE>> ]
 !endprocedure
 
 ' Elements
-!procedure External($alias, $label)
-    $alias [label="$label", shape=box fillcolor=lightblue style=filled fontcolor="#000000"  fontsize=12 color=blue width=2];
+
+!unquoted procedure External($alias, $label)
+    $alias [label="$label" shape=box fillcolor=lightsteelblue1 style=filled fontcolor="#000000"  fontsize=12 color=grey width=1 height=2];
 !endprocedure
 
-!procedure Process($alias, $id, $name)
-    $alias [label="{<f0> $id |<f1> $name\n\n\n}" fillcolor=white fontcolor="#000000" fontsize=12 color=blue width=2];
+!unquoted procedure SubProcess($alias, $id, $label)
+   $alias [label="$id | $label\n\n\n" shape=Mrecord fillcolor=lightsteelblue1 style=filled fontcolor="#000000" fontsize=12 color=grey width=2];
 !endprocedure
 
-!procedure Store($alias, $id, $name)
-    $alias [label="<f0> $id   |<f1> $name" fillcolor=white style=filled fontcolor="#000000" fontsize=12 color=blue width=2];
+!procedure DataStore($alias, $label)
+    $alias [label="{<f0>D |<f1> $label}" shape=record fillcolor=lightsteelblue1 style=filled fontcolor="#000000" fontsize=12 color=grey width=2];
 !endprocedure
