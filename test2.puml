@@ -8,16 +8,16 @@ digraph dfd2 {
     node[shape=record]
 !endprocedure
 
-!unqoted procedure endDfd()
+!unquoted procedure endDfd()
 }
 !endprocedure
 
 ' Elements
 
-!unqoted procedure External($alias, $label)
+!unquoted procedure External($alias, $label)
     $alias [label="$label" shape=box];
 !endprocedure
 
-!unqoted procedure Process($alias, $label)
+!unquoted procedure Process($alias, $label)
     $alias [label="0 | $label\n\n" shape=Mrecord];
 !endprocedure
