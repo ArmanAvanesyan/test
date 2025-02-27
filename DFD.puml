@@ -54,19 +54,19 @@ node[shape=record];
     $alias [label="$formattedLabel" shape=$shape fillcolor=$fillcolor style=$DEFAULT_STYLE fontcolor="$DEFAULT_FONTCOLOR" fontsize=$DEFAULT_FONTSIZE color=$DEFAULT_BORDERCOLOR width=$width height=$height];
 !endprocedure
 
-!unquoted procedure Flow_($from, $to, $label="", $direction, $style, $color, $penwidth)
-  $from -> $to [label="$label" dir=$direction style=$style fontcolor=$fontcolor fontsize=$fontsize color=$color penwidth=$penwidth]
+!unquoted procedure Flow_($from, $to, $label="", $direction)
+  $from -> $to [label="$label" dir=$direction style=$DEFAULT_ARROW_STYLE fontcolor=$DEFAULT_ARROW_FONTCOLOR fontsize=$DEFAULT_ARROW_FONTSIZE color=$DEFAULT_ARROW_COLOR penwidth=$FLOW_PENWIDTH]
 !endprocedure
 
 !unquoted procedure Flow($from, $to, $label="")
-    Flow_($from, $to, $label, forward, $FLOW_ARROW_STYLE, $FLOW_FONTCOLOR, $FLOW_FONTSIZE, $FLOW_COLOR, $FLOW_PENWIDTH)
+    Flow_($from, $to, $label, forward)
 !endprocedure
 
 !unquoted procedure BiFlow($from, $to, $label="")
-    Flow_($from, $to, $label, both, $BIFLOW_ARROW_STYLE,  $BIFLOW_FONTCOLOR, $BIFLOW_FONTSIZE, $BIFLOW_COLOR, $FLOW_PENWIDTH)
+    Flow_($from, $to, $label, both)
 !endprocedure
 
 !unquoted procedure Flow_Back($from, $to, $label="")
-    Flow_($from, $to, $label, back, $FLOWBACK_ARROW_STYLE, $FLOWBACK_FONTCOLOR, $FLOWBACK_FONTSIZE, $FLOWBACK_COLOR, $FLOWBACK_PENWIDTH)
+    Flow_($from, $to, $label, back)
 !endprocedure
 
