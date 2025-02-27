@@ -9,7 +9,6 @@
 !$PROCESS_SHAPE = "Mrecord"
 !$PROCESS_FILLCOLOR = "lightsteelblue1"
 !$PROCESS_WIDTH = 2
-!$PROCESS_ HEIGHT = 1
 
 !$DEFAULT_STYLE = "filled"
 !$DEFAULT_FONTCOLOR = "#000000"
