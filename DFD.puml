@@ -16,7 +16,7 @@ node[shape=record];
 }
 !endprocedure
 
-!unquoted procedure Component($alias, $label, $shape, $fiillcolor, $style, $fontcolor, $fontsize, $bordercolor, $width, $height)
+!unquoted procedure Component($alias, $label, $shape="", $fiillcolor="", $style="", $fontcolor="", $fontsize="", $bordercolor="", $width="", $height="")
     $alias [label="$label" shape=$shape fillcolor=$fillcolor style=$style fontcolor="$fontcolor" fontsize=$fontsize color=$bordercolor width=$width height=$height];
 !endprocedure
 
