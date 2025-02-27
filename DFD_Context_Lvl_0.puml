@@ -1,12 +1,18 @@
 !includeurl https://raw.githubusercontent.com/ArmanAvanesyan/test/main/DFD.puml
 !$level="Context Diagram (DFD Level 0)"
 
-' Elements
+!$color_external = "lightcoral"
+!$color_process = "lightblue"
+!$default_fontsize = 12
+!$default_width = 2
+!$default_height = 2
+!$default_fontcolor = "#000000"
+!$default_bordercolor = "grey"
 
 !unquoted procedure External($alias, $label)
-    $alias [label="$label" shape=box fillcolor=lightsteelblue1 style=filled fontcolor="#000000"  fontsize=12 color=grey width=1 height=2];
+    Component($alias, $label, "box", $color_external, $default_fontsize, 1, $default_height)
 !endprocedure
 
 !unquoted procedure Process($alias, $label)
-   $alias [label="0 | $label\n\n" shape=Mrecord fillcolor=lightsteelblue1 style=filled fontcolor="#000000" fontsize=12 color=grey width=2];
+    Component($alias, "0 | $label\n\n", "Mrecord", $color_process, $default_fontsize, $default_width, $default_height)
 !endprocedure
