@@ -17,9 +17,9 @@
 !$DEFAULT_BORDERCOLOR = "grey"
 
 !unquoted procedure External($alias, $label)
-    Component($alias, $label, $EXTERNAL_SHAPE, $EXTERNAL_FILLCOLOR, DEFAULT_STYLE, $DEFAULT_FONTCOLOR, $DEFAULT_FONTSIZE, $DEFAULT_BORDERCOLOR, $EXTERNAL_WIDTH, $EXTERNAL_HEIGHT)
+    $alias [label="$label" shape=$EXTERNAL_SHAPE fillcolor=$EXTERNAL_FILLCOLOR style=$DEFAULT_STYLE fontcolor="$DEFAULT_FONTCOLOR"  fontsize=$DEFAULT_FONTSIZE color=$DEFAULT_BORDERCOLOR width=$EXTERNAL_WIDTH height=$EXTERNAL_HEIGHT];
 !endprocedure
 
 !unquoted procedure Process($alias, $label)
-    Component($alias, $label, $PROCESS_SHAPE, $PROCESS_FILLCOLOR, DEFAULT_STYLE, $DEFAULT_FONTCOLOR, $DEFAULT_FONTSIZE, $DEFAULT_BORDERCOLOR, $PROCESS_WIDTH, $PROCESS_ HEIGHT)
+   $alias [label="0 | $label\n\n" shape=$PROCESS_SHAPE fillcolor=$PROCESS_FILLCOLOR style=$DEFAULT_STYLE fontcolor="$DEFAULT_FONTCOLOR" fontsize=$DEFAULT_FONTSIZE color=$DEFAULT_BORDERCOLOR width=$PROCESS_WIDTH];
 !endprocedure
