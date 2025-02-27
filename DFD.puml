@@ -16,8 +16,8 @@ node[shape=record];
 }
 !endprocedure
 
-!unquoted procedure Component($alias, $label, $shape="", $color="", $fontsize="", $width="", $height="")
-    $alias [label="$label" shape=$shape fillcolor=$color style=filled fontcolor=$default_fontcolor fontsize=$fontsize color=$default_bordercolor width=$width height=$height];
+!unquoted procedure Component($alias, $label, $shape, $fiillcolor, $style, $fontcolor, $fontsize, $bordercolor, $width, $height)
+    $alias [label="$label" shape=$shape fillcolor=$fillcolor style=$style fontcolor="$fontcolor" fontsize=$fontsize color=$bordercolor width=$width height=$height];
 !endprocedure
 
 !unquoted procedure Flow_($from, $to, $label="", $direction="")
