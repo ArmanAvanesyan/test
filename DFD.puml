@@ -5,12 +5,14 @@
 !$DEFAULT_BORDERCOLOR ?= "grey"
 !$DEFAULT_WIDTH ?= 2
 !$DEFAULT_HEIGHT ?= 1
+!$DEFAULT_TITLE_FONTSIZE = 16
+!$DEFAULT_SUBTITLE_FONTSIZE = 10
 
-!procedure Title($title, $level)
+!procedure Title($title, $LEVEL)
     graph [rankdir=LR ranksep=1.5 labeljust=c labelloc=t \
     label=<<TABLE BORDER="0" CELLBORDER="0"> \
-    <TR><TD><FONT POINT-SIZE="16">$title</FONT></TD></TR> \
-    <TR><TD><FONT POINT-SIZE="10">$LEVEL</FONT></TD></TR> \
+    <TR><TD><FONT POINT-SIZE="$DEFAULT_TITLE_FONTSIZE">$title</FONT></TD></TR> \
+    <TR><TD><FONT POINT-SIZE="$DEFAULT_SUBTITLE_FONTSIZE">$LEVEL</FONT></TD></TR> \
     </TABLE>> ]
 !endprocedure
 
