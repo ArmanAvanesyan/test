@@ -3,17 +3,17 @@
 
 !$EXTERNAL_SHAPE = "box"
 !$EXTERNAL_FILLCOLOR = "lightsteelblue1"
-!$EXTERNAL_WIDTH = "1"
-!$EXTERNAL_HEIGHT = "2"
+!$EXTERNAL_WIDTH = 1
+!$EXTERNAL_HEIGHT = 2
 
 !$PROCESS_SHAPE = "Mrecord"
 !$PROCESS_FILLCOLOR = "lightsteelblue1"
-!$PROCESS_WIDTH ="2"
-!$PROCESS_ HEIGHT = "1"
+!$PROCESS_WIDTH = 2
+!$PROCESS_ HEIGHT = 1
 
 !$DEFAULT_STYLE = "filled"
 !$DEFAULT_FONTCOLOR = "#000000"
-!$DEFAULT_FONTSIZE = "12"
+!$DEFAULT_FONTSIZE = 12
 !$DEFAULT_BORDERCOLOR = "grey"
 
 !unquoted procedure External($alias, $label)
