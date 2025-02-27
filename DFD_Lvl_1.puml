@@ -1,26 +1,50 @@
 !includeurl https://raw.githubusercontent.com/ArmanAvanesyan/test/main/DFD.puml
-!$level="DFD Level 1"
+!$LEVEL="DFD Level 1"
+!$TITLE_FONTSIZE = $DEFAULT_TITLE_FONTSIZE
+!$SUBTITLE_FONTSIZE = $DEFAULT_SUBTITLE_FONTSIZE
 
-!unquoted procedure Process($label)
+!$EXTERNAL_FILLCOLOR ?= $DEFAULT_FILLCOLOR
+!$EXTERNAL_STYLE ?= $DEFAULT_STYLE
+!$EXTERNAL_FONTCOLOR ?= $DEFAULT_FONTCOLOR
+!$EXTERNAL_FONTSIZE ?= $DEFAULT_FONTSIZE
+!$EXTERNAL_SHAPE ?= "box"
+!$EXTERNAL_FILLCOLOR ?= $DEFAULT_FILLCOLOR
+!$EXTERNAL_WIDTH ?= $DEFAULT_WIDTH
+!$EXTERNAL_HEIGHT ?= 2
+
+!$PROCESS_FILLCOLOR ?= $DEFAULT_FILLCOLOR
+!$PROCESS_STYLE ?= $DEFAULT_STYLE
+!$PROCESS_FONTCOLOR ?= $DEFAULT_FONTCOLOR
+!$PROCESS_FONTSIZE ?= $DEFAULT_FONTSIZE
+!$PROCESS_SHAPE ?= "Mrecord"
+!$PROCESS_FILLCOLOR ?= $DEFAULT_FILLCOLOR
+!$PROCESS_WIDTH ?= $DEFAULT_WIDTH
+!$PROCESS_HEIGHT ?= 1
+
+!$DATASTORE_FILLCOLOR ?= $DEFAULT_FILLCOLOR
+!$DATASTORE_STYLE ?= $DEFAULT_STYLE
+!$DATASTORE_FONTCOLOR ?= $DEFAULT_FONTCOLOR
+!$DATASTORE_FONTSIZE ?= $DEFAULT_FONTSIZE
+!$DATASTORE_SHAPE ?= "record"
+!$DATASTORE_FILLCOLOR ?= $DEFAULT_FILLCOLOR
+!$DATASTORE_WIDTH ?= $DEFAULT_WIDTH
+!$DATASTORE_HEIGHT ?= 0
+
+!unquoted procedure SubProcess($label)
 subgraph cluster_level1{
 graph [clusterrank=local rankdir=TB labeljust=c labelloc=t color=grey \
 label="$label"]
 !endprocedure
-
 !procedure DataFlows()
 }
 !endprocedure
 
-' Elements
-
-!unquoted procedure External($alias, $label)
-    $alias [label="$label" shape=box fillcolor=lightsteelblue1 style=filled fontcolor="#000000"  fontsize=12 color=grey width=1 height=2];
+!unquoted procedure External($alias, $label, $id="")
+    Component($alias, $label, $id, $EXTERNAL_SHAPE, $EXTERNAL_FILLCOLOR, $EXTERNAL_WIDTH, $EXTERNAL_HEIGHT, "external")
 !endprocedure
-
-!unquoted procedure SubProcess($alias, $id, $label)
-   $alias [label="$id | $label\n\n\n" shape=Mrecord fillcolor=lightsteelblue1 style=filled fontcolor="#000000" fontsize=12 color=grey width=2];
+!unquoted procedure Process($alias, $label, $id="")
+    Component($alias, $label, $id, $PROCESS_SHAPE, $PROCESS_FILLCOLOR, $PROCESS_WIDTH, $PROCESS_HEIGHT, "process")
 !endprocedure
-
-!procedure DataStore($alias, $label)
-    $alias [label="{<f0>D |<f1> $label}" shape=record fillcolor=lightsteelblue1 style=filled fontcolor="#000000" fontsize=12 color=grey width=2];
+!unquoted procedure Datastore($alias, $label, $id="")
+    Component($alias, $label, $id, $DATASTORE_SHAPE, $DATASTORE_FILLCOLOR, $DATASTORE_WIDTH, $DATASTORE_HEIGHT, "datastore")
 !endprocedure
