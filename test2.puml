@@ -1,33 +1,63 @@
-!includeurl https://raw.githubusercontent.com/ArmanAvanesyan/test/main/DFD.puml
-
-!function getTitle($title)
-    !return $title
-!endfunction
-
-!unquoted procedure Title($title)
-    graph [rankdir=LR ranksep=1.5 splines=true overlap=false labeljust=c labelloc=t fontname="Helvetica,Arial,sans-serif"\
+!procedure Title($title, $level)
+    graph [rankdir=LR ranksep=1.5 labeljust=c labelloc=t \
     label=<<TABLE BORDER="0" CELLBORDER="0"> \
-    <TR><TD><FONT COLOR=#000000" POINT-SIZE="16">$title</FONT></TD></TR> \
-    <TR><TD><FONT COLOR="#000000" POINT-SIZE="10">"Context Diagram (DFD Level 0)"</FONT></TD></TR> \
+    <TR><TD><FONT POINT-SIZE="16">$title</FONT></TD></TR> \
+    <TR><TD><FONT POINT-SIZE="10">$level</FONT></TD></TR> \
     </TABLE>> ]
 !endprocedure
 
-!unquoted procedure startDfd($title)
+!procedure startDfd($label)
 digraph dfd2 {
-    Title($title)
-    node[shape=record]
+Title($label, $level)
+node[shape=record];
 !endprocedure
 
 !procedure endDfd()
 }
 !endprocedure
 
-' Elements
-
-!unquoted procedure External($alias, $label)
-    $alias [label="$label" shape=box fillcolor=lightblue style=filled fontcolor="#000000"  fontsize=12 color=blue width=2];
+!unquoted procedure Component($alias, $label, $shape="", $fiillcolor="", $style="", $fontcolor="", $fontsize="", $bordercolor="", $width="", $height="")
+    $alias [label="$label" shape=$shape fillcolor=$fillcolor style=$style fontcolor="$fontcolor" fontsize=$fontsize color=$bordercolor width=$width height=$height];
 !endprocedure
 
-!unquoted procedure Process($alias, $label)
-   $alias [label="0 | $label\n\n" shape=Mrecord fillcolor=white fontcolor="#000000" fontsize=12 color=blue width=2];
+!unquoted procedure Flow_($from, $to, $label="", $direction="")
+  !if ($label != "")
+    $from -> $to [label="$label" dir=$direction]
+  !else
+    $from -> $to [dir=$direction]
+  !endif
+!endprocedure
+
+!unquoted procedure Flow($from, $to, $label="")
+Flow_($from, $to, $label, forward)
+!endprocedure
+
+!unquoted procedure BiFlow($from, $to, $label="")
+Flow_($from, $to, $label, both)
+!endprocedure
+
+!unquoted procedure Flow_Back($from, $to, $label="")
+Flow_($from, $to, $label, back)
+!endprocedure
+
+
+' Layout Helpers
+
+!unquoted procedure Lay_D($from, $to)
+{
+  newrank=true;
+  $from -> $to [style=invis, constraint=true];
+}
+!endprocedure
+
+!unquoted procedure Lay_U($from, $to)
+  {newrank=true; $to -> $from [style=invis, constraint=true]}
+!endprocedure
+
+!unquoted procedure Lay_R($from, $to)
+  {{ rank=same; $from -> $to [style=invis, constraint=true]}}
+!endprocedure
+
+!unquoted procedure Lay_L($from, $to)
+  {{rank=same; $to -> $from [style=invis, constraint=true]}}
 !endprocedure
