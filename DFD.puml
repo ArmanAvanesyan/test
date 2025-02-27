@@ -75,11 +75,11 @@ node[shape=record];
 !endprocedure
 
 !unquoted procedure Flow($from, $to, $label="")
-Flow_($from, $to, $label, "forward", $FLOW_ARROW_STYLE, $FLOW_FONTCOLOR, $FLOW_FONTSIZE, $FLOW_COLOR, $FLOW_PENWIDTH)
+Flow_($from, $to, "$label", forward, $FLOW_ARROW_STYLE, $FLOW_FONTCOLOR, $FLOW_FONTSIZE, $FLOW_COLOR, $FLOW_PENWIDTH)
 !endprocedure
 
 !unquoted procedure BiFlow($from, $to, $label="")
-Flow_($from, $to, $label, both, $BIFLOW_ARROW_STYLE,  $BIFLOW_FONTCOLOR, $BIFLOW_FONTSIZE, $BIFLOW_COLOR, $FLOW_PENWIDTH)
+Flow_($from, $to, "$label", both, $BIFLOW_ARROW_STYLE,  $BIFLOW_FONTCOLOR, $BIFLOW_FONTSIZE, $BIFLOW_COLOR, $FLOW_PENWIDTH)
 !endprocedure
 
 !unquoted procedure Flow_Back($from, $to, $label="")
