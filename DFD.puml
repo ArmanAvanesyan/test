@@ -17,7 +17,7 @@
 !$DEFAULT_ARROW_STYLE ?= "solid"
 !$DEFAULT_ARROW_COLOR ?= "black"
 
-!procedure Title($title, $LEVEL)
+!procedure Title($title)
     graph [rankdir=LR ranksep=1.5 labeljust=c labelloc=t \
     label=<<TABLE BORDER="0" CELLBORDER="0"> \
     <TR><TD><FONT POINT-SIZE="$TITLE_FONTSIZE">$title</FONT></TD></TR> \
@@ -27,7 +27,7 @@
 
 !procedure startDfd($label)
 digraph dfd2 {
-Title($label, $LEVEL)
+Title($label)
 node[shape=record];
 !endprocedure
 
@@ -54,7 +54,7 @@ node[shape=record];
     $alias [label="$formattedLabel" shape=$shape fillcolor=$fillcolor style=$DEFAULT_STYLE fontcolor="$DEFAULT_FONTCOLOR" fontsize=$DEFAULT_FONTSIZE color=$DEFAULT_BORDERCOLOR width=$width height=$height];
 !endprocedure
 
-!unquoted procedure Flow_($from, $to, $label="", $direction)
+!unquoted procedure Flow_($from, $to, $label="", $direction="")
   $from -> $to [label="$label" dir=$direction style=$DEFAULT_ARROW_STYLE fontcolor=$DEFAULT_ARROW_FONTCOLOR fontsize=$DEFAULT_ARROW_FONTSIZE color=$DEFAULT_ARROW_COLOR penwidth=$FLOW_PENWIDTH]
 !endprocedure
 
