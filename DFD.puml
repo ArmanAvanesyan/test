@@ -70,11 +70,7 @@ node[shape=record];
 !endprocedure
 
 !unquoted procedure Flow_($from, $to, $label="", $direction="", $style="", $fontcolor="", $fontsize="", $color="", $penwidth="")
-  !if ($label != "")
-    $from -> $to [label="$label" dir=$direction style="$style" fontcolor="$fontcolor" fontsize=$fontsize color="$color" penwidth=$penwidth];
-  !else
-    $from -> $to [dir=$direction style=$style color=$color penwidth=$penwidth];
-  !endif
+  $from -> $to [label="$label" dir=$direction style=$style fontcolor=$fontcolor fontsize=$fontsize color=$color penwidth=$penwidth];
 !endprocedure
 
 !unquoted procedure Flow($from, $to, $label="")
@@ -82,7 +78,7 @@ node[shape=record];
 !endprocedure
 
 !unquoted procedure BiFlow($from, $to, $label="")
-    Flow_($from, $to, "$label", both, $BIFLOW_ARROW_STYLE,  $BIFLOW_FONTCOLOR, $BIFLOW_FONTSIZE, $BIFLOW_COLOR, $FLOW_PENWIDTH)
+    Flow_($from, $to, $label, both, $BIFLOW_ARROW_STYLE,  $BIFLOW_FONTCOLOR, $BIFLOW_FONTSIZE, $BIFLOW_COLOR, $FLOW_PENWIDTH)
 !endprocedure
 
 !unquoted procedure Flow_Back($from, $to, $label="")
