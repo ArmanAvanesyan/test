@@ -1,24 +1,31 @@
 !includeurl https://raw.githubusercontent.com/ArmanAvanesyan/test/main/DFD.puml
-!$level="Context Diagram (DFD Level 0)"
+!$LEVEL="Context Diagram (DFD Level 0)"
 
-!$EXTERNAL_SHAPE = "box"
-!$EXTERNAL_FILLCOLOR = "lightsteelblue1"
-!$EXTERNAL_WIDTH = 1
-!$EXTERNAL_HEIGHT = 2
+!$TITLE_FONTSIZE = $DEFAULT_TITLE_FONTSIZE
+!$SUBTITLE_FONTSIZE = $DEFAULT_SUBTITLE_FONTSIZE
 
-!$PROCESS_SHAPE = "Mrecord"
-!$PROCESS_FILLCOLOR = "lightsteelblue1"
-!$PROCESS_WIDTH = 2
+!$EXTERNAL_FILLCOLOR ?= $DEFAULT_FILLCOLOR
+!$EXTERNAL_STYLE ?= $DEFAULT_STYLE
+!$EXTERNAL_FONTCOLOR ?= $DEFAULT_FONTCOLOR
+!$EXTERNAL_FONTSIZE ?= $DEFAULT_FONTSIZE
+!$EXTERNAL_SHAPE ?= "box"
+!$EXTERNAL_FILLCOLOR ?= $DEFAULT_FILLCOLOR
+!$EXTERNAL_WIDTH ?= $DEFAULT_WIDTH
+!$EXTERNAL_HEIGHT ?= 2
 
-!$DEFAULT_STYLE = "filled"
-!$DEFAULT_FONTCOLOR = "#000000"
-!$DEFAULT_FONTSIZE = 12
-!$DEFAULT_BORDERCOLOR = "grey"
+!$PROCESS_FILLCOLOR ?= $DEFAULT_FILLCOLOR
+!$PROCESS_STYLE ?= $DEFAULT_STYLE
+!$PROCESS_FONTCOLOR ?= $DEFAULT_FONTCOLOR
+!$PROCESS_FONTSIZE ?= $DEFAULT_FONTSIZE
+!$PROCESS_SHAPE ?= "Mrecord"
+!$PROCESS_FILLCOLOR ?= $DEFAULT_FILLCOLOR
+!$PROCESS_WIDTH ?= $DEFAULT_WIDTH
+!$PROCESS_HEIGHT ?= 1
 
-!unquoted procedure External($alias, $label)
-    $alias [label="$label" shape=$EXTERNAL_SHAPE fillcolor=$EXTERNAL_FILLCOLOR style=$DEFAULT_STYLE fontcolor="$DEFAULT_FONTCOLOR"  fontsize=$DEFAULT_FONTSIZE color=$DEFAULT_BORDERCOLOR width=$EXTERNAL_WIDTH height=$EXTERNAL_HEIGHT];
+!unquoted procedure External($alias, $label, $id="")
+    Component($alias, $label, $id, $EXTERNAL_SHAPE, $EXTERNAL_FILLCOLOR, $EXTERNAL_WIDTH, $EXTERNAL_HEIGHT, "external")
 !endprocedure
 
-!unquoted procedure Process($alias, $label)
-   $alias [label="0 | $label\n\n" shape=$PROCESS_SHAPE fillcolor=$PROCESS_FILLCOLOR style=$DEFAULT_STYLE fontcolor="$DEFAULT_FONTCOLOR" fontsize=$DEFAULT_FONTSIZE color=$DEFAULT_BORDERCOLOR width=$PROCESS_WIDTH];
+!unquoted procedure Process($alias, $label, $id="")
+    Component($alias, $label, $id, $PROCESS_SHAPE, $PROCESS_FILLCOLOR, $PROCESS_WIDTH, $PROCESS_HEIGHT, "process")
 !endprocedure
