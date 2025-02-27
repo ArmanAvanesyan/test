@@ -22,7 +22,7 @@
 !procedure startDfd($label)
 digraph dfd2 {
 Title($label)
-node[shape=record];
+node[shape=record]
 !endprocedure
 
 !procedure endDfd()
