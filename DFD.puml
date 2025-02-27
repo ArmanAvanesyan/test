@@ -70,7 +70,7 @@ node[shape=record];
   !if ($label != "")
     $from -> $to [label="$label" dir=$direction style="$style" fontcolor="$fontcolor" fontsize=$fontsize color="$color" penwidth=$penwidth ]
   !else
-    $from -> $to [dir=$direction style=$style fontcolor=$fontcolor fontsize=$fontsize color=$color penwidth=$penwidth]
+    $from -> $to [dir=$direction style=$style color=$color penwidth=$penwidth]
   !endif
 !endprocedure
 
