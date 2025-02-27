@@ -70,7 +70,7 @@ node[shape=record];
 !endprocedure
 
 !unquoted procedure Flow_($from, $to, $label="", $direction="", $style="", $fontcolor="", $fontsize="", $color="", $penwidth="")
-  $from -> $to [label="$label" dir=$direction style=$style fontcolor=$fontcolor fontsize=$fontsize color=$color penwidth=$penwidth];
+  $from -> $to [label="$label" dir=$direction style=$style fontcolor=$fontcolor fontsize=$fontsize color=$color penwidth=$penwidth]
 !endprocedure
 
 !unquoted procedure Flow($from, $to, $label="")
