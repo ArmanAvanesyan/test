@@ -1,6 +1,5 @@
 !includeurl https://raw.githubusercontent.com/ArmanAvanesyan/test/main/DFD.puml
 !$LEVEL="Context Diagram (DFD Level 0)"
-
 !$TITLE_FONTSIZE = $DEFAULT_TITLE_FONTSIZE
 !$SUBTITLE_FONTSIZE = $DEFAULT_SUBTITLE_FONTSIZE
 
@@ -25,7 +24,6 @@
 !unquoted procedure External($alias, $label, $id="")
     Component($alias, $label, $id, $EXTERNAL_SHAPE, $EXTERNAL_FILLCOLOR, $EXTERNAL_WIDTH, $EXTERNAL_HEIGHT, "external")
 !endprocedure
-
 !unquoted procedure Process($alias, $label, $id="")
     Component($alias, $label, $id, $PROCESS_SHAPE, $PROCESS_FILLCOLOR, $PROCESS_WIDTH, $PROCESS_HEIGHT, "process")
 !endprocedure
