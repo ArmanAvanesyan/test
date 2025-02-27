@@ -1,25 +1,25 @@
 !includeurl https://raw.githubusercontent.com/ArmanAvanesyan/test/main/DFD.puml
 !$level="Context Diagram (DFD Level 0)"
 
-!$external_shape = "box"
-!$external_fillcolor = "lightsteelblue1"
-!$external_width = "1"
-!$external_height = "2"
+!$EXTERNAL_SHAPE = "box"
+!$EXTERNAL_FILLCOLOR = "lightsteelblue1"
+!$EXTERNAL_WIDTH = "1"
+!$EXTERNAL_HEIGHT = "2"
 
-!$process_shape = "Mrecord"
-!$process_fillcolor = "lightsteelblue1"
-!$process_width ="2"
-!$process_height = "1"
+!$PROCESS_SHAPE = "Mrecord"
+!$PROCESS_FILLCOLOR = "lightsteelblue1"
+!$PROCESS_WIDTH ="2"
+!$PROCESS_ HEIGHT = "1"
 
-!$default_style = "filled"
-!$default_fontcolor = "#000000"
-!$default_fonsize = "12"
-!$default_bordercolor = "grey"
+!$DEFAULT_STYLE = "filled"
+!$DEFAULT_FONTCOLOR = "#000000"
+!$DEFAULT_FONTSIZE = "12"
+!$DEFAULT_BORDERCOLOR = "grey"
 
 !unquoted procedure External($alias, $label)
-    Component($alias, $label, $external_shape, $external_fillcolor, $default_style, $default_fontcolor, $default_fontsize, $default_bordercolor, $external_width, $external_height)
+    Component($alias, $label, $EXTERNAL_SHAPE, $EXTERNAL_FILLCOLOR, DEFAULT_STYLE, $DEFAULT_FONTCOLOR, $DEFAULT_FONTSIZE, $DEFAULT_BORDERCOLOR, $EXTERNAL_WIDTH, $EXTERNAL_HEIGHT)
 !endprocedure
 
 !unquoted procedure Process($alias, $label)
-    Component($alias, $label, $process_shape, $process_fillcolor, $default_style, $default_fontcolor, $default_fontsize, $default_bordercolor, $process_width, $process_height)
+    Component($alias, $label, $PROCESS_SHAPE, $PROCESS_FILLCOLOR, DEFAULT_STYLE, $DEFAULT_FONTCOLOR, $DEFAULT_FONTSIZE, $DEFAULT_BORDERCOLOR, $PROCESS_WIDTH, $PROCESS_ HEIGHT)
 !endprocedure
