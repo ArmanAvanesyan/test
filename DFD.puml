@@ -1,4 +1,4 @@
-!$DEFAULT_TITLE_FONTSIZE ?= 12
+!$DEFAULT_TITLE_FONTSIZE ?= 16
 !$DEFAULT_SUBTITLE_FONTSIZE ?= 10
 
 !$DEFAULT_FILLCOLOR ?= "lightsteelblue1"
@@ -8,8 +8,12 @@
 !$DEFAULT_BORDERCOLOR ?= "grey"
 !$DEFAULT_WIDTH ?= 2
 !$DEFAULT_HEIGHT ?= 1
-!$DEFAULT_TITLE_FONTSIZE ?= 16
-!$DEFAULT_SUBTITLE_FONTSIZE ?= 10
+
+!$DEFAULT_ARROW_FONTSIZE ?= 13
+!$DEFAULT_ARROW_FONTCOLOR ?= "black"
+!$DEFAULT_PENWIDTH ?= 1
+!$DEFAULT_ARROW_STYLE ?= "solid"
+!$DEFAULT_ARROW_COLOR ?= "black"
 
 !procedure Title($title)
     graph [rankdir=LR ranksep=1.5 labeljust=c labelloc=t \
@@ -18,13 +22,11 @@
     <TR><TD><FONT POINT-SIZE="$SUBTITLE_FONTSIZE">$LEVEL</FONT></TD></TR> \
     </TABLE>> ]
 !endprocedure
-
 !procedure startDfd($label)
 digraph dfd2 {
 Title($label)
 node[shape=record]
 !endprocedure
-
 !procedure endDfd()
 }
 !endprocedure
@@ -50,20 +52,17 @@ node[shape=record]
 
 !unquoted procedure Flow_($from, $to, $label="", $direction="")
   !if ($label != "")
-    $from -> $to [label="$label" dir=$direction]
+    $from -> $to [label="$label" dir=$direction tyle=$DEFAULT_ARROW_STYLE color=$DEFAULT_ARROW_COLOR penwidth=$DEFAULT_PENWIDTH fontcolor=$DEFAULT_ARROW_FONTCOLOR fontsize=$DEFAULT_ARROW_FONTSIZE]
   !else
-    $from -> $to [dir=$direction]
+    $from -> $to [dir=$direction style=$DEFAULT_ARROW_STYLE color=$DEFAULT_ARROW_COLOR penwidth=$DEFAULT_PENWIDTH]
   !endif
 !endprocedure
-
 !unquoted procedure Flow($from, $to, $label="")
 Flow_($from, $to, $label, forward)
 !endprocedure
-
 !unquoted procedure BiFlow($from, $to, $label="")
 Flow_($from, $to, $label, both)
 !endprocedure
-
 !unquoted procedure Flow_Back($from, $to, $label="")
 Flow_($from, $to, $label, back)
 !endprocedure
