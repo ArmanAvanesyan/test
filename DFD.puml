@@ -70,14 +70,14 @@ node[shape=record];
 
 !unquoted procedure Component($alias, $label, $id="", $shape, $fillcolor, $width, $height, $elementType)
     !$formattedLabel = getLabel($label, $id, $elementType)
-    $alias [label="$formattedLabel" shape=$shape fillcolor=$fillcolor style=$DEFAULT_STYLE fontcolor="$DEFAULT_FONTCOLOR" fontsize=$DEFAULT_FONTSIZE color=$DEFAULT_BORDERCOLOR width=$width height=$height];
+    $alias [label="$formattedLabel" shape=$shape fillcolor=$fillcolor style=$style fontcolor="$fontcolor" fontsize=$fontsize color=$color width=$width height=$height];
 !endprocedure
 
 !unquoted procedure Flow_($from, $to, $label="", $direction="", $style="", $arrowhead="", $arrowtail="", $fontcolor="", $fontsize="", $penwidth="")
   !if ($label != "")
-    $from -> $to [label="$label" dir=$direction style=$DEFAULT_ARROW_STYLE arrowhead=$DEFAULT_ARROWHEAD arrowtail=$DEFAULT_ARROWTAIL fontcolor=$DEFAULT_FONTCOLOR fontsize=$DEFAULT_FONTSIZE color=$DEFAULT_BORDERCOLOR penwidth=$DEFAULT_FLOW_PENWIDTH ]
+    $from -> $to [label="$label" dir=$direction style=$style arrowhead=$arrowhead arrowtail=$arrowtail fontcolor=$fontcolor fontsize=$fontsize color=$color penwidth=$penwidth ]
   !else
-    $from -> $to [dir=$direction style=$DEFAULT_ARROW_STYLE arrowhead=$DEFAULT_ARROWHEAD arrowtail=$DEFAULT_ARROWTAIL fontcolor=$DEFAULT_FONTCOLOR fontsize=$DEFAULT_FONTSIZE color=$DEFAULT_BORDERCOLOR penwidth=$DEFAULT_FLOW_PENWIDTH]
+    $from -> $to [dir=$directionstyle=$style arrowhead=$arrowhead arrowtail=$arrowtail fontcolor=$fontcolor fontsize=$fontsize color=$color penwidth=$penwidth]
   !endif
 !endprocedure
 
