@@ -1,3 +1,6 @@
+!$DEFAULT_TITLE_FONTSIZE ?= 12
+!$DEFAULT_SUBTITLE_FONTSIZE ?= 10
+
 !$DEFAULT_FILLCOLOR ?= "lightsteelblue1"
 !$DEFAULT_STYLE ?= "filled"
 !$DEFAULT_FONTCOLOR ?= "#000000"
@@ -14,29 +17,11 @@
 !$DEFAULT_ARROW_STYLE ?= "solid"
 !$DEFAULT_ARROW_COLOR ?= "black"
 
-!$FLOW_FONT_COLOR ?= $DEFAULT_ARROW_FONTCOLOR
-!$FLOW_FONTSIZE ?= $DEFAULT_ARROW_FONTSIZE
-!$FLOW_COLOR ?= $DEFAULT_ARROW_COLOR
-!$FLOW_PENWIDTH ?= $DEFAULT_PENWIDTH
-!$FLOW_ARROW_STYLE ?= $DEFAULT_ARROW_STYLE
-
-!$BIFLOW_FONT_COLOR ?= $DEFAULT_ARROW_FONTCOLOR
-!$BIFLOW_FONTSIZE ?= $DEFAULT_ARROW_FONTSIZE
-!$BIFLOW_COLOR = $DEFAULT_ARROW_COLOR
-!$BIFLOW_PENWIDTH ?= $DEFAULT_PENWIDTH
-!$BIFLOW_ARROW_STYLE ?= $DEFAULT_ARROW_STYLE
-
-!$FLOWBACK_FONT_COLOR ?= $DEFAULT_ARROW_FONTCOLOR
-!$FLOWBACK_FONTSIZE ?= $DEFAULT_ARROW_FONTSIZE
-!$FLOWBACK_COLOR = $DEFAULT_ARROW_COLOR
-!$FLOWBACK_PENWIDTH ?= $DEFAULT_PENWIDTH
-!$FLOWBACK_ARROW_STYLE ?= $DEFAULT_ARROW_STYLE
-
 !procedure Title($title, $LEVEL)
     graph [rankdir=LR ranksep=1.5 labeljust=c labelloc=t \
     label=<<TABLE BORDER="0" CELLBORDER="0"> \
-    <TR><TD><FONT POINT-SIZE="$DEFAULT_TITLE_FONTSIZE">$title</FONT></TD></TR> \
-    <TR><TD><FONT POINT-SIZE="$DEFAULT_SUBTITLE_FONTSIZE">$LEVEL</FONT></TD></TR> \
+    <TR><TD><FONT POINT-SIZE="$TITLE_FONTSIZE">$title</FONT></TD></TR> \
+    <TR><TD><FONT POINT-SIZE="$SUBTITLE_FONTSIZE">$LEVEL</FONT></TD></TR> \
     </TABLE>> ]
 !endprocedure
 
@@ -64,12 +49,12 @@ node[shape=record];
   !return $formattedLabel
 !endfunction
 
-!unquoted procedure Component($alias, $label, $id="", $shape, $fillcolor, $width, $height, $elementType)
+!unquoted procedure Component($alias, $label, $id="", $shape, $fillcolor, $style, $fontcolor, $fontsize, $color, $width, $height, $elementType)
     !$formattedLabel = getLabel($label, $id, $elementType)
     $alias [label="$formattedLabel" shape=$shape fillcolor=$fillcolor style=$style fontcolor="$fontcolor" fontsize=$fontsize color=$color width=$width height=$height];
 !endprocedure
 
-!unquoted procedure Flow_($from, $to, $label="", $direction="", $style="", $fontcolor="", $fontsize="", $color="", $penwidth="")
+!unquoted procedure Flow_($from, $to, $label="", $direction, $style, $fontcolor, $fontsize, $color, $penwidth)
   $from -> $to [label="$label" dir=$direction style=$style fontcolor=$fontcolor fontsize=$fontsize color=$color penwidth=$penwidth]
 !endprocedure
 
