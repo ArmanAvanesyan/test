@@ -5,24 +5,36 @@
 !$DEFAULT_BORDERCOLOR ?= "grey"
 !$DEFAULT_WIDTH ?= 2
 !$DEFAULT_HEIGHT ?= 1
-!$DEFAULT_TITLE_FONTSIZE = 16
-!$DEFAULT_SUBTITLE_FONTSIZE = 10
-!$DEFAULT_PENWIDTH = 
+!$DEFAULT_TITLE_FONTSIZE ?= 16
+!$DEFAULT_SUBTITLE_FONTSIZE ?= 10
+!$DEFAULT_PENWIDTH ?= 1
+!$DEFAULT_ARROW_STYLE ?= ""
+!$DEFAULT_ARROWHEAD ?= "normal"
+!$DEFAULT_ARROWTAIL ?= ""
 
 !$FLOW_FONT_COLOR ?= $DEFAULT_FONTCOLOR
 !$FLOW_FONTSIZE ?= 10
 !$FLOW_COLOR = $DEFAULT_BORDERCOLOR
-!$FLOW_PENWIDTH = 1
+!$FLOW_PENWIDTH = $DEFAULT_PENWIDTH
+!$FLOW_ARROW_STYLE ?= $DEFAULT_ARROW_STYLE
+!$FLOW_ARROWHEAD ?= $DEFAULT_ARROWHEAD
+!$FLOW_ARROWTAIL ?= $DEFAULT_ARROWTAIL
 
 !$BIFLOW_FONT_COLOR ?= $DEFAULT_FONTCOLOR
 !$BIFLOW_FONTSIZE ?= 10
 !$BIFLOW_COLOR = $DEFAULT_BORDERCOLOR
-!$BIFLOW_PENWIDTH = 1
+!$BIFLOW_PENWIDTH = $DEFAULT_PENWIDTH
+!$BIFLOW_ARROW_STYLE ?= $DEFAULT_ARROW_STYLE
+!$BIFLOW_ARROWHEAD ?= $DEFAULT_ARROWHEAD
+!$BIFLOW_ARROWTAIL ?= $DEFAULT_ARROWTAIL
 
 !$FLOWBACK_FONT_COLOR ?= $DEFAULT_FONTCOLOR
 !$FLOWBACK_FONTSIZE ?= 10
 !$FLOWBACK_COLOR = $DEFAULT_BORDERCOLOR
-!$FLOWBACK_PENWIDTH = 1
+!$FLOWBACK_PENWIDTH = $DEFAULT_PENWIDTH
+!$FLOWBACK_ARROW_STYLE ?= $DEFAULT_ARROW_STYLE
+!$FLOWBACK_ARROWHEAD ?= $DEFAULT_ARROWHEAD
+!$FLOWBACK_ARROWTAIL ?= $DEFAULT_ARROWTAIL
 
 !procedure Title($title, $LEVEL)
     graph [rankdir=LR ranksep=1.5 labeljust=c labelloc=t \
@@ -61,23 +73,23 @@ node[shape=record];
     $alias [label="$formattedLabel" shape=$shape fillcolor=$fillcolor style=$DEFAULT_STYLE fontcolor="$DEFAULT_FONTCOLOR" fontsize=$DEFAULT_FONTSIZE color=$DEFAULT_BORDERCOLOR width=$width height=$height];
 !endprocedure
 
-!unquoted procedure Flow_($from, $to, $label="", $direction="", $fontcolor="", $fontsize="", $penwidth="")
+!unquoted procedure Flow_($from, $to, $label="", $direction="", $style="", $arrowhead="", $arrowtail="", $fontcolor="", $fontsize="", $penwidth="")
   !if ($label != "")
-    $from -> $to [label="$label" dir=$direction fontcolor=$DEFAULT_FONTCOLOR fontsize=$DEFAULT_FONTSIZE color=$DEFAULT_BORDERCOLOR penwidth=$DEFAULT_FLOW_PENWIDTH ]
+    $from -> $to [label="$label" dir=$direction style=$DEFAULT_ARROW_STYLE arrowhead=$DEFAULT_ARROWHEAD arrowtail=$DEFAULT_ARROWTAIL fontcolor=$DEFAULT_FONTCOLOR fontsize=$DEFAULT_FONTSIZE color=$DEFAULT_BORDERCOLOR penwidth=$DEFAULT_FLOW_PENWIDTH ]
   !else
-    $from -> $to [dir=$direction fontcolor=$DEFAULT_FONTCOLOR fontsize=$DEFAULT_FONTSIZE color=$DEFAULT_BORDERCOLOR penwidth=$DEFAULT_FLOW_PENWIDTH]
+    $from -> $to [dir=$direction style=$DEFAULT_ARROW_STYLE arrowhead=$DEFAULT_ARROWHEAD arrowtail=$DEFAULT_ARROWTAIL fontcolor=$DEFAULT_FONTCOLOR fontsize=$DEFAULT_FONTSIZE color=$DEFAULT_BORDERCOLOR penwidth=$DEFAULT_FLOW_PENWIDTH]
   !endif
 !endprocedure
 
 !unquoted procedure Flow($from, $to, $label="")
-Flow_($from, $to, $label, forward, $FLOW_FONTCOLOR, $FLOW_FONTSIZE, $FLOW_COLOR, $FLOW_PENWIDTH)
+Flow_($from, $to, $label, forward, $FLOW_ARROW_STYLE, $FLOW_ARROWHEAD, $FLOW_ARROWTAIL, $FLOW_FONTCOLOR, $FLOW_FONTSIZE, $FLOW_COLOR, $FLOW_PENWIDTH)
 !endprocedure
 
 !unquoted procedure BiFlow($from, $to, $label="")
-Flow_($from, $to, $label, both,  $BIFLOW_FONTCOLOR, $BIFLOW_FONTSIZE, $BIFLOW_COLOR, $FLOW_PENWIDTH)
+Flow_($from, $to, $label, both, $BIFLOW_ARROW_STYLE, $BIFLOW_ARROWHEAD, $BIFLOW_ARROWTAIL,  $BIFLOW_FONTCOLOR, $BIFLOW_FONTSIZE, $BIFLOW_COLOR, $FLOW_PENWIDTH)
 !endprocedure
 
 !unquoted procedure Flow_Back($from, $to, $label="")
-Flow_($from, $to, $label, back, $FLOWBACK_FONTCOLOR, $FLOWBACK_FONTSIZE, $FLOWBACK_COLOR, $FLOWBACK_PENWIDTH)
+Flow_($from, $to, $label, back, $FLOWBACK_ARROW_STYLE, $FLOWBACK_ARROWHEAD, $FLOWBACK_ARROWTAIL, $FLOWBACK_ARROW_STYLE, $FLOWBACK_ARROWHEAD, $FLOWBACK_ARROWTAIL, $FLOWBACK_FONTCOLOR, $FLOWBACK_FONTSIZE, $FLOWBACK_COLOR, $FLOWBACK_PENWIDTH)
 !endprocedure
 
