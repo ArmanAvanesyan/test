@@ -21,7 +21,7 @@
     graph [rankdir=LR ranksep=1.5 labeljust=c labelloc=t \
     label=<<TABLE BORDER="0" CELLBORDER="0"> \
     <TR><TD><FONT POINT-SIZE="$TITLE_FONTSIZE">$title</FONT></TD></TR> \
-    <TR><TD><FONT POINT-SIZE="$SUBTITLE_FONTSIZE">"$LEVEL"</FONT></TD></TR> \
+    <TR><TD><FONT POINT-SIZE="$SUBTITLE_FONTSIZE">$LEVEL</FONT></TD></TR> \
     </TABLE>> ]
 !endprocedure
 
