@@ -1,7 +1,3 @@
-!function getTitle($title)
-    !return $title
-!endfunction
-
 !procedure Title($title, $level)
     graph [rankdir=LR ranksep=1.5 labeljust=c labelloc=t \
     label=<<TABLE BORDER="0" CELLBORDER="0"> \
@@ -20,7 +16,10 @@ node[shape=record];
 }
 !endprocedure
 
-' Data Flows
+!unquoted procedure Component($alias, $label, $shape, $color, $fontsize, $width, $height)
+    $alias [label="$label" shape=$shape fillcolor=$color style=filled fontcolor=$default_fontcolor fontsize=$fontsize color=$default_bordercolor width=$width height=$height];
+!endprocedure
+
 !unquoted procedure Flow_($from, $to, $label="", $direction="")
   !if ($label != "")
     $from -> $to [label="$label" dir=$direction]
