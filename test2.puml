@@ -39,7 +39,21 @@ Flow_($from, $to, $label, both)
 !unquoted procedure Flow_Back($from, $to, $label="")
 Flow_($from, $to, $label, back)
 !endprocedure
+!unquoted procedure Flow_($from, $to, $label="", $direction="")
+  $from -> $to [label="$label" dir=$direction style=$DEFAULT_ARROW_STYLE fontcolor=$DEFAULT_ARROW_FONTCOLOR fontsize=$DEFAULT_ARROW_FONTSIZE color=$DEFAULT_ARROW_COLOR penwidth=$FLOW_PENWIDTH]
+!endprocedure
 
+!unquoted procedure Flow($from, $to, $label="")
+    Flow_($from, $to, $label, forward)
+!endprocedure
+
+!unquoted procedure BiFlow($from, $to, $label="")
+    Flow_($from, $to, $label, both)
+!endprocedure
+
+!unquoted procedure Flow_Back($from, $to, $label="")
+    Flow_($from, $to, $label, back)
+!endprocedure
 
 ' Layout Helpers
 
