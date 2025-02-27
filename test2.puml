@@ -1,3 +1,9 @@
+!$DEFAULT_ARROW_FONTSIZE ?= 10
+!$DEFAULT_ARROW_FONTCOLOR ?= "black"
+!$DEFAULT_PENWIDTH ?= 1
+!$DEFAULT_ARROW_STYLE ?= "solid"
+!$DEFAULT_ARROW_COLOR ?= "black"
+
 !procedure Title($title, $level)
     graph [rankdir=LR ranksep=1.5 labeljust=c labelloc=t \
     label=<<TABLE BORDER="0" CELLBORDER="0"> \
