@@ -57,20 +57,6 @@
 !$DEFAULT_GROUP_STYLE = "dashed"
 !$DEFAULT_GROUP_COLOR = "gray"
 
-' Default legend settings
-!$DEFAULT_LEGEND_POSITION = "right"
-!$DEFAULT_LEGEND_TITLE = "Legend"
-!$DEFAULT_LEGEND_FONTSIZE = 12
-!$DEFAULT_LEGEND_BORDER_COLOR = "gray"
-!$DEFAULT_LEGEND_BORDER_STYLE = "solid"
-!$DEFAULT_LEGEND_FILLCOLOR = "white"
-!$DEFAULT_SHOW_LEGEND = "true"
-
-' Default visibility settings
-!$DEFAULT_HIDDEN_STYLE = "invis"
-!$HIDDEN_ELEMENTS = {}
-!$HIDDEN_FLOWS = {}
-
 ' Core Procedures
 ' ##################################
 
