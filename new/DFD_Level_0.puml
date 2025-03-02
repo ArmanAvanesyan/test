@@ -19,6 +19,6 @@ Component($alias, $label, "", "rectangle", "lightgray", $DEFAULT_WIDTH, $DEFAULT
 !endprocedure
 
 ' Process
-!procedure Process($alias, $id, $label)
+!procedure Process($alias, $id="", $label)
 Component($alias, $label, $id, "circle", $DEFAULT_FILLCOLOR, $DEFAULT_WIDTH, $DEFAULT_HEIGHT, "process")
 !endprocedure
