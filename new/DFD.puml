@@ -1,0 +1,575 @@
+' Default Settings
+' ##################################
+
+' Default title settings
+!$DEFAULT_TITLE_FONTSIZE = 16
+!$DEFAULT_SUBTITLE_FONTSIZE = 10
+!$TITLE_FONTSIZE = $DEFAULT_TITLE_FONTSIZE
+!$SUBTITLE_FONTSIZE = $DEFAULT_SUBTITLE_FONTSIZE
+
+' Default component settings
+!$DEFAULT_STYLE = "filled"
+!$DEFAULT_FILLCOLOR = "lightsteelblue1"
+!$DEFAULT_FONTCOLOR = "#000000"
+!$DEFAULT_FONTSIZE = 12
+!$DEFAULT_BORDERCOLOR = "grey"
+!$DEFAULT_WIDTH = 2
+!$DEFAULT_HEIGHT = 1
+
+' Default external entity settings
+!$DEFAULT_EXTERNAL_STYLE = "filled"
+!$DEFAULT_EXTERNAL_FILLCOLOR = "lightgray"
+!$DEFAULT_EXTERNAL_SHAPE = "rectangle"
+!$DEFAULT_EXTERNAL_WIDTH = 2
+!$DEFAULT_EXTERNAL_HEIGHT = 1
+
+' Default process settings
+!$DEFAULT_PROCESS_STYLE = "filled"
+!$DEFAULT_PROCESS_FILLCOLOR = "lightsteelblue1"
+!$DEFAULT_PROCESS_SHAPE = "circle"
+!$DEFAULT_PROCESS_WIDTH = 2
+!$DEFAULT_PROCESS_HEIGHT = 1
+
+' Default data store settings
+!$DEFAULT_DATASTORE_STYLE = "filled"
+!$DEFAULT_DATASTORE_FILLCOLOR = "white"
+!$DEFAULT_DATASTORE_SHAPE = "record"
+!$DEFAULT_DATASTORE_WIDTH = 2
+!$DEFAULT_DATASTORE_HEIGHT = 1
+
+' Default flow settings
+!$DEFAULT_ARROW_STYLE = "solid"
+!$DEFAULT_ARROW_COLOR = "black"
+!$DEFAULT_ARROW_FONTCOLOR = "black"
+!$DEFAULT_ARROW_FONTSIZE = 13
+!$DEFAULT_PENWIDTH = 1
+
+' Default layout settings
+!$DEFAULT_RANKDIR = "LR"
+!$DEFAULT_RANKSEP = 1.5
+!$DEFAULT_NODESEP = 0.5
+!$DEFAULT_SPLINES = "spline"
+!$DEFAULT_CONCENTRATE = "false"
+!$DEFAULT_LAYOUT_ENGINE = "dot"
+!$DEFAULT_CONSTRAINT = "true"
+
+' Default group settings
+!$DEFAULT_GROUP_STYLE = "dashed"
+!$DEFAULT_GROUP_COLOR = "gray"
+
+' Default legend settings
+!$DEFAULT_LEGEND_POSITION = "right"
+!$DEFAULT_LEGEND_TITLE = "Legend"
+!$DEFAULT_LEGEND_FONTSIZE = 12
+!$DEFAULT_LEGEND_BORDER_COLOR = "gray"
+!$DEFAULT_LEGEND_BORDER_STYLE = "solid"
+!$DEFAULT_LEGEND_FILLCOLOR = "white"
+!$DEFAULT_SHOW_LEGEND = "true"
+
+' Default visibility settings
+!$DEFAULT_HIDDEN_STYLE = "invis"
+!$HIDDEN_ELEMENTS = {}
+!$HIDDEN_FLOWS = {}
+
+' Core Procedures
+' ##################################
+
+' DFD start/end procedures
+!procedure startDfd($title)
+digraph dfd {
+Title($title)
+layout=$LAYOUT_ENGINE
+splines=$SPLINES
+concentrate=$CONCENTRATE
+nodesep=$NODESEP
+node[shape=record]
+compound=true
+!endprocedure
+
+!procedure endDfd()
+!if ($SHOW_LEGEND == "true")
+  AddLegend()
+!endif
+}
+!endprocedure
+
+' Title procedure and customization
+!procedure Title($title)
+    graph [rankdir=$RANKDIR ranksep=$RANKSEP labeljust=c labelloc=t \
+    label=<<TABLE BORDER="0" CELLBORDER="0"> \
+    <TR><TD><FONT POINT-SIZE="$TITLE_FONTSIZE">$title</FONT></TD></TR> \
+    <TR><TD><FONT POINT-SIZE="$SUBTITLE_FONTSIZE">$LEVEL</FONT></TD></TR> \
+    </TABLE>> ]
+!endprocedure
+
+!procedure SetTitleFontSize($size)
+!$TITLE_FONTSIZE = $size
+!endprocedure
+
+!procedure SetSubtitleFontSize($size)
+!$SUBTITLE_FONTSIZE = $size
+!endprocedure
+
+' Legend  procedures
+!procedure AddLegend()
+subgraph cluster_legend {
+  label=<<B>$LEGEND_TITLE</B>>
+  labeljust="l"
+  fontsize=$LEGEND_FONTSIZE
+  style=$LEGEND_BORDER_STYLE
+  color=$LEGEND_BORDER_COLOR
+  bgcolor=$LEGEND_FILLCOLOR
+  
+  !foreach $key in $LEGEND_ITEMS.keys()
+    !$desc = $LEGEND_ITEMS[$key]
+    !if ($desc != "")
+      legend_$key [label=<<TABLE BORDER="0" CELLBORDER="0">
+        <TR><TD><B>$key</B></TD></TR>
+        <TR><TD>$desc</TD></TR>
+      </TABLE>> shape=none]
+    !endif
+  !endfor
+}
+!if ($LEGEND_POSITION == "right")
+  {rank=sink; cluster_legend}
+!elseif ($LEGEND_POSITION == "left")
+  {rank=sink; cluster_legend}
+!elseif ($LEGEND_POSITION == "top")
+  {rank=source; cluster_legend}
+!else
+  {rank=sink; cluster_legend}
+!endif
+!endprocedure
+
+' Base component creation procedures
+!unquoted procedure Component($alias, $label, $id="", $shape, $fillcolor, $width, $height, $elementType)
+    !$formattedLabel = getLabel($label, $id, $elementType)
+    !if (isHidden($alias) == "true")
+      $alias [label="$formattedLabel" 
+              shape=$shape 
+              style=$HIDDEN_STYLE]
+    !else
+      $alias [label="$formattedLabel" 
+              shape=$shape 
+              fillcolor=$fillcolor 
+                            style=$STYLE 
+              fontcolor=$FONTCOLOR 
+              fontsize=$FONTSIZE 
+              color=$BORDERCOLOR 
+              width=$width 
+              height=$height]
+    !endif
+!endprocedure
+
+' Flow creation procedures
+!unquoted procedure Flow_($from, $to, $label="", $direction="")
+  !$flowId = $from + "_to_" + $to
+  !if (isFlowHidden($flowId) == "true")
+    !if ($label != "")
+      $from -> $to [label="$label" style=$HIDDEN_STYLE]
+    !else
+      $from -> $to [style=$HIDDEN_STYLE]
+    !endif
+  !else
+    !if ($label != "")
+      $from -> $to [label="$label" 
+                    dir=$direction 
+                                        style=$ARROW_STYLE 
+                    color=$ARROW_COLOR 
+                    penwidth=$PENWIDTH 
+                    fontcolor=$ARROW_FONTCOLOR 
+                    fontsize=$ARROW_FONTSIZE]
+    !else
+      $from -> $to [dir=$direction 
+                          style=$ARROW_STYLE 
+                    color=$ARROW_COLOR 
+                    penwidth=$PENWIDTH]
+    !endif
+  !endif
+!endprocedure
+
+' Standard flow (forward direction)
+!unquoted procedure Flow($from, $to, $label="")
+Flow_($from, $to, $label, forward)
+!endprocedure
+
+' Bidirectional flow
+!unquoted procedure BiFlow($from, $to, $label="")
+Flow_($from, $to, $label, both)
+!endprocedure
+
+' Backward flow
+!unquoted procedure Flow_Back($from, $to, $label="")
+Flow_($from, $to, $label, back)
+!endprocedure
+
+' Component visibility procedures
+!procedure Hide($elements...)
+!foreach $element in $elements
+  !$HIDDEN_ELEMENTS[$element] = "true"
+!endfor
+!endprocedure
+
+!procedure Show($elements...)
+!foreach $element in $elements
+  !$HIDDEN_ELEMENTS[$element] = "false"
+!endfor
+!endprocedure
+
+!procedure HideFlow($flows...)
+!foreach $flow in $flows
+  !$HIDDEN_FLOWS[$flow] = "true"
+!endfor
+!endprocedure
+
+!procedure ShowFlow($flows...)
+!foreach $flow in $flows
+  !$HIDDEN_FLOWS[$flow] = "false"
+!endfor
+!endprocedure
+
+' Helper Functions
+' ##################################
+
+' Label formatting
+!unquoted function getLabel($label, $id, $elementType)
+  !$formattedLabel = "" 
+  !if ($elementType == "process")
+    !$formattedLabel = $id + " | " + $label + "\n\n\n"
+  !endif
+  !if ($elementType == "external")
+    !$formattedLabel = $label
+  !endif
+  !if ($elementType == "datastore")
+    !$formattedLabel = "{<f0>" + $id + " |<f1> "+ $label + "}"
+  !endif
+  !return $formattedLabel
+!endfunction
+
+' Visibility checking
+!function isHidden($element)
+  !if ($HIDDEN_ELEMENTS[$element] == "true")
+    !return "true"
+  !endif
+  !return "false"
+!endfunction
+
+!function isFlowHidden($flow)
+  !if ($HIDDEN_FLOWS[$flow] == "true")
+    !return "true"
+  !endif
+  !return "false"
+!endfunction
+
+' Variable Initialization
+' ##################################
+
+' Initialize customizable variables with defaults
+!$STYLE = $DEFAULT_STYLE
+!$FILLCOLOR = $DEFAULT_FILLCOLOR
+!$FONTCOLOR = $DEFAULT_FONTCOLOR
+!$FONTSIZE = $DEFAULT_FONTSIZE
+!$BORDERCOLOR = $DEFAULT_BORDERCOLOR
+!$WIDTH = $DEFAULT_WIDTH
+!$HEIGHT = $DEFAULT_HEIGHT
+
+!$EXTERNAL_STYLE = $DEFAULT_EXTERNAL_STYLE
+!$EXTERNAL_FILLCOLOR = $DEFAULT_EXTERNAL_FILLCOLOR
+!$EXTERNAL_SHAPE = $DEFAULT_EXTERNAL_SHAPE
+!$EXTERNAL_WIDTH = $DEFAULT_EXTERNAL_WIDTH
+!$EXTERNAL_HEIGHT = $DEFAULT_EXTERNAL_HEIGHT
+
+!$PROCESS_STYLE = $DEFAULT_PROCESS_STYLE
+!$PROCESS_FILLCOLOR = $DEFAULT_PROCESS_FILLCOLOR
+!$PROCESS_SHAPE = $DEFAULT_PROCESS_SHAPE
+!$PROCESS_WIDTH = $DEFAULT_PROCESS_WIDTH
+!$PROCESS_HEIGHT = $DEFAULT_PROCESS_HEIGHT
+
+!$DATASTORE_STYLE = $DEFAULT_DATASTORE_STYLE
+!$DATASTORE_FILLCOLOR = $DEFAULT_DATASTORE_FILLCOLOR
+!$DATASTORE_SHAPE = $DEFAULT_DATASTORE_SHAPE
+!$DATASTORE_WIDTH = $DEFAULT_DATASTORE_WIDTH
+!$DATASTORE_HEIGHT = $DEFAULT_DATASTORE_HEIGHT
+
+!$ARROW_STYLE = $DEFAULT_ARROW_STYLE
+!$ARROW_COLOR = $DEFAULT_ARROW_COLOR
+!$ARROW_FONTCOLOR = $DEFAULT_ARROW_FONTCOLOR
+!$ARROW_FONTSIZE = $DEFAULT_ARROW_FONTSIZE
+!$PENWIDTH = $DEFAULT_PENWIDTH
+
+!$RANKDIR = $DEFAULT_RANKDIR
+!$RANKSEP = $DEFAULT_RANKSEP
+!$NODESEP = $DEFAULT_NODESEP
+!$SPLINES = $DEFAULT_SPLINES
+!$CONCENTRATE = $DEFAULT_CONCENTRATE
+!$LAYOUT_ENGINE = $DEFAULT_LAYOUT_ENGINE
+!$CONSTRAINT = $DEFAULT_CONSTRAINT
+
+!$GROUP_STYLE = $DEFAULT_GROUP_STYLE
+!$GROUP_COLOR = $DEFAULT_GROUP_COLOR
+
+!$LEGEND_POSITION = $DEFAULT_LEGEND_POSITION
+!$LEGEND_TITLE = $DEFAULT_LEGEND_TITLE
+!$LEGEND_FONTSIZE = $DEFAULT_LEGEND_FONTSIZE
+!$LEGEND_BORDER_COLOR = $DEFAULT_LEGEND_BORDER_COLOR
+!$LEGEND_BORDER_STYLE = $DEFAULT_LEGEND_BORDER_STYLE
+!$LEGEND_FILLCOLOR = $DEFAULT_LEGEND_FILLCOLOR
+!$SHOW_LEGEND = $DEFAULT_SHOW_LEGEND
+
+!$HIDDEN_STYLE = $DEFAULT_HIDDEN_STYLE
+
+' Initialize default legend items
+!$LEGEND_ITEMS = {
+  "Process": "A system process or function",
+  "External Entity": "An external system or actor",
+  "Data Store": "A data storage component",
+  "Data Flow": "Flow of information"
+}
+
+' Customization
+' ##################################
+
+' Component style customization procedures
+!procedure SetComponentStyle($style="filled")
+!$STYLE = $style
+!endprocedure
+
+!procedure SetComponentFillColor($color="lightsteelblue1")
+!$FILLCOLOR = $color
+!endprocedure
+
+!procedure SetComponentFontColor($color="#000000")
+!$FONTCOLOR = $color
+!endprocedure
+
+!procedure SetComponentFontSize($size=12)
+!$FONTSIZE = $size
+!endprocedure
+
+!procedure SetComponentBorderColor($color="grey")
+!$BORDERCOLOR = $color
+!endprocedure
+
+!procedure SetComponentSize($width=2, $height=1)
+!$WIDTH = $width
+!$HEIGHT = $height
+!endprocedure
+
+' External Entity customization
+!procedure SetExternalStyle($style="filled")
+!$EXTERNAL_STYLE = $style
+!endprocedure
+
+!procedure SetExternalFillColor($color="lightgray")
+!$EXTERNAL_FILLCOLOR = $color
+!endprocedure
+
+!procedure SetExternalShape($shape="rectangle")
+!$EXTERNAL_SHAPE = $shape
+!endprocedure
+
+!procedure SetExternalSize($width=2, $height=1)
+!$EXTERNAL_WIDTH = $width
+!$EXTERNAL_HEIGHT = $height
+!endprocedure
+
+' Process customization
+!procedure SetProcessStyle($style="filled")
+!$PROCESS_STYLE = $style
+!endprocedure
+
+!procedure SetProcessFillColor($color="lightsteelblue1")
+!$PROCESS_FILLCOLOR = $color
+!endprocedure
+
+!procedure SetProcessShape($shape="circle")
+!$PROCESS_SHAPE = $shape
+!endprocedure
+
+!procedure SetProcessSize($width=2, $height=1)
+!$PROCESS_WIDTH = $width
+!$PROCESS_HEIGHT = $height
+!endprocedure
+
+' Data Store customization
+!procedure SetDataStoreStyle($style="filled")
+!$DATASTORE_STYLE = $style
+!endprocedure
+
+!procedure SetDataStoreFillColor($color="white")
+!$DATASTORE_FILLCOLOR = $color
+!endprocedure
+
+!procedure SetDataStoreShape($shape="record")
+!$DATASTORE_SHAPE = $shape
+!endprocedure
+
+!procedure SetDataStoreSize($width=2, $height=1)
+!$DATASTORE_WIDTH = $width
+!$DATASTORE_HEIGHT = $height
+!endprocedure
+
+' Component group customization
+!procedure SetGroupStyle($style="dashed")
+!$GROUP_STYLE = $style
+!endprocedure
+
+!procedure SetGroupColor($color="gray")
+!$GROUP_COLOR = $color
+!endprocedure
+
+' Component visibility customization
+!procedure SetHiddenStyle($style="invis")
+!$HIDDEN_STYLE = $style
+!endprocedure
+
+' Batch customization procedures
+!procedure SetAllComponentColors($fillColor, $borderColor="grey", $fontColor="#000000")
+SetComponentFillColor($fillColor)
+SetExternalFillColor($fillColor)
+SetProcessFillColor($fillColor)
+SetDataStoreFillColor($fillColor)
+SetComponentBorderColor($borderColor)
+SetComponentFontColor($fontColor)
+!endprocedure
+
+!procedure SetAllComponentSizes($width=2, $height=1)
+SetComponentSize($width, $height)
+SetExternalSize($width, $height)
+SetProcessSize($width, $height)
+SetDataStoreSize($width, $height)
+!endprocedure
+
+!procedure SetAllComponentStyles($style="filled")
+SetComponentStyle($style)
+SetExternalStyle($style)
+SetProcessStyle($style)
+SetDataStoreStyle($style)
+!endprocedure
+
+' Flow style customization procedures
+!procedure SetFlowStyle($style="solid")
+!$ARROW_STYLE = $style
+!endprocedure
+
+!procedure SetFlowColor($color="black")
+!$ARROW_COLOR = $color
+!endprocedure
+
+!procedure SetFlowFontColor($color="black")
+!$ARROW_FONTCOLOR = $color
+!endprocedure
+
+!procedure SetFlowFontSize($size=13)
+!$ARROW_FONTSIZE = $size
+!endprocedure
+
+!procedure SetFlowPenWidth($width=1)
+!$PENWIDTH = $width
+!endprocedure
+
+' Flow layout customization
+!procedure SetFlowSplines($type="spline")
+!$SPLINES = $type
+!endprocedure
+
+!procedure SetFlowConcentrate($value="false")
+!$CONCENTRATE = $value
+!endprocedure
+
+!procedure SetFlowRankDir($dir="LR")
+!$RANKDIR = $dir
+!endprocedure
+
+!procedure SetFlowRankSep($sep=1.5)
+!$RANKSEP = $sep
+!endprocedure
+
+!procedure SetFlowNodeSep($sep=0.5)
+!$NODESEP = $sep
+!endprocedure
+
+' Flow constraint customization
+!procedure SetFlowConstraint($value="true")
+!$CONSTRAINT = $value
+!endprocedure
+
+' Flow type customization
+!procedure SetFlowType($type="normal")
+!if ($type == "normal")
+  SetFlowStyle("solid")
+  SetFlowPenWidth(1)
+!elseif ($type == "bold")
+  SetFlowStyle("bold")
+  SetFlowPenWidth(2)
+!elseif ($type == "dashed")
+  SetFlowStyle("dashed")
+  SetFlowPenWidth(1)
+!elseif ($type == "dotted")
+  SetFlowStyle("dotted")
+  SetFlowPenWidth(1)
+!endif
+!endprocedure
+
+' Flow direction customization
+!procedure SetFlowDirection($dir="forward")
+!if ($dir == "forward")
+  SetFlowRankDir("LR")
+!elseif ($dir == "backward")
+  SetFlowRankDir("RL")
+!elseif ($dir == "down")
+  SetFlowRankDir("TB")
+!elseif ($dir == "up")
+  SetFlowRankDir("BT")
+!endif
+!endprocedure
+
+' Flow layout presets
+!procedure SetFlowLayoutOrthogonal()
+SetFlowSplines("ortho")
+SetFlowConcentrate("true")
+!endprocedure
+
+!procedure SetFlowLayoutCurved()
+SetFlowSplines("curved")
+SetFlowConcentrate("false")
+!endprocedure
+
+!procedure SetFlowLayoutDirect()
+SetFlowSplines("line")
+SetFlowConcentrate("false")
+!endprocedure
+
+' Batch flow customization
+!procedure SetAllFlowProperties($style="solid", $color="black", $fontColor="black", $fontSize=13, $penWidth=1)
+SetFlowStyle($style)
+SetFlowColor($color)
+SetFlowFontColor($fontColor)
+SetFlowFontSize($fontSize)
+SetFlowPenWidth($penWidth)
+!endprocedure
+
+' Legend customization procedures
+!procedure SetLegendPosition($position="right")
+!$LEGEND_POSITION = $position
+!endprocedure
+
+!procedure SetLegendTitle($title="Legend")
+!$LEGEND_TITLE = $title
+!endprocedure
+
+!procedure AddLegendItem($key, $description)
+!$LEGEND_ITEMS[$key] = $description
+!endprocedure
+
+!procedure RemoveLegendItem($key)
+!$LEGEND_ITEMS[$key] = ""
+!endprocedure
+
+!procedure ShowLegend()
+!$SHOW_LEGEND = "true"
+!endprocedure
+
+!procedure HideLegend()
+!$SHOW_LEGEND = "false"
+!endprocedure
