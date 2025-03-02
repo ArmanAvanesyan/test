@@ -16,6 +16,20 @@
 !$DEFAULT_WIDTH = 2
 !$DEFAULT_HEIGHT = 1
 
+' External entity settings
+!$DEFAULT_EXTERNAL_STYLE = "filled"
+!$DEFAULT_EXTERNAL_FILLCOLOR = "lightgray"
+!$DEFAULT_EXTERNAL_SHAPE = "rectangle"
+!$DEFAULT_EXTERNAL_WIDTH = 2
+!$DEFAULT_EXTERNAL_HEIGHT = 1
+
+' Process settings
+!$DEFAULT_PROCESS_STYLE = "filled"
+!$DEFAULT_PROCESS_FILLCOLOR = "lightsteelblue1"
+!$DEFAULT_PROCESS_SHAPE = "circle"
+!$DEFAULT_PROCESS_WIDTH = 2
+!$DEFAULT_PROCESS_HEIGHT = 1
+
 ' Default flow settings
 !$DEFAULT_ARROW_STYLE = "solid"
 !$DEFAULT_ARROW_COLOR = "black"
