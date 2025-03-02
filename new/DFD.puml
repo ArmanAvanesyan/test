@@ -96,37 +96,6 @@ compound=true
 !$SUBTITLE_FONTSIZE = $size
 !endprocedure
 
-' Legend  procedures
-!procedure AddLegend()
-subgraph cluster_legend {
-  label=<<B>$LEGEND_TITLE</B>>
-  labeljust="l"
-  fontsize=$LEGEND_FONTSIZE
-  style=$LEGEND_BORDER_STYLE
-  color=$LEGEND_BORDER_COLOR
-  bgcolor=$LEGEND_FILLCOLOR
-  
-  !foreach $key in $LEGEND_ITEMS.keys()
-    !$desc = $LEGEND_ITEMS[$key]
-    !if ($desc != "")
-      legend_$key [label=<<TABLE BORDER="0" CELLBORDER="0">
-        <TR><TD><B>$key</B></TD></TR>
-        <TR><TD>$desc</TD></TR>
-      </TABLE>> shape=none]
-    !endif
-  !endfor
-}
-!if ($LEGEND_POSITION == "right")
-  {rank=sink; cluster_legend}
-!elseif ($LEGEND_POSITION == "left")
-  {rank=sink; cluster_legend}
-!elseif ($LEGEND_POSITION == "top")
-  {rank=source; cluster_legend}
-!else
-  {rank=sink; cluster_legend}
-!endif
-!endprocedure
-
 ' Base component creation procedures
 !unquoted procedure Component($alias, $label, $id="", $shape, $fillcolor, $width, $height, $elementType)
     !$formattedLabel = getLabel($label, $id, $elementType)
@@ -294,23 +263,7 @@ Flow_($from, $to, $label, back)
 !$GROUP_STYLE = $DEFAULT_GROUP_STYLE
 !$GROUP_COLOR = $DEFAULT_GROUP_COLOR
 
-!$LEGEND_POSITION = $DEFAULT_LEGEND_POSITION
-!$LEGEND_TITLE = $DEFAULT_LEGEND_TITLE
-!$LEGEND_FONTSIZE = $DEFAULT_LEGEND_FONTSIZE
-!$LEGEND_BORDER_COLOR = $DEFAULT_LEGEND_BORDER_COLOR
-!$LEGEND_BORDER_STYLE = $DEFAULT_LEGEND_BORDER_STYLE
-!$LEGEND_FILLCOLOR = $DEFAULT_LEGEND_FILLCOLOR
-!$SHOW_LEGEND = $DEFAULT_SHOW_LEGEND
-
 !$HIDDEN_STYLE = $DEFAULT_HIDDEN_STYLE
-
-' Initialize default legend items
-!$LEGEND_ITEMS = {
-  "Process": "A system process or function",
-  "External Entity": "An external system or actor",
-  "Data Store": "A data storage component",
-  "Data Flow": "Flow of information"
-}
 
 ' Customization
 ' ##################################
@@ -533,31 +486,6 @@ SetFlowColor($color)
 SetFlowFontColor($fontColor)
 SetFlowFontSize($fontSize)
 SetFlowPenWidth($penWidth)
-!endprocedure
-
-' Legend customization procedures
-!procedure SetLegendPosition($position="right")
-!$LEGEND_POSITION = $position
-!endprocedure
-
-!procedure SetLegendTitle($title="Legend")
-!$LEGEND_TITLE = $title
-!endprocedure
-
-!procedure AddLegendItem($key, $description)
-!$LEGEND_ITEMS[$key] = $description
-!endprocedure
-
-!procedure RemoveLegendItem($key)
-!$LEGEND_ITEMS[$key] = ""
-!endprocedure
-
-!procedure ShowLegend()
-!$SHOW_LEGEND = "true"
-!endprocedure
-
-!procedure HideLegend()
-!$SHOW_LEGEND = "false"
 !endprocedure
 
 ' Layout customization procedures
