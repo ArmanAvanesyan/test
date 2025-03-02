@@ -204,25 +204,25 @@ Flow_($from, $to, $label, back)
 !endprocedure
 
 ' Component visibility procedures
-!procedure Hide($elements...)
+!procedure Hide($elements)
 !foreach $element in $elements
   !$HIDDEN_ELEMENTS[$element] = "true"
 !endfor
 !endprocedure
 
-!procedure Show($elements...)
+!procedure Show($elements)
 !foreach $element in $elements
   !$HIDDEN_ELEMENTS[$element] = "false"
 !endfor
 !endprocedure
 
-!procedure HideFlow($flows...)
+!procedure HideFlow($flows)
 !foreach $flow in $flows
   !$HIDDEN_FLOWS[$flow] = "true"
 !endfor
 !endprocedure
 
-!procedure ShowFlow($flows...)
+!procedure ShowFlow($flows)
 !foreach $flow in $flows
   !$HIDDEN_FLOWS[$flow] = "false"
 !endfor
