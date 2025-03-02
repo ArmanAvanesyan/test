@@ -109,30 +109,22 @@ compound=true
 
 ' Flow creation procedures
 !unquoted procedure Flow_($from, $to, $label="", $direction="")
-  !$flowId = $from + "_to_" + $to
-  !if (isFlowHidden($flowId) == "true")
+    !$flowId = $from + "_to_" + $to
     !if ($label != "")
-      $from -> $to [label="$label" style=$HIDDEN_STYLE]
+        $from -> $to [label="$label" 
+            dir=$direction 
+             style=$ARROW_STYLE 
+             color=$ARROW_COLOR 
+             penwidth=$PENWIDTH 
+             fontcolor=$ARROW_FONTCOLOR 
+             fontsize=$ARROW_FONTSIZE]
     !else
-      $from -> $to [style=$HIDDEN_STYLE]
+        $from -> $to [dir=$direction 
+            style=$ARROW_STYLE 
+            color=$ARROW_COLOR 
+            penwidth=$PENWIDTH]
     !endif
-  !else
-    !if ($label != "")
-      $from -> $to [label="$label" 
-                    dir=$direction 
-                                        style=$ARROW_STYLE 
-                    color=$ARROW_COLOR 
-                    penwidth=$PENWIDTH 
-                    fontcolor=$ARROW_FONTCOLOR 
-                    fontsize=$ARROW_FONTSIZE]
-    !else
-      $from -> $to [dir=$direction 
-                          style=$ARROW_STYLE 
-                    color=$ARROW_COLOR 
-                    penwidth=$PENWIDTH]
-    !endif
-  !endif
-!endprocedure
+  !endprocedure
 
 ' Standard flow (forward direction)
 !unquoted procedure Flow($from, $to, $label="")
