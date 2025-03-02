@@ -73,9 +73,6 @@ compound=true
 !endprocedure
 
 !procedure endDfd()
-!if ($SHOW_LEGEND == "true")
-  AddLegend()
-!endif
 }
 !endprocedure
 
@@ -158,31 +155,6 @@ Flow_($from, $to, $label, both)
 Flow_($from, $to, $label, back)
 !endprocedure
 
-' Component visibility procedures
-!procedure Hide($elements)
-!foreach $element in $elements
-  !$HIDDEN_ELEMENTS[$element] = "true"
-!endfor
-!endprocedure
-
-!procedure Show($elements)
-!foreach $element in $elements
-  !$HIDDEN_ELEMENTS[$element] = "false"
-!endfor
-!endprocedure
-
-!procedure HideFlow($flows)
-!foreach $flow in $flows
-  !$HIDDEN_FLOWS[$flow] = "true"
-!endfor
-!endprocedure
-
-!procedure ShowFlow($flows)
-!foreach $flow in $flows
-  !$HIDDEN_FLOWS[$flow] = "false"
-!endfor
-!endprocedure
-
 ' Helper Functions
 ' ##################################
 
@@ -199,21 +171,6 @@ Flow_($from, $to, $label, back)
     !$formattedLabel = "{<f0>" + $id + " |<f1> "+ $label + "}"
   !endif
   !return $formattedLabel
-!endfunction
-
-' Visibility checking
-!function isHidden($element)
-  !if ($HIDDEN_ELEMENTS[$element] == "true")
-    !return "true"
-  !endif
-  !return "false"
-!endfunction
-
-!function isFlowHidden($flow)
-  !if ($HIDDEN_FLOWS[$flow] == "true")
-    !return "true"
-  !endif
-  !return "false"
 !endfunction
 
 ' Variable Initialization
