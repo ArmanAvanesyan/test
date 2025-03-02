@@ -96,21 +96,15 @@ compound=true
 ' Base component creation procedures
 !unquoted procedure Component($alias, $label, $id="", $shape, $fillcolor, $width, $height, $elementType)
     !$formattedLabel = getLabel($label, $id, $elementType)
-    !if (isHidden($alias) == "true")
-      $alias [label="$formattedLabel" 
-              shape=$shape 
-              style=$HIDDEN_STYLE]
-    !else
-      $alias [label="$formattedLabel" 
-              shape=$shape 
-              fillcolor=$fillcolor 
-                            style=$STYLE 
-              fontcolor=$FONTCOLOR 
-              fontsize=$FONTSIZE 
-              color=$BORDERCOLOR 
-              width=$width 
-              height=$height]
-    !endif
+    $alias [label="$formattedLabel" 
+            shape=$shape 
+            fillcolor=$fillcolor 
+            style=$STYLE 
+            fontcolor=$FONTCOLOR 
+            fontsize=$FONTSIZE 
+            color=$BORDERCOLOR 
+            width=$width 
+            height=$height]
 !endprocedure
 
 ' Flow creation procedures
