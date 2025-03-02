@@ -13,16 +13,6 @@ SetAllComponentStyles("filled")
 SetAllFlowProperties("solid", "black", "black", 13, 1)
 SetFlowLayoutOrthogonal()
 
-' Default legend for Context Level 0
-!$LEGEND_ITEMS = {
-  "External Entity": "External actors or systems that interact with the system",
-  "Process": "The main system or process being described",
-}
-
-' Set legend position to right by default
-SetLegendPosition("right")
-SetLegendTitle("Context Level 0 Legend")
-
 ' External Entity
 !procedure External($alias, $label)
 Component($alias, $label, "", "rectangle", "lightgray", $DEFAULT_WIDTH, $DEFAULT_HEIGHT, "external")
