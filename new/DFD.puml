@@ -573,3 +573,39 @@ SetFlowPenWidth($penWidth)
 !procedure HideLegend()
 !$SHOW_LEGEND = "false"
 !endprocedure
+
+' Layout customization procedures
+!procedure SetRankDir($dir="LR")
+graph [rankdir=$dir]
+!endprocedure
+
+!procedure SetSplines($type="spline")
+splines=$type
+!endprocedure
+
+!procedure SetLayout($engine="dot")
+layout=$engine
+!endprocedure
+
+!procedure SetNodeSep($sep=0.5)
+nodesep=$sep
+!endprocedure
+
+!procedure SetRankSep($sep=1.5)
+ranksep=$sep
+!endprocedure
+
+!procedure SameRank($elements...)
+{rank=same; $elements}
+!endprocedure
+
+!procedure Cluster($label="cluster")
+subgraph cluster_$label {
+  label="$label"
+  style="rounded"
+  color="gray"
+!endprocedure
+
+!procedure EndCluster()
+}
+!endprocedure
