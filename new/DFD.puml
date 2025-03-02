@@ -595,7 +595,7 @@ nodesep=$sep
 ranksep=$sep
 !endprocedure
 
-!procedure SameRank($elements...)
+!procedure SameRank($elements)
 {rank=same; $elements}
 !endprocedure
 
