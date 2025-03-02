@@ -17,11 +17,7 @@ SetFlowLayoutOrthogonal()
 !$LEGEND_ITEMS = {
   "External Entity": "External actors or systems that interact with the system",
   "Process": "The main system or process being described",
-  "Data Flow": "Information flow between entities and the system"
 }
-
-' Hide DataStore from legend as it's not used in Context Level 0
-RemoveLegendItem("Data Store")
 
 ' Set legend position to right by default
 SetLegendPosition("right")
