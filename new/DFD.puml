@@ -16,27 +16,6 @@
 !$DEFAULT_WIDTH = 2
 !$DEFAULT_HEIGHT = 1
 
-' Default external entity settings
-!$DEFAULT_EXTERNAL_STYLE = "filled"
-!$DEFAULT_EXTERNAL_FILLCOLOR = "lightgray"
-!$DEFAULT_EXTERNAL_SHAPE = "rectangle"
-!$DEFAULT_EXTERNAL_WIDTH = 2
-!$DEFAULT_EXTERNAL_HEIGHT = 1
-
-' Default process settings
-!$DEFAULT_PROCESS_STYLE = "filled"
-!$DEFAULT_PROCESS_FILLCOLOR = "lightsteelblue1"
-!$DEFAULT_PROCESS_SHAPE = "circle"
-!$DEFAULT_PROCESS_WIDTH = 2
-!$DEFAULT_PROCESS_HEIGHT = 1
-
-' Default data store settings
-!$DEFAULT_DATASTORE_STYLE = "filled"
-!$DEFAULT_DATASTORE_FILLCOLOR = "white"
-!$DEFAULT_DATASTORE_SHAPE = "record"
-!$DEFAULT_DATASTORE_WIDTH = 2
-!$DEFAULT_DATASTORE_HEIGHT = 1
-
 ' Default flow settings
 !$DEFAULT_ARROW_STYLE = "solid"
 !$DEFAULT_ARROW_COLOR = "black"
@@ -50,7 +29,6 @@
 !$DEFAULT_NODESEP = 0.5
 !$DEFAULT_SPLINES = "spline"
 !$DEFAULT_CONCENTRATE = "false"
-!$DEFAULT_LAYOUT_ENGINE = "dot"
 !$DEFAULT_CONSTRAINT = "true"
 
 ' Default group settings
@@ -298,11 +276,6 @@ Flow_($from, $to, $label, back)
 
 !procedure SetGroupColor($color="gray")
 !$GROUP_COLOR = $color
-!endprocedure
-
-' Component visibility customization
-!procedure SetHiddenStyle($style="invis")
-!$HIDDEN_STYLE = $style
 !endprocedure
 
 ' Batch customization procedures
