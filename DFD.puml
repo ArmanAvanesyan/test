@@ -1,118 +1,28 @@
-' DFD – Data Flow Diagram core library
-' PlantUML Standard Library candidate
+' ============================================================
+' DFD – Data Flow Diagram Core (Evaluated Stdlib-style)
+' ============================================================
 
+' Guard
+!ifndef __DFD_BASE_LOADED__
+!define __DFD_BASE_LOADED__
 
-' Guard (prevent double include)
-' #############################################################################
-
-!ifndef __DFD_STDLIB_LOADED__
-!define __DFD_STDLIB_LOADED__
-
-' Runtime state initialization
-!global __DFD_LOADED = %true()
+' ------------------------------------------------------------
+' Runtime state
+' ------------------------------------------------------------
 !global __DFD_INITIALIZED = %false()
-!global __DFD_ERROR_COUNT = 0
-!global __DFD_WARNING_COUNT = 0
-
-
-' Versioning & metadata
-' #############################################################################
-
-' Version constants
-!global $DFD_VERSION_MAJOR = 1
-!global $DFD_VERSION_MINOR = 0
-!global $DFD_VERSION_PATCH = 0
-!global $DFD_VERSION_BUILD = 0
-
-' Version string construction
-!function $DFD_VERSION_STRING()
-  !return $DFD_VERSION_MAJOR + "." + $DFD_VERSION_MINOR + "." + $DFD_VERSION_PATCH
-!endfunction
-
-!global $DFD_VERSION = $DFD_VERSION_STRING()
-
-' Version metadata
-!global $DFD_VERSION_DATE = "2024-01-01"
-!global $DFD_VERSION_STATUS = "alpha"
-
-' Public version function (stdlib API)
-!function DFD_Version()
-  !return $DFD_VERSION_STRING()
-!endfunction
-
-' Version check procedures
-!function $DFD_CHECK_VERSION($major, $minor, $patch)
-  !if ($major < 1)
-    !return %false()
-  !endif
-  !if ($major == 1 and $minor < 0)
-    !return %false()
-  !endif
-  !return %true()
-!endfunction
-
-' Get version info as formatted string
-!function $DFD_GET_VERSION_INFO()
-  !return "DFD PlantUML v" + $DFD_VERSION + " (" + $DFD_VERSION_STATUS + ")"
-!endfunction
-
-' Version check procedure (can be called by users)
-!procedure DFD_VERSION_CHECK()
-  ' Version information is available via DFD_Version() function
-  ' This procedure is a placeholder for future enhancements
-!endprocedure
-
-' Migration helpers
-!function $DFD_NEEDS_MIGRATION($oldVersion)
-  ' This can be enhanced to check against known breaking changes
-  !return %false()
-!endfunction
-
-' Deprecation tracking
-!global $DFD_DEPRECATED_FEATURES = ""
-
-' Mark a feature as deprecated
-!procedure __DFD_MARK_DEPRECATED($feature, $replacement)
-  !if ($DFD_DEPRECATED_FEATURES == "")
-    !$DFD_DEPRECATED_FEATURES = $feature + "->" + $replacement
-  !else
-    !$DFD_DEPRECATED_FEATURES = $DFD_DEPRECATED_FEATURES + ";" + $feature + "->" + $replacement
-  !endif
-!endprocedure
-
-
-' Global defaults
-' #############################################################################
-
-!global $DFD_THEME = "light"
-!global $DFD_DEBUG = 0
 !global $__DFD_LEVEL = -1
 
-' Profile flags (set by level profiles, defaults allow unrestricted mode)
-!global $__DFD_ALLOW_DATASTORE = 1
-!global $__DFD_ALLOW_MULTI_PROCESS = 1
-!global $__DFD_ALLOW_SUBPROCESS = 0
-!global $__DFD_ALLOW_TECH_FLOWS = 0
+' ------------------------------------------------------------
+' Default settings
+' ------------------------------------------------------------
 
-' Feature flags
-!global $DFD_ENABLE_LEGEND = 1
-!global $DFD_ENABLE_VALIDATION = 1
-!global $DFD_ENABLE_NODE_REGISTRY = 1
-!global $DFD_ENABLE_AUTO_LAYOUT = 1
-
-' Notation settings
-!global $DFD_NOTATION = "DEFAULT"
-
-' Level description (set by level profiles)
-!global $LEVEL = "DFD Diagram"
-
-' Default title settings
+' Title
 !$DEFAULT_TITLE_FONTSIZE = 16
 !$DEFAULT_SUBTITLE_FONTSIZE = 10
 !$TITLE_FONTSIZE = $DEFAULT_TITLE_FONTSIZE
 !$SUBTITLE_FONTSIZE = $DEFAULT_SUBTITLE_FONTSIZE
 
-' Default component settings
+' Component
 !$DEFAULT_STYLE = "filled"
 !$DEFAULT_FILLCOLOR = "lightsteelblue1"
 !$DEFAULT_FONTCOLOR = "#000000"
@@ -121,159 +31,31 @@
 !$DEFAULT_WIDTH = 2
 !$DEFAULT_HEIGHT = 1
 
-' External entity settings
-!$DEFAULT_EXTERNAL_STYLE = "filled"
-!$DEFAULT_EXTERNAL_FILLCOLOR = "lightgray"
+' External
 !$DEFAULT_EXTERNAL_SHAPE = "rectangle"
-!$DEFAULT_EXTERNAL_WIDTH = 2
-!$DEFAULT_EXTERNAL_HEIGHT = 1
+!$DEFAULT_EXTERNAL_FILLCOLOR = "lightgray"
 
-' Process settings
-!$DEFAULT_PROCESS_STYLE = "filled"
-!$DEFAULT_PROCESS_FILLCOLOR = "lightsteelblue1"
+' Process
 !$DEFAULT_PROCESS_SHAPE = "circle"
-!$DEFAULT_PROCESS_WIDTH = 2
-!$DEFAULT_PROCESS_HEIGHT = 1
+!$DEFAULT_PROCESS_FILLCOLOR = "lightsteelblue1"
 
-' Data Store settings
-!$DEFAULT_DATASTORE_STYLE = "filled"
-!$DEFAULT_DATASTORE_FILLCOLOR = "white"
-!$DEFAULT_DATASTORE_SHAPE = "record"
-!$DEFAULT_DATASTORE_WIDTH = 2
-!$DEFAULT_DATASTORE_HEIGHT = 1
-
-' Default flow settings
+' Flow
 !$DEFAULT_ARROW_STYLE = "solid"
 !$DEFAULT_ARROW_COLOR = "black"
 !$DEFAULT_ARROW_FONTCOLOR = "black"
 !$DEFAULT_ARROW_FONTSIZE = 13
 !$DEFAULT_PENWIDTH = 1
 
-' Default layout settings
-!$DEFAULT_LAYOUT_ENGINE = "dot"
+' Layout
 !$DEFAULT_RANKDIR = "LR"
 !$DEFAULT_RANKSEP = 1.5
 !$DEFAULT_NODESEP = 0.5
 !$DEFAULT_SPLINES = "spline"
 !$DEFAULT_CONCENTRATE = "false"
-!$DEFAULT_CONSTRAINT = "true"
 
-' Default group settings
-!$DEFAULT_GROUP_STYLE = "dashed"
-!$DEFAULT_GROUP_COLOR = "gray"
-
-
-' Compatibility helpers (RFC compliant)
-' #############################################################################
-
-!function DFD_NewLine()
-  !if %function_exists("%breakline")
-    !return %breakline()
-  !endif
-  !return %newline()
-!endfunction
-
-
-' Internal
-' #############################################################################
-
-' Node registry initialization
-!global $__DFD_NODE_REGISTRY = ""
-!global $__dfd_nodes = ""
-!global $__dfd_process_count = 0
-
-' Register a node alias
-!procedure DFD_REGISTER_NODE($alias)
-  !if ($DFD_ENABLE_NODE_REGISTRY == 1)
-    !if ($__DFD_NODE_REGISTRY == "")
-      !$__DFD_NODE_REGISTRY = $alias
-    !else
-      !$__DFD_NODE_REGISTRY = $__DFD_NODE_REGISTRY + "," + $alias
-    !endif
-  !endif
-  ' Also maintain legacy format for compatibility
-  !if %strpos($__dfd_nodes, "|" + $alias + "|") < 0
-    !$__dfd_nodes = $__dfd_nodes + "|" + $alias + "|"
-  !endif
-!endprocedure
-
-' Check if a node is registered
-!function DFD_NODE_EXISTS($alias)
-  !if ($DFD_ENABLE_NODE_REGISTRY == 1)
-    !return %strpos($__DFD_NODE_REGISTRY, $alias) >= 0 or %strpos($__dfd_nodes, "|" + $alias + "|") >= 0
-  !else
-    !return %true()
-  !endif
-!endfunction
-
-' Internal node existence check (for registry)
-!function __DFD_NODE_EXISTS($alias)
-  !return %strpos($__DFD_NODE_REGISTRY, $alias) >= 0 or %strpos($__dfd_nodes, "|" + $alias + "|") >= 0
-!endfunction
-
-' Register a node when an element is created
-!procedure __DFD_REGISTER_ELEMENT($alias, $elementType)
-  !if ($DFD_ENABLE_NODE_REGISTRY == 1)
-    DFD_REGISTER_NODE($alias)
-  !endif
-!endprocedure
-
-' Validate flow source and destination nodes
-!procedure __DFD_VALIDATE_FLOW($from, $to)
-  !if ($DFD_ENABLE_VALIDATION == 1 and $DFD_ENABLE_NODE_REGISTRY == 1)
-    !if (not DFD_NODE_EXISTS($from))
-      !error "Flow source node '" + $from + "' does not exist"
-    !endif
-    !if (not DFD_NODE_EXISTS($to))
-      !error "Flow destination node '" + $to + "' does not exist"
-    !endif
-  !endif
-!endprocedure
-
-' Get node count (for statistics/debugging)
-!function $DFD_GET_NODE_COUNT()
-  !if ($__DFD_NODE_REGISTRY == "")
-    !return 0
-  !endif
-  ' Simple approximation - count commas + 1
-  !return 1
-!endfunction
-
-' Clear node registry (for testing/reset)
-!procedure DFD_CLEAR_REGISTRY()
-  !global $__DFD_NODE_REGISTRY = ""
-  !global $__dfd_nodes = ""
-!endprocedure
-
-' Error handling infrastructure
-!procedure __DFD_ERROR($message)
-  !$__DFD_ERROR_COUNT = $__DFD_ERROR_COUNT + 1
-  !error $message
-!endprocedure
-
-!procedure __DFD_WARNING($message)
-  !$__DFD_WARNING_COUNT = $__DFD_WARNING_COUNT + 1
-  ' Note: PlantUML doesn't have a built-in warning mechanism
-!endprocedure
-
-
-' Labels
-' #############################################################################
-
-' Title/Subtitle Customization
-!procedure SetTitleFontColor($color)
-  !$TITLE_FONTCOLOR = $color
-!endprocedure
-
-!procedure SetSubtitleFontColor($color)
-  !$SUBTITLE_FONTCOLOR = $color
-!endprocedure
-
-
-'' Variable Initialization
-' ##################################
-
-' Initialize customizable variables with defaults
+' ------------------------------------------------------------
+' Variable initialization
+' ------------------------------------------------------------
 !$STYLE = $DEFAULT_STYLE
 !$FILLCOLOR = $DEFAULT_FILLCOLOR
 !$FONTCOLOR = $DEFAULT_FONTCOLOR
@@ -282,23 +64,11 @@
 !$WIDTH = $DEFAULT_WIDTH
 !$HEIGHT = $DEFAULT_HEIGHT
 
-!$EXTERNAL_STYLE = $DEFAULT_EXTERNAL_STYLE
-!$EXTERNAL_FILLCOLOR = $DEFAULT_EXTERNAL_FILLCOLOR
-!$EXTERNAL_SHAPE = $DEFAULT_EXTERNAL_SHAPE
-!$EXTERNAL_WIDTH = $DEFAULT_EXTERNAL_WIDTH
-!$EXTERNAL_HEIGHT = $DEFAULT_EXTERNAL_HEIGHT
-
-!$PROCESS_STYLE = $DEFAULT_PROCESS_STYLE
-!$PROCESS_FILLCOLOR = $DEFAULT_PROCESS_FILLCOLOR
-!$PROCESS_SHAPE = $DEFAULT_PROCESS_SHAPE
-!$PROCESS_WIDTH = $DEFAULT_PROCESS_WIDTH
-!$PROCESS_HEIGHT = $DEFAULT_PROCESS_HEIGHT
-
-!$DATASTORE_STYLE = $DEFAULT_DATASTORE_STYLE
-!$DATASTORE_FILLCOLOR = $DEFAULT_DATASTORE_FILLCOLOR
-!$DATASTORE_SHAPE = $DEFAULT_DATASTORE_SHAPE
-!$DATASTORE_WIDTH = $DEFAULT_DATASTORE_WIDTH
-!$DATASTORE_HEIGHT = $DEFAULT_DATASTORE_HEIGHT
+!$RANKDIR = $DEFAULT_RANKDIR
+!$RANKSEP = $DEFAULT_RANKSEP
+!$NODESEP = $DEFAULT_NODESEP
+!$SPLINES = $DEFAULT_SPLINES
+!$CONCENTRATE = $DEFAULT_CONCENTRATE
 
 !$ARROW_STYLE = $DEFAULT_ARROW_STYLE
 !$ARROW_COLOR = $DEFAULT_ARROW_COLOR
@@ -306,675 +76,91 @@
 !$ARROW_FONTSIZE = $DEFAULT_ARROW_FONTSIZE
 !$PENWIDTH = $DEFAULT_PENWIDTH
 
-!$RANKDIR = $DEFAULT_RANKDIR
-!$RANKSEP = $DEFAULT_RANKSEP
-!$NODESEP = $DEFAULT_NODESEP
-!$SPLINES = $DEFAULT_SPLINES
-!$CONCENTRATE = $DEFAULT_CONCENTRATE
-!$LAYOUT_ENGINE = $DEFAULT_LAYOUT_ENGINE
-!$CONSTRAINT = $DEFAULT_CONSTRAINT
-
-!$GROUP_STYLE = $DEFAULT_GROUP_STYLE
-!$GROUP_COLOR = $DEFAULT_GROUP_COLOR
-
-!$HIDDEN_STYLE = $DEFAULT_HIDDEN_STYLE
-
-' Customization
-' ##################################
-
-' Component style customization procedures
-!procedure SetComponentStyle($style="filled")
-!$STYLE = $style
-!endprocedure
-
-!procedure SetComponentFillColor($color="lightsteelblue1")
-!$FILLCOLOR = $color
-!endprocedure
-
-!procedure SetComponentFontColor($color="#000000")
-!$FONTCOLOR = $color
-!endprocedure
-
-!procedure SetComponentFontSize($size=12)
-!$FONTSIZE = $size
-!endprocedure
-
-!procedure SetComponentBorderColor($color="grey")
-!$BORDERCOLOR = $color
-!endprocedure
-
-!procedure SetComponentSize($width=2, $height=1)
-!$WIDTH = $width
-!$HEIGHT = $height
-!endprocedure
-
-' External Entity customization
-!procedure SetExternalStyle($style="filled")
-!$EXTERNAL_STYLE = $style
-!endprocedure
-
-!procedure SetExternalFillColor($color="lightgray")
-!$EXTERNAL_FILLCOLOR = $color
-!endprocedure
-
-!procedure SetExternalShape($shape="rectangle")
-!$EXTERNAL_SHAPE = $shape
-!endprocedure
-
-!procedure SetExternalSize($width=2, $height=1)
-!$EXTERNAL_WIDTH = $width
-!$EXTERNAL_HEIGHT = $height
-!endprocedure
-
-' Process customization
-!procedure SetProcessStyle($style="filled")
-!$PROCESS_STYLE = $style
-!endprocedure
-
-!procedure SetProcessFillColor($color="lightsteelblue1")
-!$PROCESS_FILLCOLOR = $color
-!endprocedure
-
-!procedure SetProcessShape($shape="circle")
-!$PROCESS_SHAPE = $shape
-!endprocedure
-
-!procedure SetProcessSize($width=2, $height=1)
-!$PROCESS_WIDTH = $width
-!$PROCESS_HEIGHT = $height
-!endprocedure
-
-' Data Store customization
-!procedure SetDataStoreStyle($style="filled")
-!$DATASTORE_STYLE = $style
-!endprocedure
-
-!procedure SetDataStoreFillColor($color="white")
-!$DATASTORE_FILLCOLOR = $color
-!endprocedure
-
-!procedure SetDataStoreShape($shape="record")
-!$DATASTORE_SHAPE = $shape
-!endprocedure
-
-!procedure SetDataStoreSize($width=2, $height=1)
-!$DATASTORE_WIDTH = $width
-!$DATASTORE_HEIGHT = $height
-!endprocedure
-
-' Component group customization
-!procedure SetGroupStyle($style="dashed")
-!$GROUP_STYLE = $style
-!endprocedure
-
-!procedure SetGroupColor($color="gray")
-!$GROUP_COLOR = $color
-!endprocedure
-
-' Batch customization procedures
-!procedure SetAllComponentColors($fillColor, $borderColor="grey", $fontColor="#000000")
-SetComponentFillColor($fillColor)
-SetExternalFillColor($fillColor)
-SetProcessFillColor($fillColor)
-SetDataStoreFillColor($fillColor)
-SetComponentBorderColor($borderColor)
-SetComponentFontColor($fontColor)
-!endprocedure
-
-!procedure SetAllComponentSizes($width=2, $height=1)
-SetComponentSize($width, $height)
-SetExternalSize($width, $height)
-SetProcessSize($width, $height)
-SetDataStoreSize($width, $height)
-!endprocedure
-
-!procedure SetAllComponentStyles($style="filled")
-SetComponentStyle($style)
-SetExternalStyle($style)
-SetProcessStyle($style)
-SetDataStoreStyle($style)
-!endprocedure
-
-' Flow style customization procedures
-!procedure SetFlowStyle($style="solid")
-!$ARROW_STYLE = $style
-!endprocedure
-
-!procedure SetFlowColor($color="black")
-!$ARROW_COLOR = $color
-!endprocedure
-
-!procedure SetFlowFontColor($color="black")
-!$ARROW_FONTCOLOR = $color
-!endprocedure
-
-!procedure SetFlowFontSize($size=13)
-!$ARROW_FONTSIZE = $size
-!endprocedure
-
-!procedure SetFlowPenWidth($width=1)
-!$PENWIDTH = $width
-!endprocedure
-
-' Flow layout customization
-!procedure SetFlowSplines($type="spline")
-!$SPLINES = $type
-!endprocedure
-
-!procedure SetFlowConcentrate($value="false")
-!$CONCENTRATE = $value
-!endprocedure
-
-!procedure SetFlowRankDir($dir="LR")
-!$RANKDIR = $dir
-!endprocedure
-
-!procedure SetFlowRankSep($sep=1.5)
-!$RANKSEP = $sep
-!endprocedure
-
-!procedure SetFlowNodeSep($sep=0.5)
-!$NODESEP = $sep
-!endprocedure
-
-' Flow constraint customization
-!procedure SetFlowConstraint($value="true")
-!$CONSTRAINT = $value
-!endprocedure
-
-' Flow type customization
-!procedure SetFlowType($type="normal")
-!if ($type == "normal")
-  SetFlowStyle("solid")
-  SetFlowPenWidth(1)
-!elseif ($type == "bold")
-  SetFlowStyle("bold")
-  SetFlowPenWidth(2)
-!elseif ($type == "dashed")
-  SetFlowStyle("dashed")
-  SetFlowPenWidth(1)
-!elseif ($type == "dotted")
-  SetFlowStyle("dotted")
-  SetFlowPenWidth(1)
-!endif
-!endprocedure
-
-' Flow direction customization
-!procedure SetFlowDirection($dir="forward")
-!if ($dir == "forward")
-  SetFlowRankDir("LR")
-!elseif ($dir == "backward")
-  SetFlowRankDir("RL")
-!elseif ($dir == "down")
-  SetFlowRankDir("TB")
-!elseif ($dir == "up")
-  SetFlowRankDir("BT")
-!endif
-!endprocedure
-
-' Flow layout presets
-!procedure SetFlowLayoutOrthogonal()
-SetFlowSplines("ortho")
-SetFlowConcentrate("true")
-!endprocedure
-
-!procedure SetFlowLayoutCurved()
-SetFlowSplines("curved")
-SetFlowConcentrate("false")
-!endprocedure
-
-!procedure SetFlowLayoutDirect()
-SetFlowSplines("line")
-SetFlowConcentrate("false")
-!endprocedure
-
-' Batch flow customization
-!procedure SetAllFlowProperties($style="solid", $color="black", $fontColor="black", $fontSize=13, $penWidth=1)
-SetFlowStyle($style)
-SetFlowColor($color)
-SetFlowFontColor($fontColor)
-SetFlowFontSize($fontSize)
-SetFlowPenWidth($penWidth)
-!endprocedure
-
-' Layout customization procedures
-!procedure SetRankDir($dir="LR")
-graph [rankdir=$dir]
-!endprocedure
-
-!procedure SetSplines($type="spline")
-splines=$type
-!endprocedure
-
-!procedure SetLayout($engine="dot")
-layout=$engine
-!endprocedure
-
-!procedure SetNodeSep($sep=0.5)
-nodesep=$sep
-!endprocedure
-
-!procedure SetRankSep($sep=1.5)
-ranksep=$sep
-!endprocedure
-
-!procedure SameRank($elements)
-{rank=same; $elements}
-!endprocedure
-
-!procedure Cluster($label="cluster")
-subgraph cluster_$label {
-  label="$label"
-  style="rounded"
-  color="gray"
-!endprocedure
-
-!procedure EndCluster()
-}
-!endprocedure
-
-
-
-' Layout Customization
-!procedure SetRankDir($dir="LR")
-  !$RANKDIR = $dir
-!endprocedure
-
-!procedure SetSplines($type="spline")
-  !$SPLINES = $type
-!endprocedure
-
-!procedure SetLayout($engine="dot")
-  !$LAYOUT_ENGINE = $engine
-!endprocedure
-
-!procedure SetNodeSep($sep=0.5)
-  !$NODESEP = $sep
-!endprocedure
-
-!procedure SetRankSep($sep=1.5)
-  !$RANKSEP = $sep
-!endprocedure
-
-' Group/Cluster Customization
-!procedure SetGroupStyle($style="dashed")
-  !$GROUP_STYLE = $style
-!endprocedure
-
-!procedure SetGroupColor($color="gray")
-  !$GROUP_COLOR = $color
-!endprocedure
-
-' Batch Customization Procedures
-!procedure SetAllComponentColors($fillColor, $borderColor="grey", $fontColor="#000000")
-  SetComponentFillColor($fillColor)
-  SetExternalFillColor($fillColor)
-  SetProcessFillColor($fillColor)
-  SetDataStoreFillColor($fillColor)
-  SetComponentBorderColor($borderColor)
-  SetComponentFontColor($fontColor)
-!endprocedure
-
-!procedure SetAllComponentSizes($width=2, $height=1)
-  SetComponentSize($width, $height)
-  SetExternalSize($width, $height)
-  SetProcessSize($width, $height)
-  SetDataStoreSize($width, $height)
-!endprocedure
-
-!procedure SetAllComponentStyles($style="filled")
-  SetComponentStyle($style)
-  SetExternalStyle($style)
-  SetProcessStyle($style)
-  SetDataStoreStyle($style)
-!endprocedure
-
-' Flow Layout Customization (for digraph mode compatibility)
-!procedure SetFlowSplines($type="spline")
-  !$SPLINES = $type
-!endprocedure
-
-!procedure SetFlowConcentrate($value="false")
-  !$CONCENTRATE = $value
-!endprocedure
-
-!procedure SetFlowRankDir($dir="LR")
-  !$RANKDIR = $dir
-!endprocedure
-
-!procedure SetFlowRankSep($sep=1.5)
-  !$RANKSEP = $sep
-!endprocedure
-
-!procedure SetFlowNodeSep($sep=0.5)
-  !$NODESEP = $sep
-!endprocedure
-
-!procedure SetFlowConstraint($value="true")
-  !$CONSTRAINT = $value
-!endprocedure
-
-' Flow Type Presets
-!procedure SetFlowType($type="normal")
-  !if ($type == "normal")
-    SetFlowStyle("solid")
-    SetFlowPenWidth(1)
-  !elseif ($type == "bold")
-    SetFlowStyle("bold")
-    SetFlowPenWidth(2)
-  !elseif ($type == "dashed")
-    SetFlowStyle("dashed")
-    SetFlowPenWidth(1)
-  !elseif ($type == "dotted")
-    SetFlowStyle("dotted")
-    SetFlowPenWidth(1)
-  !endif
-!endprocedure
-
-!procedure SetFlowDirection($dir="forward")
-  !if ($dir == "forward")
-    SetRankDir("LR")
-  !elseif ($dir == "backward")
-    SetRankDir("RL")
-  !elseif ($dir == "down")
-    SetRankDir("TB")
-  !elseif ($dir == "up")
-    SetRankDir("BT")
-  !endif
-!endprocedure
-
-' Flow Layout Presets
-!procedure SetFlowLayoutOrthogonal()
-  SetFlowSplines("ortho")
-  SetFlowConcentrate("true")
-!endprocedure
-
-!procedure SetFlowLayoutCurved()
-  SetFlowSplines("curved")
-  SetFlowConcentrate("false")
-!endprocedure
-
-!procedure SetFlowLayoutDirect()
-  SetFlowSplines("line")
-  SetFlowConcentrate("false")
-!endprocedure
-
-' Batch Flow Customization
-!procedure SetAllFlowProperties($style="solid", $color="black", $fontColor="black", $fontSize=13, $penWidth=1)
-  SetFlowStyle($style)
-  SetFlowColor($color)
-  SetFlowFontColor($fontColor)
-  SetFlowFontSize($fontSize)
-  SetFlowPenWidth($penWidth)
-!endprocedure
-
-' Dark Mode Integration
-!procedure SetComponentFillColorDarkAware($lightColor, $darkColor="")
-  !if ($darkColor == "")
-    SetComponentFillColor($lightColor)
-  !elseif (%function_exists("$DFD_GET_COLOR"))
-    !$color = $DFD_GET_COLOR($lightColor, $darkColor)
-    SetComponentFillColor($color)
-  !else
-    SetComponentFillColor($lightColor)
-  !endif
-!endprocedure
-
-' Initialization
-' #############################################################################
-
-' Base initialization (for level files to call)
-!procedure DFD_INIT_BASE()
-  ' Initialize node registry if enabled
-  !if ($DFD_ENABLE_NODE_REGISTRY == 1)
-    !ifndef $__DFD_NODE_REGISTRY
-      !global $__DFD_NODE_REGISTRY = ""
-      !global $__dfd_nodes = ""
-    !endif
-  !endif
-  
-  ' Mark as initialized
+!global $LEVEL = "DFD Diagram"
+
+' ------------------------------------------------------------
+' Core init
+' ------------------------------------------------------------
+!procedure DFD_INIT()
   !global __DFD_INITIALIZED = %true()
 !endprocedure
 
-' Public INIT (overridable by level files)
-!procedure DFD_INIT()
-  DFD_INIT_BASE()
+' ------------------------------------------------------------
+' Title
+' ------------------------------------------------------------
+!procedure Title($title)
+  graph [rankdir=$RANKDIR ranksep=$RANKSEP labeljust=c labelloc=t \
+  label=<<TABLE BORDER="0" CELLBORDER="0"> \
+  <TR><TD><FONT POINT-SIZE="$TITLE_FONTSIZE">$title</FONT></TD></TR> \
+  <TR><TD><FONT POINT-SIZE="$SUBTITLE_FONTSIZE">$LEVEL</FONT></TD></TR> \
+  </TABLE>> ]
 !endprocedure
 
-' Core Procedures
-' ##################################
-'
-' ARCHITECTURE NOTE:
-' ==================
-' These procedures generate DOT syntax inside PlantUML digraph blocks.
-' Validation and registration happen in PlantUML BEFORE dot code generation.
-' Once dot syntax is output, it cannot be validated by PlantUML.
-'
-' Flow:
-'   1. PlantUML validation/registration (if enabled)
-'   2. PlantUML variable processing (labels, styles, etc.)
-'   3. Dot syntax output (pure text generation)
-'
-' Limitations:
-'   - Flow validation only works if node registry is enabled
-'   - Validation happens at procedure call time, not at dot render time
-'   - Dot syntax errors will be caught by the dot renderer, not PlantUML
-
-' DFD start/end procedures
-!procedure startDfd($title="")
-digraph dfd {
-!if ($title != "")
-Title($title)
-!endif
-layout=$LAYOUT_ENGINE
-splines=$SPLINES
-concentrate=$CONCENTRATE
-nodesep=$NODESEP
-node[shape=record]
-compound=true
+' ------------------------------------------------------------
+' Diagram start/end
+' ------------------------------------------------------------
+!procedure startDfd($title)
+  !if not __DFD_INITIALIZED
+    DFD_INIT()
+  !endif
+  digraph dfd {
+    Title($title)
+    splines=$SPLINES
+    concentrate=$CONCENTRATE
+    nodesep=$NODESEP
+    node [shape=record]
 !endprocedure
 
 !procedure endDfd()
-}
+  }
 !endprocedure
 
-' Title procedure and customization
-!procedure Title($title)
-    graph [rankdir=$RANKDIR ranksep=$RANKSEP labeljust=c labelloc=t \
-    label=<<TABLE BORDER="0" CELLBORDER="0"> \
-    <TR><TD><FONT POINT-SIZE="$TITLE_FONTSIZE">$title</FONT></TD></TR> \
-    <TR><TD><FONT POINT-SIZE="$SUBTITLE_FONTSIZE">$LEVEL</FONT></TD></TR> \
-    </TABLE>> ]
+' ------------------------------------------------------------
+' Base component renderer (internal)
+' ------------------------------------------------------------
+!unquoted procedure __Component($alias, $label, $shape, $fill)
+  $alias [
+    label="$label"
+    shape=$shape
+    style=$STYLE
+    fillcolor=$fill
+    fontcolor=$FONTCOLOR
+    fontsize=$FONTSIZE
+    color=$BORDERCOLOR
+    width=$WIDTH
+    height=$HEIGHT
+  ]
 !endprocedure
 
-!procedure SetTitleFontSize($size)
-!$TITLE_FONTSIZE = $size
+' ------------------------------------------------------------
+' Flows
+' ------------------------------------------------------------
+!unquoted procedure __Flow($from, $to, $label="", $dir="forward")
+  !if ($label != "")
+    $from -> $to [
+      label="$label"
+      dir="$dir"
+      style=$ARROW_STYLE
+      color=$ARROW_COLOR
+      penwidth=$PENWIDTH
+      fontcolor=$ARROW_FONTCOLOR
+      fontsize=$ARROW_FONTSIZE
+    ]
+  !else
+    $from -> $to [dir="$dir"]
+  !endif
 !endprocedure
 
-!procedure SetSubtitleFontSize($size)
-!$SUBTITLE_FONTSIZE = $size
-!endprocedure
-
-' Base component creation procedures
-' NOTE: Node registration happens in PlantUML BEFORE dot syntax generation
-!unquoted procedure Component($alias, $label, $id="", $shape, $fillcolor, $width, $height, $elementType)
-    ' ============================================================
-    ' STEP 1: PlantUML-level registration (before dot generation)
-    ' ============================================================
-    DFD_REGISTER_NODE($alias)
-    
-    ' ============================================================
-    ' STEP 2: Format label (PlantUML processing)
-    ' ============================================================
-    !$formattedLabel = getLabel($label, $id, $elementType)
-    
-    ' ============================================================
-    ' STEP 3: Get element-specific style variables
-    ' ============================================================
-    !if ($elementType == "process")
-      !$elemStyle = $PROCESS_STYLE
-      !$elemFontColor = $FONTCOLOR
-      !$elemFontSize = $FONTSIZE
-      !$elemBorderColor = $BORDERCOLOR
-    !elseif ($elementType == "external")
-      !$elemStyle = $EXTERNAL_STYLE
-      !$elemFontColor = $FONTCOLOR
-      !$elemFontSize = $FONTSIZE
-      !$elemBorderColor = $BORDERCOLOR
-    !elseif ($elementType == "datastore")
-      !$elemStyle = $DATASTORE_STYLE
-      !$elemFontColor = $FONTCOLOR
-      !$elemFontSize = $FONTSIZE
-      !$elemBorderColor = $BORDERCOLOR
-    !else
-      !$elemStyle = $STYLE
-      !$elemFontColor = $FONTCOLOR
-      !$elemFontSize = $FONTSIZE
-      !$elemBorderColor = $BORDERCOLOR
-    !endif
-    
-    ' ============================================================
-    ' STEP 4: Generate dot syntax (pure output)
-    ' ============================================================
-    $alias [label="$formattedLabel" 
-            shape=$shape 
-            fillcolor=$fillcolor 
-            style=$elemStyle 
-            fontcolor=$elemFontColor 
-            fontsize=$elemFontSize 
-            color=$elemBorderColor 
-            width=$width 
-            height=$height]
-!endprocedure
-
-' Flow creation procedures
-' NOTE: Validation happens in PlantUML BEFORE dot syntax generation
-' Once dot code is output, we cannot validate it further
-!unquoted procedure Flow_($from, $to, $label="", $direction="")
-    ' ============================================================
-    ' STEP 1: PlantUML-level validation (before dot generation)
-    ' ============================================================
-    !if ($DFD_ENABLE_VALIDATION == 1)
-      __DFD_VALIDATE_FLOW($from, $to)
-    !endif
-    
-    ' ============================================================
-    ' STEP 2: Generate dot syntax (pure output, no validation)
-    ' ============================================================
-    !if ($label != "")
-        $from -> $to [label="$label" 
-            dir=$direction 
-             style=$ARROW_STYLE 
-             color=$ARROW_COLOR 
-             penwidth=$PENWIDTH 
-             fontcolor=$ARROW_FONTCOLOR 
-             fontsize=$ARROW_FONTSIZE]
-    !else
-        $from -> $to [dir=$direction 
-            style=$ARROW_STYLE 
-            color=$ARROW_COLOR 
-            penwidth=$PENWIDTH]
-    !endif
-!endprocedure
-
-' Standard flow (forward direction)
 !unquoted procedure Flow($from, $to, $label="")
-Flow_($from, $to, $label, forward)
+  __Flow($from, $to, $label, "forward")
 !endprocedure
 
-' Bidirectional flow
 !unquoted procedure BiFlow($from, $to, $label="")
-Flow_($from, $to, $label, both)
+  __Flow($from, $to, $label, "both")
 !endprocedure
 
-' Backward flow
 !unquoted procedure Flow_Back($from, $to, $label="")
-Flow_($from, $to, $label, back)
+  __Flow($from, $to, $label, "back")
 !endprocedure
 
-' Element Creation Procedures
-' ##################################
-
-' External Entity
-!unquoted procedure External($alias, $label, $id="")
-  Component($alias, $label, $id, $EXTERNAL_SHAPE, $EXTERNAL_FILLCOLOR, $EXTERNAL_WIDTH, $EXTERNAL_HEIGHT, "external")
-!endprocedure
-
-' Process
-!unquoted procedure Process($alias, $label, $id="")
-  ' Level 0 validation: only one process allowed
-  !if $__DFD_LEVEL == 0
-    !if $__dfd_process_count > 0
-      !error "DFD Level 0 allows only one process"
-    !endif
-  !endif
-  !$__dfd_process_count = $__dfd_process_count + 1
-  Component($alias, $label, $id, $PROCESS_SHAPE, $PROCESS_FILLCOLOR, $PROCESS_WIDTH, $PROCESS_HEIGHT, "process")
-!endprocedure
-
-' Data Store
-!unquoted procedure DataStore($alias, $label, $id="")
-  ' Level 0 validation: data stores not allowed
-  !if $__DFD_LEVEL == 0
-    !error "Data stores are not allowed in DFD Level 0 (Context Diagram)"
-  !endif
-  !if $__DFD_ALLOW_DATASTORE == 0
-    !error "Data stores are not allowed at this DFD level"
-  !endif
-  Component($alias, $label, $id, $DATASTORE_SHAPE, $DATASTORE_FILLCOLOR, $DATASTORE_WIDTH, $DATASTORE_HEIGHT, "datastore")
-!endprocedure
-
-' DFD_* Wrapper Procedures (stdlib API)
-' ##################################
-
-' DFD_* wrapper procedures (stdlib API)
-!unquoted procedure DFD_External($alias, $label, $id="")
-  External($alias, $label, $id)
-!endprocedure
-
-!unquoted procedure DFD_Process($alias, $label, $id="")
-  Process($alias, $label, $id)
-!endprocedure
-
-!unquoted procedure DFD_DataStore($alias, $label, $id="")
-  DataStore($alias, $label, $id)
-!endprocedure
-
-!unquoted procedure DFD_Flow($from, $to, $label="")
-  Flow($from, $to, $label)
-!endprocedure
-
-!unquoted procedure DFD_BiFlow($from, $to, $label="")
-  BiFlow($from, $to, $label)
-!endprocedure
-
-!unquoted procedure DFD_Flow_Back($from, $to, $label="")
-  Flow_Back($from, $to, $label)
-!endprocedure
-
-' Helper Functions
-' ##################################
-
-' Label formatting
-!unquoted function getLabel($label, $id, $elementType)
-  !$formattedLabel = ""
-  !if ($elementType == "process")
-    !if ($id != "")
-      !$formattedLabel = $id + " | " + $label + "\n\n\n"
-    !else
-      !$formattedLabel = $label + "\n\n\n"
-    !endif
-  !endif
-  !if ($elementType == "external")
-    !$formattedLabel = $label
-  !endif
-  !if ($elementType == "datastore")
-    !if ($id != "")
-      !$formattedLabel = "{<f0>" + $id + " |<f1> " + $label + "}"
-    !else
-      !$formattedLabel = "{<f0>D |<f1> " + $label + "}"
-    !endif
-  !endif
-  !return $formattedLabel
-!endfunction
+!endif
