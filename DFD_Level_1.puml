@@ -1,0 +1,84 @@
+' DFD Level 1 – System Decomposition
+ Purpose: Decompose the main system into major processes
+' Rules: Multiple processes allowed, external entities allowed, data stores allowed
+
+!include DFD.puml
+
+
+' Profile Configuration
+!procedure DFD_INIT()
+  DFD_INIT_BASE()
+  DFD_PROFILE_LEVEL_1()
+  
+  ' Profile selectors flag setting only
+!procedure DFD_PROFILE_LEVEL_1()
+  !global __DFD_LEVEL = 1
+  !global __DFD_ALLOW_DATASTORE = 1
+  !global __DFD_ALLOW_SUBPROCESS = 0
+  !global __DFD_ALLOW_MULTI_PROCESS = 1
+  !$__dfd_process_count = 0
+  !global $LEVEL = "DFD Level 1"
+!endprocedure
+
+
+  ' Styling
+  ' #############################################################################
+  
+  ' Process styling - multiple processes with clear distinction
+  SetProcessFillColor("#E3F2FD")     ' Light blue for processes
+  SetProcessFontSize(12)
+  SetProcessSize(2.5, 1.2)          ' Standard size for multiple processes
+  
+  ' External entity styling - consistent with Level 0
+  SetExternalFillColor("#FFFDE7")   ' Light yellow
+  SetExternalFontSize(11)
+  SetExternalSize(2, 1.5)
+  
+  ' Data store styling - emphasized in Level 1
+  SetDataStoreFillColor("#C8E6C9")  ' Light green for data stores
+  SetDataStoreFontSize(12)
+  SetDataStoreSize(2, 1.5)          ' Prominent size for data stores
+  SetDataStoreBorderColor("#4CAF50") ' Green border
+  
+  ' Flow styling - clear flows between processes
+  SetFlowColor("#424242")           ' Dark gray for flows
+  SetFlowFontSize(11)
+  SetFlowPenWidth(1.5)
+  
+  ' Layout - optimized for decomposition view
+  SetRankDir("LR")                  ' Left to right
+  SetRankSep(1.5)                    ' Standard spacing
+  SetNodeSep(0.8)                    ' Closer nodes for decomposition
+  SetSplines("spline")               ' Curved splines for better flow visualization
+  
+  ' Apply skin parameters specific to Level 1
+  skinparam Rectangle {
+    BackgroundColor #E3F2FD
+    BorderColor #1976D2
+    BorderThickness 1.5
+  }
+  
+  skinparam Actor {
+    BackgroundColor #FFFDE7
+    BorderColor #F9A825
+    BorderThickness 1.5
+  }
+  
+  skinparam Database {
+    BackgroundColor #C8E6C9
+    BorderColor #4CAF50
+    BorderThickness 1.5
+  }
+  
+  skinparam Arrow {
+    Color #424242
+    Thickness 1.5
+  }
+  
+  ' Title/Subtitle defaults for Level 1
+  !global $LEVEL = "DFD Level 1 - System Decomposition"
+  SetTitleFontSize(16)
+  SetTitleFontColor("#1976D2")
+  SetSubtitleFontSize(12)
+  SetSubtitleFontColor("#666666")
+!endprocedure
