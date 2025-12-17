@@ -2,7 +2,7 @@
 ' Purpose: Show system as a black box with external entities
 ' Rules: Only ONE process, external entities allowed, NO data stores
 
-!include DFD.puml
+!include https://raw.githubusercontent.com/ArmanAvanesyan/test/main/DFD.puml
 
 ' Profile selectors
 !procedure DFD_PROFILE_LEVEL_0()
@@ -86,3 +86,4 @@ SetFlowLayoutOrthogonal()
 !unquoted procedure DataStore($alias, $label, $id="")
   !error "Data stores are not allowed in DFD Level 0 (Context Diagram)"
 !endprocedure
+
