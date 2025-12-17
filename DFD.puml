@@ -86,7 +86,7 @@
 
 !global $DFD_THEME = "light"
 !global $DFD_DEBUG = 0
-!global $__DFD_LEVEL = -1   ' -1 = unrestricted
+!global $__DFD_LEVEL = -1
 
 ' Profile flags (set by level profiles, defaults allow unrestricted mode)
 !global $__DFD_ALLOW_DATASTORE = 1
