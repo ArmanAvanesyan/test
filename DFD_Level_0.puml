@@ -6,10 +6,10 @@
 
 ' Profile selectors
 !procedure DFD_PROFILE_LEVEL_0()
-  !global __DFD_LEVEL = 0
-  !global __DFD_ALLOW_DATASTORE = 0
-  !global __DFD_ALLOW_SUBPROCESS = 0
-  !global __DFD_ALLOW_MULTI_PROCESS = 0
+  !global $__DFD_LEVEL = 0
+  !global $__DFD_ALLOW_DATASTORE = 0
+  !global $__DFD_ALLOW_SUBPROCESS = 0
+  !global $__DFD_ALLOW_MULTI_PROCESS = 0
   !$__dfd_process_count = 0
   !global $LEVEL = "Context Diagram"
 !endprocedure
@@ -86,4 +86,3 @@ SetFlowLayoutOrthogonal()
 !unquoted procedure DataStore($alias, $label, $id="")
   !error "Data stores are not allowed in DFD Level 0 (Context Diagram)"
 !endprocedure
-
