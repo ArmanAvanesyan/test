@@ -416,6 +416,15 @@
   !return $formattedLabel
 !endfunction
 
+' Title procedure for digraph labels
+!unquoted procedure Title($title)
+  graph [rankdir=LR ranksep=1.5 splines=true overlap=false labeljust=c labelloc=t \
+  label=<<TABLE BORDER="0" CELLBORDER="0"> \
+  <TR><TD><FONT POINT-SIZE="$TITLE_FONTSIZE">$title</FONT></TD></TR> \
+  <TR><TD><FONT POINT-SIZE="$SUBTITLE_FONTSIZE">$LEVEL</FONT></TD></TR> \
+  </TABLE>> ]
+!endprocedure
+
 
 ' Styles
 ' #############################################################################
@@ -728,11 +737,29 @@
   DFD_INIT_BASE()
 !endprocedure
 
+' Start DFD diagram (digraph mode)
+!unquoted procedure startDfd($title="")
+  !if (not __DFD_INITIALIZED)
+    DFD_INIT()
+  !endif
+  
+  digraph dfd {
+  !if ($title != "")
+    Title($title)
+  !endif
+  node[shape=record]
+!endprocedure
+
+' End DFD diagram
+!procedure endDfd()
+  }
+!endprocedure
+
 
 ' Elements
 ' #############################################################################
 
-' Base component creation procedure
+' Base component creation procedure (digraph mode)
 !unquoted procedure Component($alias, $label, $id="", $shape, $fillcolor, $width, $height, $elementType)
   !$formattedLabel = getLabel($label, $id, $elementType)
   
@@ -759,14 +786,8 @@
     !$elemBorderColor = $BORDERCOLOR
   !endif
   
-  ' Create the node
-  !if ($elementType == "external")
-    actor "$label" as $alias
-  !elseif ($elementType == "process")
-    rectangle "$label" as $alias
-  !elseif ($elementType == "datastore")
-    database "$label" as $alias
-  !endif
+  ' Create the node using digraph syntax
+  $alias [label="$formattedLabel" shape=$shape fillcolor=$fillcolor style=$elemStyle fontcolor=$elemFontColor fontsize=$elemFontSize color=$elemBorderColor width=$width height=$height]
   
   ' Register the node
   DFD_REGISTER_NODE($alias)
@@ -774,8 +795,7 @@
 
 ' External Entity
 !unquoted procedure DFD_External($alias, $label, $id="")
-  DFD_REGISTER_NODE($alias)
-  actor "$label" as $alias
+  Component($alias, $label, $id, $EXTERNAL_SHAPE, $EXTERNAL_FILLCOLOR, $EXTERNAL_WIDTH, $EXTERNAL_HEIGHT, "external")
 !endprocedure
 
 ' Process
@@ -787,8 +807,7 @@
   !endif
 
   !$__dfd_process_count = $__dfd_process_count + 1
-  DFD_REGISTER_NODE($alias)
-  rectangle "$label" as $alias
+  Component($alias, $label, $id, $PROCESS_SHAPE, $PROCESS_FILLCOLOR, $PROCESS_WIDTH, $PROCESS_HEIGHT, "process")
 !endprocedure
 
 ' Data Store
@@ -800,10 +819,19 @@
     !error "Data stores are not allowed at this DFD level"
   !endif
 
-  DFD_REGISTER_NODE($alias)
-  database "$label" as $alias
+  Component($alias, $label, $id, $DATASTORE_SHAPE, $DATASTORE_FILLCOLOR, $DATASTORE_WIDTH, $DATASTORE_HEIGHT, "datastore")
 !endprocedure
 
+' Base flow procedure (internal - used by other flow procedures)
+!unquoted procedure Flow_($from, $to, $label="", $direction="")
+  __DFD_VALIDATE_FLOW($from, $to)
+  
+  !if ($label != "")
+    $from -> $to [label="$label" dir=$direction style=$ARROW_STYLE color=$ARROW_COLOR penwidth=$PENWIDTH fontcolor=$ARROW_FONTCOLOR fontsize=$ARROW_FONTSIZE]
+  !else
+    $from -> $to [dir=$direction style=$ARROW_STYLE color=$ARROW_COLOR penwidth=$PENWIDTH]
+  !endif
+!endprocedure
 
 ' Data flows
 !unquoted procedure DFD_Flow($from, $to, $label="")
@@ -816,33 +844,17 @@
     !endif
   !endif
   
-  __DFD_VALIDATE_FLOW($from, $to)
-  
-  !if $label == ""
-    $from --> $to
-  !else
-    $from --> $to : $label
-  !endif
+  Flow_($from, $to, $label, forward)
 !endprocedure
 
 ' Bidirectional flow
 !unquoted procedure DFD_BiFlow($from, $to, $label="")
-  __DFD_VALIDATE_FLOW($from, $to)
-  !if $label == ""
-    $from <--> $to
-  !else
-    $from <--> $to : $label
-  !endif
+  Flow_($from, $to, $label, both)
 !endprocedure
 
 ' Backward flow
 !unquoted procedure DFD_Flow_Back($from, $to, $label="")
-  __DFD_VALIDATE_FLOW($from, $to)
-  !if $label == ""
-    $to --> $from
-  !else
-    $to --> $from : $label
-  !endif
+  Flow_($from, $to, $label, back)
 !endprocedure
 
 !endif
