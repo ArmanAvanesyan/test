@@ -84,15 +84,15 @@
 ' Global defaults
 ' #############################################################################
 
-!global DFD_THEME = "light"
-!global DFD_DEBUG = 0
-!global __DFD_LEVEL = -1   ' -1 = unrestricted
+!global $DFD_THEME = "light"
+!global $DFD_DEBUG = 0
+!global $__DFD_LEVEL = -1   ' -1 = unrestricted
 
 ' Profile flags (set by level profiles, defaults allow unrestricted mode)
-!global __DFD_ALLOW_DATASTORE = 1
-!global __DFD_ALLOW_MULTI_PROCESS = 1
-!global __DFD_ALLOW_SUBPROCESS = 0
-!global __DFD_ALLOW_TECH_FLOWS = 0
+!global $__DFD_ALLOW_DATASTORE = 1
+!global $__DFD_ALLOW_MULTI_PROCESS = 1
+!global $__DFD_ALLOW_SUBPROCESS = 0
+!global $__DFD_ALLOW_TECH_FLOWS = 0
 
 ' Feature flags
 !global $DFD_ENABLE_LEGEND = 1
@@ -178,9 +178,9 @@
 ' #############################################################################
 
 ' Node registry initialization
-!global __DFD_NODE_REGISTRY = ""
-!global __dfd_nodes = ""
-!global __dfd_process_count = 0
+!global $__DFD_NODE_REGISTRY = ""
+!global $__dfd_nodes = ""
+!global $__dfd_process_count = 0
 
 ' Register a node alias
 !procedure DFD_REGISTER_NODE($alias)
@@ -241,8 +241,8 @@
 
 ' Clear node registry (for testing/reset)
 !procedure DFD_CLEAR_REGISTRY()
-  !global __DFD_NODE_REGISTRY = ""
-  !global __dfd_nodes = ""
+  !global $__DFD_NODE_REGISTRY = ""
+  !global $__dfd_nodes = ""
 !endprocedure
 
 ' Error handling infrastructure
@@ -727,9 +727,9 @@ subgraph cluster_$label {
 !procedure DFD_INIT_BASE()
   ' Initialize node registry if enabled
   !if ($DFD_ENABLE_NODE_REGISTRY == 1)
-    !ifndef __DFD_NODE_REGISTRY
-      !global __DFD_NODE_REGISTRY = ""
-      !global __dfd_nodes = ""
+    !ifndef $__DFD_NODE_REGISTRY
+      !global $__DFD_NODE_REGISTRY = ""
+      !global $__dfd_nodes = ""
     !endif
   !endif
   
@@ -902,7 +902,7 @@ Flow_($from, $to, $label, back)
 ' Process
 !unquoted procedure Process($alias, $label, $id="")
   ' Level 0 validation: only one process allowed
-  !if __DFD_LEVEL == 0
+  !if $__DFD_LEVEL == 0
     !if $__dfd_process_count > 0
       !error "DFD Level 0 allows only one process"
     !endif
@@ -914,10 +914,10 @@ Flow_($from, $to, $label, back)
 ' Data Store
 !unquoted procedure DataStore($alias, $label, $id="")
   ' Level 0 validation: data stores not allowed
-  !if __DFD_LEVEL == 0
+  !if $__DFD_LEVEL == 0
     !error "Data stores are not allowed in DFD Level 0 (Context Diagram)"
   !endif
-  !if __DFD_ALLOW_DATASTORE == 0
+  !if $__DFD_ALLOW_DATASTORE == 0
     !error "Data stores are not allowed at this DFD level"
   !endif
   Component($alias, $label, $id, $DATASTORE_SHAPE, $DATASTORE_FILLCOLOR, $DATASTORE_WIDTH, $DATASTORE_HEIGHT, "datastore")
