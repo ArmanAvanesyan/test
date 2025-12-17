@@ -200,7 +200,7 @@
 ' Check if a node is registered
 !function DFD_NODE_EXISTS($alias)
   !if ($DFD_ENABLE_NODE_REGISTRY == 1)
-    !return %string_contains($__DFD_NODE_REGISTRY, $alias) or %strpos($__dfd_nodes, "|" + $alias + "|") >= 0
+    !return %strpos($__DFD_NODE_REGISTRY, $alias) >= 0 or %strpos($__dfd_nodes, "|" + $alias + "|") >= 0
   !else
     !return %true()
   !endif
@@ -208,7 +208,7 @@
 
 ' Internal node existence check (for registry)
 !function __DFD_NODE_EXISTS($alias)
-  !return %string_contains($__DFD_NODE_REGISTRY, $alias) or %strpos($__dfd_nodes, "|" + $alias + "|") >= 0
+  !return %strpos($__DFD_NODE_REGISTRY, $alias) >= 0 or %strpos($__dfd_nodes, "|" + $alias + "|") >= 0
 !endfunction
 
 ' Register a node when an element is created
@@ -762,9 +762,11 @@ subgraph cluster_$label {
 '   - Dot syntax errors will be caught by the dot renderer, not PlantUML
 
 ' DFD start/end procedures
-!procedure startDfd($title)
+!procedure startDfd($title="")
 digraph dfd {
+!if ($title != "")
 Title($title)
+!endif
 layout=$LAYOUT_ENGINE
 splines=$SPLINES
 concentrate=$CONCENTRATE
