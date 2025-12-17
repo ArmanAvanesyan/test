@@ -2,8 +2,6 @@
 
 !global $__DFD_LEVEL = 0
 !$LEVEL = "Context Diagram (DFD Level 0)"
-
-' One process rule
 !global $__DFD_PROCESS_COUNT = 0
 
 !unquoted procedure External($alias, $label)
@@ -15,6 +13,9 @@
     !error "DFD Level 0 allows only one process"
   !endif
   !$__DFD_PROCESS_COUNT = $__DFD_PROCESS_COUNT + 1
-  __Component($alias, "0 | " + $label + "\n\n", $DEFAULT_PROCESS_SHAPE, $DEFAULT_PROCESS_FILLCOLOR)
-!endprocedure
 
+  ' precompute (so we don’t pass an expression as an argument)
+  !$pLabel = "0 | " + $label + "\n\n"
+
+  __Component($alias, $pLabel, $DEFAULT_PROCESS_SHAPE, $DEFAULT_PROCESS_FILLCOLOR)
+!endprocedure
