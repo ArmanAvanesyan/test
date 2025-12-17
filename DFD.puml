@@ -118,7 +118,7 @@
 ' ------------------------------------------------------------
 ' Base component renderer (internal)
 ' ------------------------------------------------------------
-!unquoted procedure __Component($alias, $label, $shape, $fill)
+!procedure __Component($alias, $label, $shape, $fill)
   $alias [
     label="$label"
     shape=$shape
