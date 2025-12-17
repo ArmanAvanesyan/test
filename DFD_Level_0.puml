@@ -2,7 +2,7 @@
 ' Purpose: Show system as a black box with external entities
 ' Rules: Only ONE process, external entities allowed, NO data stores
 
-!include DFD.puml
+https://raw.githubusercontent.com/ArmanAvanesyan/test/refs/heads/main/DFD.puml
 
 ' Profile selectors
 !procedure DFD_PROFILE_LEVEL_0()
@@ -66,4 +66,5 @@
   !global $LEVEL = "Context Diagram"
   SetTitleFontSize(18)              ' Larger title for context diagrams
   SetTitleFontColor("#1976D2")      ' Blue title color
+
 !endprocedure
