@@ -4,7 +4,7 @@
 !$LEVEL = "Context Diagram (DFD Level 0)"
 !global $__DFD_PROCESS_COUNT = 0
 
-! procedure External($alias, $label)
+!procedure External($alias, $label)
   __Component($alias, $label, "rectangle", $DEFAULT_EXTERNAL_FILLCOLOR)
 !endprocedure
 
@@ -19,4 +19,5 @@
 
   __Component($alias, $pLabel, $DEFAULT_PROCESS_SHAPE, $DEFAULT_PROCESS_FILLCOLOR)
 !endprocedure
+
 
