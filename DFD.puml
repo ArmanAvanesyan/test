@@ -84,53 +84,27 @@
 ' Global defaults
 ' #############################################################################
 
-!ifndef DFD_THEME
-  !global DFD_THEME = "light"
-!endif
-!ifndef DFD_DEBUG
-  !global DFD_DEBUG = 0
-!endif
-!ifndef __DFD_LEVEL
-  !global __DFD_LEVEL = -1   ' -1 = unrestricted
-!endif
+!global DFD_THEME = "light"
+!global DFD_DEBUG = 0
+!global __DFD_LEVEL = -1   ' -1 = unrestricted
 
 ' Profile flags (set by level profiles, defaults allow unrestricted mode)
-!ifndef __DFD_ALLOW_DATASTORE
-  !global __DFD_ALLOW_DATASTORE = 1
-!endif
-!ifndef __DFD_ALLOW_MULTI_PROCESS
-  !global __DFD_ALLOW_MULTI_PROCESS = 1
-!endif
-!ifndef __DFD_ALLOW_SUBPROCESS
-  !global __DFD_ALLOW_SUBPROCESS = 0
-!endif
-!ifndef __DFD_ALLOW_TECH_FLOWS
-  !global __DFD_ALLOW_TECH_FLOWS = 0
-!endif
+!global __DFD_ALLOW_DATASTORE = 1
+!global __DFD_ALLOW_MULTI_PROCESS = 1
+!global __DFD_ALLOW_SUBPROCESS = 0
+!global __DFD_ALLOW_TECH_FLOWS = 0
 
 ' Feature flags
-!ifndef $DFD_ENABLE_LEGEND
-  !global $DFD_ENABLE_LEGEND = 1
-!endif
-!ifndef $DFD_ENABLE_VALIDATION
-  !global $DFD_ENABLE_VALIDATION = 1
-!endif
-!ifndef $DFD_ENABLE_NODE_REGISTRY
-  !global $DFD_ENABLE_NODE_REGISTRY = 1
-!endif
-!ifndef $DFD_ENABLE_AUTO_LAYOUT
-  !global $DFD_ENABLE_AUTO_LAYOUT = 1
-!endif
+!global $DFD_ENABLE_LEGEND = 1
+!global $DFD_ENABLE_VALIDATION = 1
+!global $DFD_ENABLE_NODE_REGISTRY = 1
+!global $DFD_ENABLE_AUTO_LAYOUT = 1
 
 ' Notation settings
-!ifndef $DFD_NOTATION
-  !global $DFD_NOTATION = "DEFAULT"
-!endif
+!global $DFD_NOTATION = "DEFAULT"
 
 ' Level description (set by level profiles)
-!ifndef $LEVEL
-  !global $LEVEL = "DFD Diagram"
-!endif
+!global $LEVEL = "DFD Diagram"
 
 ' Default title settings
 !$DEFAULT_TITLE_FONTSIZE = 16
