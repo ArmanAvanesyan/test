@@ -1,5 +1,5 @@
 ' Include base components and flows
-!includeurl https://raw.githubusercontent.com/ArmanAvanesyan/test/main/new/DFD.puml
+!include https://raw.githubusercontent.com/ArmanAvanesyan/test/main/new/DFD.puml
 
 ' Default styles and settings for Context Level 0
 !$DEFAULT_TITLE_FONTSIZE = 16
