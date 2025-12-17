@@ -1,6 +1,4 @@
-'!include https://raw.githubusercontent.com/ArmanAvanesyan/test/main/DFD.puml
-
-!includeurl DFD_Base.puml
+!include https://raw.githubusercontent.com/ArmanAvanesyan/test/main/DFD.puml
 
 !global $__DFD_LEVEL = 0
 !$LEVEL = "Context Diagram (DFD Level 0)"
@@ -19,3 +17,4 @@
   !$__DFD_PROCESS_COUNT = $__DFD_PROCESS_COUNT + 1
   __Component($alias, "0 | " + $label + "\n\n", $DEFAULT_PROCESS_SHAPE, $DEFAULT_PROCESS_FILLCOLOR)
 !endprocedure
+
